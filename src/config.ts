@@ -27,7 +27,7 @@ export const C = {
 export const MATCH_MOTION = { downhill: 3.2, damping: .025, restitution: .94 } as const;
 // Tentative open-lane playtest. Set back to 5 to restore the lower pair.
 export const MATCH_SKATERS: 3 | 5 = 3;
-// Three-skater travel experiment; the original slot artwork stays in place for now.
+// Three-skater travel; the match artwork follows these extended side lanes.
 export const MATCH_EXTENDED_WINGS = true;
 export type PlayTuning = { openingSpeed: number; openingMinX: number; openingMaxX: number; openingZ: number; rearBoost: number; rearMaxSpeed: number; rearCone: number };
 export const MATCH_PLAY_TUNING: PlayTuning = {

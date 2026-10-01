@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-01T19:41:51.193Z",
+  "mode": "rally",
+  "catches": 0,
+  "releaseAttempts": 0,
+  "completed": true,
+  "reason": null,
+  "activeSeconds": 120,
+  "measuredFrames": 7021,
+  "medianFrameMs": 16.7,
+  "p95FrameMs": 16.8,
+  "medianDrawIntervalMs": 16.7,
+  "p95DrawIntervalMs": 16.8,
+  "stallsOver100ms": 0,
+  "p95PhysicsPerFrameMs": 0.4,
+  "contacts": 451,
+  "goals": 0,
+  "conceded": 1,
+  "neutralRestarts": 1,
+  "completedMatches": 0,
+  "assistedStrikes": 12,
+  "checks": 1,
+  "settings": {
+    "version": "0.4.0",
+    "presentation": {
+      "camera": "perspective",
+      "elevation": 57,
+      "crowd": true,
+      "reducedMotion": false,
+      "drawCalls": 122,
+      "triangles": 184492,
+      "celebration": null
+    },
+    "difficulty": "normal",
+    "seed": 1024,
+    "actors": 4,
+    "extendedWings": true,
+    "playTuning": {
+      "openingSpeed": 9.5,
+      "openingMinX": 2.2,
+      "openingMaxX": 3.6,
+      "openingZ": 6.15,
+      "rearBoost": 2.4,
+      "rearMaxSpeed": 24,
+      "rearCone": -0.65
+    },
+    "flipperRubber": {
+      "heldRestitution": 0.12,
+      "passiveRestitution": 0.3,
+      "strikeRestitution": 0.94,
+      "friction": 0.2
+    },
+    "checking": {
+      "maxDistance": 0.95,
+      "fullImpact": 23,
+      "minImpact": 1,
+      "cooldown": 0.4
+    },
+    "skaterLanes": [
+      {
+        "index": 0,
+        "x": -2.8,
+        "min": -5.9,
+        "max": 4.9,
+        "home": -4.1
+      },
+      {
+        "index": 1,
+        "x": 2.8,
+        "min": -5.9,
+        "max": 4.9,
+        "home": -4.1
+      },
+      {
+        "index": 2,
+        "x": 0,
+        "min": -3.25,
+        "max": 0.25,
+        "home": -1.65
+      }
+    ],
+    "hops": false,
+    "reduced": false,
+    "render30": false,
+    "physicsHz": 120,
+    "downhill": 3.2,
+    "resolution": "1177 × 718",
+    "viewport": "1440 × 1000",
+    "devicePixelRatio": 0.9999999914449802,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+  }
+}

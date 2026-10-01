@@ -1,4 +1,14 @@
-# Hockey Schtick — Stage 3 (0.3.6)
+# Hockey Schtick — Phase 4 (0.4.0)
+
+The visual-finish release brings the playable match toward mockup four: a centered perspective camera, rounded red hockey figures, a masked goalie with tan pads, scuffed blue-white ice, glass boards, blue LED strips and lamps, polished cream paddle caps, and a tabletop crowd where the viewport has room. The two wing slots now run continuously through their full travel; only three skaters appear. The far-net bumper shoulders still collide with the puck but are invisible. The net's real rounded base pipe remains visible.
+
+The accepted **0.3.6 gameplay is preserved**: slope, opening deliveries, stick/rear-body responses, paddle cushioning and release shots, checking, opponent movement, scoring and timers. Rendering does not change their physics. The material and modeling changes also appear in the practice rink.
+
+**Keyboard and touch:** A/L still work, with remapping in Settings. Two large on-screen pads support independent fingers, simultaneous holds, quick taps, release-and-shoot, mouse presses, and keyboard activation. Portrait phones put the pads below the rink; short landscape screens place them at the sides. Settings pauses the match, and resuming remains explicit. The full rink stays in view at every tested size. Audio starts from a play/control gesture, with distinct stick, board, rubber, metal and checking sounds, a goal horn and crowd cheer. Goal lights, small off-ice particles, score pulses and a final-score card provide celebrations. Sound, reduced motion and lower render resolution can be selected in Settings. No camera shake or moving gameplay camera is used.
+
+**Verification:** production build passed, all 731 existing gameplay checks passed, and 13 new input checks passed. A two-minute desktop Chromium run measured 16.7 ms median / 16.8 ms p95 frame intervals on the tested RTX 3080 Ti, with no stalls over 100 ms. Desktop Chrome keyboard play and viewport layouts at 1440×1000, 768×1024, 390×844, 320×568 and 844×390 were inspected. Android Chrome, iOS Safari and Chrome iOS are design targets using standard Pointer Events, WebGL2 and gesture-started Web Audio; **native mobile browser/device testing has not been performed**. Viewport testing does not establish mobile GPU performance or real multi-touch behavior. See [Phase 4 validation](evidence/Phase%204%20Visual%20Finish.md) for the evidence and limits.
+
+## Gameplay history
 
 A playable browser hockey match built on the stage-2 puck and flippers. The current layout test uses **three red toy skaters and a goalie**, with the lower two skaters removed so you can aim a return across open ice. You defend the near gap and shoot with two flippers. The centered elevated camera, ice, blue LED boards, and wide cream flippers follow selected mockup four.
 
@@ -21,7 +31,7 @@ Open **http://127.0.0.1:5173/**. To restart the local server later, double-click
 5. **Escape** pauses and resumes. **Change keys** supports letters, arrows, and separate left/right Shift bindings. Bindings persist locally. Space/Enter starts or resumes from the game background; Space does not inject another puck during a match.
 6. Compare optional **Low puck hops**, contact sounds, and lower render resolution. **Puck & flipper practice** opens the preserved stage-2 test rink with repeatable feeds and its moving stick fixture.
 
-Focus loss, a hidden tab, or an animation stall over 100 ms pauses the match and clears inputs. Resume is explicit, with a short ready cue. This prototype needs a physical keyboard; touch controls are not implemented. A narrow browser panel still shows the whole rink.
+Focus loss, a hidden tab, a screen rotation, or an animation stall over 100 ms pauses the match and clears inputs. Resume is explicit, with a short ready cue. Touch controls are available in the main match; the historical practice page retains its keyboard controls. A narrow browser panel still shows the whole rink.
 
 In **Performance lab**, **Watch catch & shoot** demonstrates the sequence using only the two flippers against the live team. It does not place scoring pucks or aim shots automatically. **New match** ends the demo and returns control to you. The separate practice page still contains the original stage-2 hard-flipper fixture for comparison.
 
@@ -32,20 +42,22 @@ In **Performance lab**, **Watch catch & shoot** demonstrates the sequence using 
 - Skater strikes use a bounded aiming assist **only at actual blade contact**. Opponent logic never attaches, captures, teleports, or remotely kicks the puck. The motor stops after a successful hit so another part of the swing cannot undo the strike. Side/front body and passive blade collisions retain their previous physics. A moving puck that actually contacts a skater's back gets one small outward kick, at most 2.4 game units/s, following the collision angle and player facing. It can deflect toward either net; an own goal counts for you. Slow touches cannot repeatedly pump energy into the puck, and an assisted stick strike takes priority over a rear bump. Deliberate strike assists are disabled near the flippers to avoid point-blank CPU shots. Extended wings can still approach a cradle within their existing lane limits and sweep their physical blades at it, withdrawing between sweeps.
 - The goalie responds to delayed puck observations, has limited lateral travel/speed, and never reads flipper buttons. Pad and stick contacts can rebound shots. A reachable slow puck can prompt a visible clearing windup and forward stick poke; a clear can also miss.
 - Difficulty changes preparation, movement, aim, pass/shot speeds, and goalie reaction. It does not change your flippers, puck size, gravity, slope, or goal geometry. There is no score-based handicap or external AI service.
-- A genuine stationary wedge earns a whistle and neutral restart, with no point awarded. A slow puck physically supported on the front of a fully raised, held flipper is an intentional cradle and does not earn a whistle. Releasing it ends that exception immediately. The stronger slope returns slow open-ice pucks steadily. Visible angled shoulders below the flippers close the old end-wall pockets and guide missed saves into the near opening. The rounded rear net pipe and visible backing keep the inaccessible space behind the far goal closed; rebounds follow the surface angle, without hidden randomness.
+- A genuine stationary wedge earns a whistle and neutral restart, with no point awarded. A slow puck physically supported on the front of a fully raised, held flipper is an intentional cradle and does not earn a whistle. Releasing it ends that exception immediately. The stronger slope returns slow open-ice pucks steadily. Visible angled shoulders below the flippers close the old end-wall pockets and guide missed saves into the near opening. The rounded rear net pipe and invisible shoulder colliders keep the inaccessible space behind the far goal closed; rebounds follow the surface angle, without hidden randomness.
 - Goals count only when the whole puck crosses inside the appropriate opening. Match point is announced in the HUD. The winner and final score appear at seven; physics stops until the next match.
 
 ## Motion and controls
 
 The match uses 120 Hz Rapier with continuous collision detection, 8 solver iterations, up to 4 CCD substeps, interpolation, and a horizontal speed ceiling of 40 game units/s. Version 0.3.1 raises downhill acceleration from 0.85 to 3.2, reduces puck damping from 0.055 to 0.025, and strengthens passive rebounds. Normal shots travel at 16 instead of 10 game units/s. The units describe the prototype, not a scale model of a real rink. Small optional hops remain below blocking surfaces and retain a grounded shadow. A fine white puck ring helps track the disk around figures. The separate stage-2 practice rink retains its original slope, damping, and board geometry for comparison.
 
-Rendering normally follows the browser animation rate; the Performance lab also offers a 30 FPS drawing option. Physics stays at 120 Hz. Device-pixel ratio is capped at 1.5, with a lower-resolution option. No bloom, live shadows, downloaded fonts, or external art requests are required during play.
+Rendering normally follows the browser animation rate; the Performance lab also offers a 30 FPS drawing option. Physics stays at 120 Hz. Device-pixel ratio is capped at 1.75, with a 1× lower-resolution option that also hides the crowd. Static meshes are batched by material. The figures and cabinet use environment lighting; ice reflections and soft ground shadows are baked/procedural. No bloom pass, live shadow maps, downloaded fonts, or external art requests are required during play.
 
 Flipper rubber is represented by lower restitution and modest surface friction, without deforming the mesh or locking the puck. Restitution is 0.12 while held up, 0.30 when resting/returning, and the previous 0.94 on a powered rising stroke. The original stroke speeds and keyboard timing remain. The heel guides have matching visible and physical shapes, with a cushioned surface. Other rink rebounds and earlier puck/opponent tuning remain.
 
 ## Validation
 
-`pnpm test` runs the actual physics, not a mock collision engine. The suites pass **731 checks**, plus **nine two-minute five-skater pacing scenarios**:
+`pnpm test` runs the actual physics, not a mock collision engine. The suites pass **744 checks** (731 gameplay checks and 13 input checks), plus **nine two-minute five-skater pacing scenarios**:
+
+- **13 input checks** for independent fingers and keyboard holds, quick-tap timing, repeat rejection, cancellation and reset. These exercise the input state machine; browser controls and layouts are checked separately.
 
 - The preserved **295 stage-2 checks**, including 284 fast-impact scenarios covering boards, flippers, the moving fixture, rear base, hops, scoring, and reproducible direct/bank shots.
 - **265 stage-3 checks**, including 216 targeted opponent body/blade/pad impacts, both winners at seven, a 7–6 finish, one-count scoring, neutral recovery, rematches, travel/speed limits, goalie delay and input independence, contact-gated strikes/clears, repeatable seeded play, steady downhill acceleration, firmer board rebounds, and eight missed-save apron scenarios.
@@ -81,6 +93,10 @@ pnpm preview
 | `src/opponents.ts` | Local rod-skater and goalie behavior and physical figures |
 | `src/match.ts` | Scores, countdowns, neutral restarts and winner |
 | `src/scene.ts` | Fixed-camera Three.js rink, figures and cues |
+| `src/art.ts` | Procedural models, ice texture, materials and mesh batching |
+| `src/audio.ts` | Gesture-started rink sounds and goal celebrations |
+| `src/flipper-input.ts` | Independent keyboard/pointer holds, cancellation and minimum strokes |
+| `src/match.css` | Desktop, tablet and phone layouts and touch controls |
 | `src/main.ts` | Match controls, setup and performance capture |
 | `src/practice.ts` | Preserved stage-2 practice controls |
 | `src/config.ts` | Shared rink/slot geometry and physics tuning |
@@ -93,6 +109,3 @@ pnpm preview
 The performance run uses a repeatable seed, automatic flipper taps, and normal match rules. It never injects scoring pucks or forced goals. Rematches use deterministic new seeds. Results include animation intervals, actual draw intervals, CPU physics time per frame, contacts, goals, restarts, settings, browser, viewport and GPU. Physics CPU timing does not measure GPU work. A three-second warm-up is excluded from timing samples.
 
 Original planning files and mockup four remain in the project. The former stage-2 README and evidence remain under `evidence/` for comparison.
-
-
-

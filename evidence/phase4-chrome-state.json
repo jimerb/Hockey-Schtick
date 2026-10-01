@@ -1,0 +1,200 @@
+{
+  "active": true,
+  "paused": true,
+  "started": true,
+  "phase": "playing",
+  "winner": null,
+  "elapsed": 35.87499999999861,
+  "countdown": -0.008333333333331616,
+  "tick": 4305,
+  "held": [
+    false,
+    false
+  ],
+  "physicalHeld": [
+    false,
+    false
+  ],
+  "angles": [
+    0.32,
+    0.32
+  ],
+  "puck": {
+    "x": 2.3522253036499023,
+    "y": 0.10999999940395355,
+    "z": 5.868064880371094
+  },
+  "velocity": {
+    "x": -0.7569345235824585,
+    "y": 0,
+    "z": -2.846620798110962
+  },
+  "cradledSide": null,
+  "demo": null,
+  "scores": {
+    "you": 0,
+    "cpu": 5
+  },
+  "drops": 6,
+  "recoveries": 0,
+  "returns": 11,
+  "goalieSaves": 0,
+  "actors": [
+    {
+      "id": "skater-0",
+      "kind": "skater",
+      "x": -2.8,
+      "z": -2.0666666666666735,
+      "angle": 0,
+      "stage": "roam",
+      "kick": 0
+    },
+    {
+      "id": "skater-1",
+      "kind": "skater",
+      "x": 2.8,
+      "z": -2.000000000000007,
+      "angle": 1.854134367679908,
+      "stage": "poke",
+      "kick": 0
+    },
+    {
+      "id": "skater-2",
+      "kind": "skater",
+      "x": 0,
+      "z": -1.65,
+      "angle": 0,
+      "stage": "recover",
+      "kick": 0
+    },
+    {
+      "id": "goalie",
+      "kind": "goalie",
+      "x": 0.88,
+      "z": -6.95,
+      "angle": 1.5707963267948966,
+      "stage": "guard",
+      "kick": 0
+    }
+  ],
+  "lastCheck": null,
+  "checkSounds": 0,
+  "soundEvents": {
+    "drop": 6,
+    "flipper": 2,
+    "skater-2-blade": 7,
+    "left flipper": 11,
+    "right flipper": 13,
+    "cpu": 5,
+    "skater-1-blade": 1,
+    "cradle guide": 2,
+    "board": 7,
+    "skater-0": 1,
+    "base": 1,
+    "skater-0-blade": 1
+  },
+  "soundEnabled": true,
+  "audioState": "running",
+  "team": {
+    "shots": 6,
+    "passes": 0,
+    "pushes": 1,
+    "misses": 1,
+    "goalieContacts": 0,
+    "clears": 0,
+    "strikes": 7,
+    "peakCommitted": 1,
+    "openingDeliveries": 6,
+    "rearBumps": 0,
+    "checks": 0
+  },
+  "bindings": [
+    {
+      "code": "KeyA",
+      "label": "A"
+    },
+    {
+      "code": "KeyL",
+      "label": "L"
+    }
+  ],
+  "lastInput": {
+    "code": "KeyL",
+    "requested": 7,
+    "applied": 8
+  },
+  "contacts": 48,
+  "settings": {
+    "version": "0.4.0",
+    "presentation": {
+      "camera": "perspective",
+      "elevation": 57,
+      "crowd": true,
+      "reducedMotion": false,
+      "drawCalls": 126,
+      "triangles": 185102,
+      "celebration": null
+    },
+    "difficulty": "normal",
+    "seed": 4177508713,
+    "actors": 4,
+    "extendedWings": true,
+    "playTuning": {
+      "openingSpeed": 9.5,
+      "openingMinX": 2.2,
+      "openingMaxX": 3.6,
+      "openingZ": 6.15,
+      "rearBoost": 2.4,
+      "rearMaxSpeed": 24,
+      "rearCone": -0.65
+    },
+    "flipperRubber": {
+      "heldRestitution": 0.12,
+      "passiveRestitution": 0.3,
+      "strikeRestitution": 0.94,
+      "friction": 0.2
+    },
+    "checking": {
+      "maxDistance": 0.95,
+      "fullImpact": 23,
+      "minImpact": 1,
+      "cooldown": 0.4
+    },
+    "skaterLanes": [
+      {
+        "index": 0,
+        "x": -2.8,
+        "min": -5.9,
+        "max": 4.9,
+        "home": -4.1
+      },
+      {
+        "index": 1,
+        "x": 2.8,
+        "min": -5.9,
+        "max": 4.9,
+        "home": -4.1
+      },
+      {
+        "index": 2,
+        "x": 0,
+        "min": -3.25,
+        "max": 0.25,
+        "home": -1.65
+      }
+    ],
+    "hops": false,
+    "reduced": false,
+    "render30": false,
+    "physicsHz": 120,
+    "downhill": 3.2,
+    "resolution": "1863 × 568",
+    "viewport": "1327 × 606",
+    "devicePixelRatio": 2.7200000286102295,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+  },
+  "benchmarkResult": null,
+  "benchmarkRunning": false,
+  "benchmarkElapsed": 0
+}

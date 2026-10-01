@@ -1,244 +1,168 @@
-import * as THREE from 'three';
-import { C, LANES, cradleGuides, guides, outline, rearArc, returnApron } from './config';
+import * as T from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { C, LANES, MATCH_SKATERS, MATCH_EXTENDED_WINGS, cradleGuides, guides, outline, rearArc, returnApron } from './config';
 import type { State } from './physics';
 import type { Vec } from './config';
+import { paint, surface, rounded, rod, sphere, softTexture, groundShadow, iceTexture, hockeyFigure, batchStatic } from './art';
 
-const material = (color: number, extra: THREE.MeshStandardMaterialParameters = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.55, ...extra });
-const red = material(0xda2448), navy = material(0x091d38, { metalness: 0.35 }), white = material(0xe4edee);
-const chrome = material(0x9eafbb, { metalness: 0.8, roughness: 0.25 });
-const led = new THREE.MeshBasicMaterial({ color: 0x29baff, toneMapped: false });
-function polygon(p: Vec[], height: number, mat: THREE.Material) {
-  const shape = new THREE.Shape(p.map(v => new THREE.Vector2(v.x, -v.z)));
-  const geometry = height ? new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false }) : new THREE.ShapeGeometry(shape);
-  const m = new THREE.Mesh(geometry, mat); m.rotation.x = -Math.PI / 2; return m;
+function polygon(p: Vec[], height: number, mat: T.Material) {
+  const shape = new T.Shape(p.map(v => new T.Vector2(v.x, -v.z)));
+  const geometry = height ? new T.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false }) : new T.ShapeGeometry(shape);
+  const m = new T.Mesh(geometry, mat); m.rotation.x = -Math.PI / 2; return m;
 }
 function capsuleShape(length: number, width: number) {
-  const r = width / 2, s = new THREE.Shape();
-  s.moveTo(r, -r); s.lineTo(length - r, -r);
-  s.absarc(length - r, 0, r, -Math.PI / 2, Math.PI / 2, false);
-  s.lineTo(r, r); s.absarc(r, 0, r, Math.PI / 2, Math.PI * 1.5, false); return s;
-}
-function bar(a: Vec, b: Vec, radius: number, mat: THREE.Material, y: number) {
-  const dx = b.x - a.x, dz = b.z - a.z;
-  const m = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, Math.hypot(dx, dz), 8), mat);
-  m.position.set((a.x + b.x) / 2, y, (a.z + b.z) / 2);
-  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), new THREE.Vector3(dx, 0, dz).normalize()); return m;
-}
-
-function iceTexture() {
-  const canvas = document.createElement('canvas'); canvas.width = 768; canvas.height = 1536;
-  const ctx = canvas.getContext('2d')!;
-  const grad = ctx.createLinearGradient(0, 0, 768, 1536);
-  grad.addColorStop(0, '#e3f3f7'); grad.addColorStop(0.5, '#f0f6f6'); grad.addColorStop(1, '#bcddec');
-  ctx.fillStyle = grad; ctx.fillRect(0, 0, 768, 1536);
-  let seed = 32;
-  const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
-  ctx.strokeStyle = '#ffffff55'; ctx.lineWidth = 0.7;
-  for (let i = 0; i < 2600; i++) {
-    const x = random() * 768, y = random() * 1536;
-    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + random() * 36 - 18, y + random() * 60 - 30); ctx.stroke();
-  }
-  const X = (x: number) => (x + 5.4) / 10.8 * 768, Z = (z: number) => (z + 9) / 18 * 1536;
-  const line = (z: number, color: string, width: number) => { ctx.strokeStyle = color; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(0, Z(z)); ctx.lineTo(768, Z(z)); ctx.stroke(); };
-  line(-2.8, '#168bdd', 9); line(2.8, '#168bdd', 9); line(0, '#dd4160', 7);
-  line(C.goalZ, '#d83355', 2); line(7.55, '#d83355', 2);
-  function circle(x: number, z: number, radius: number, color: string) {
-    ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.ellipse(X(x), Z(z), radius / 10.8 * 768, radius / 18 * 1536, 0, 0, Math.PI * 2); ctx.stroke();
-    ctx.fillStyle = color; ctx.beginPath(); ctx.ellipse(X(x), Z(z), 7, 8, 0, 0, Math.PI * 2); ctx.fill();
-  }
-  circle(0, 0, 1.6, '#118de0');
-  for (const x of [-2.8, 2.8]) for (const z of [-4.8, 4.5]) circle(x, z, 1.55, '#d83355');
-  for (const z of [C.goalZ, 7.55]) {
-    ctx.fillStyle = '#49b4ee35'; ctx.strokeStyle = '#dd4160'; ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.ellipse(X(0), Z(z), 1.55 / 10.8 * 768, 1.1 / 18 * 1536, 0, z < 0 ? 0 : Math.PI, z < 0 ? Math.PI : Math.PI * 2); ctx.closePath(); ctx.fill(); ctx.stroke();
-  }
-  const tex = new THREE.CanvasTexture(canvas); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4; return tex;
+  const r = width / 2, s = new T.Shape(); s.moveTo(r, -r); s.lineTo(length - r, -r);
+  s.absarc(length - r, 0, r, -Math.PI / 2, Math.PI / 2, false); s.lineTo(r, r); s.absarc(r, 0, r, Math.PI / 2, Math.PI * 1.5, false); return s;
 }
 
 export class RinkView {
-  renderer: THREE.WebGLRenderer;
-  scene = new THREE.Scene();
-  camera = new THREE.OrthographicCamera(-7, 7, 10.5, -10.5, 0.1, 100);
-  puck = new THREE.Group();
-  flippers: THREE.Group[] = [];
-  stick = new THREE.Group();
-  shadow: THREE.Mesh;
-  resolution = '';
-  gpu = 'Unavailable';
-  private actors = new Map<string, { group: THREE.Group; ring: THREE.Mesh; blade?: THREE.Group }>();
-  private puckHalo: THREE.Mesh;
-  private observer: ResizeObserver;
-  private host: HTMLElement;
-  private reduced = false;
+  renderer: T.WebGLRenderer;
+  scene = new T.Scene();
+  camera = new T.PerspectiveCamera(32, 1, .1, 150);
+  puck = new T.Group(); flippers: T.Group[] = []; stick = new T.Group(); shadow: T.Mesh;
+  resolution = ''; gpu = 'Unavailable';
+  private actors = new Map<string, { group: T.Group; ring: T.Mesh; blade?: T.Group }>();
+  private puckHalo: T.Mesh;
+  private host: HTMLElement; private observer: ResizeObserver; private reduced = false;
+  private led = new T.MeshBasicMaterial({ color: 0x35baff, toneMapped: false });
+  private glowMap = softTexture(); private glows: T.Sprite[] = [];
+  private celebration: 'you' | 'cpu' | null = null; private celebrationStart = 0;
+  private confetti: T.Points; private confettiSeeds: number[] = []; private reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private crowd = new T.Group(); private staticArt = new T.Group();
   constructor(host: HTMLElement, match = false) {
     this.host = host;
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping; this.renderer.toneMappingExposure = 1;
-    host.append(this.renderer.domElement); this.renderer.domElement.setAttribute('aria-label', 'Hockey rink viewed from behind your two flippers');
-    const gl = this.renderer.getContext(), debug = gl.getExtension('WEBGL_debug_renderer_info');
-    if (debug) this.gpu = gl.getParameter(debug.UNMASKED_RENDERER_WEBGL);
-    this.camera.position.set(0, 26, 19); this.camera.lookAt(0, 0, 0.2);
-    this.scene.add(new THREE.HemisphereLight(0xd7f4ff, 0x283347, 2.3));
-    const key = new THREE.DirectionalLight(0xffffff, 2.6); key.position.set(-5, 16, 4); this.scene.add(key);
-    const fill = new THREE.DirectionalLight(0x59b9ff, 1.1); fill.position.set(6, 10, -10); this.scene.add(fill);
-
-    const rim = new THREE.Mesh(new THREE.BoxGeometry(12, 0.65, 19.2), navy); rim.position.y = -0.35; this.scene.add(rim);
-    const ice = polygon(outline, 0, new THREE.MeshBasicMaterial({ map: iceTexture(), toneMapped: false }));
+    this.renderer = new T.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    this.renderer.outputColorSpace = T.SRGBColorSpace; this.renderer.toneMapping = T.ACESFilmicToneMapping; this.renderer.toneMappingExposure = .96;
+    host.append(this.renderer.domElement); this.renderer.domElement.setAttribute('aria-label', 'Angled tabletop hockey rink, viewed from behind your two flippers');
+    const gl = this.renderer.getContext(), debug = gl.getExtension('WEBGL_debug_renderer_info'); if (debug) this.gpu = gl.getParameter(debug.UNMASKED_RENDERER_WEBGL);
+    const environment = new RoomEnvironment(), pmrem = new T.PMREMGenerator(this.renderer);
+    const env = pmrem.fromScene(environment, .04); this.scene.environment = env.texture; this.scene.environmentIntensity = .6; environment.dispose(); pmrem.dispose();
+    this.scene.add(new T.HemisphereLight(0xd4eaff, 0x20344d, 1.25));
+    const key = new T.DirectionalLight(0xfff8ed, 1.9); key.position.set(-4, 12, 4); this.scene.add(key);
+    const fill = new T.DirectionalLight(0x4faaff, .8); fill.position.set(6, 8, -9); this.scene.add(fill);
+    this.scene.add(this.staticArt, this.crowd);
+    const { navy, chrome, white, red } = paint;
+    const outer = outline.map(v => ({ ...v, x: v.x * 1.11, z: v.z * 1.06 }));
+    const cabinet = polygon(outer, .62, navy); cabinet.position.y = -.68; this.staticArt.add(cabinet);
+    // Baked light reflections keep the painted lines and skate scuffs legible on small screens.
+    const ice = polygon(outline, 0, new T.MeshBasicMaterial({ map: iceTexture(), toneMapped: false }));
     const pos = ice.geometry.getAttribute('position'), uv = ice.geometry.getAttribute('uv');
     for (let i = 0; i < pos.count; i++) uv.setXY(i, (pos.getX(i) + 5.4) / 10.8, (pos.getY(i) + 9) / 18);
-    uv.needsUpdate = true; ice.position.y = 0.01; this.scene.add(ice);
-    const glass = new THREE.MeshStandardMaterial({ color: 0x76bfee, transparent: true, opacity: 0.18, roughness: 0.2, depthWrite: false });
+    uv.needsUpdate = true; ice.position.y = .01; this.staticArt.add(ice);
+    const glass = new T.MeshPhysicalMaterial({ color: 0xaccbdf, transparent: true, opacity: .13, roughness: .1, metalness: .05, depthWrite: false, side: T.DoubleSide });
+    const glassEdges = surface(0x99cbe8, { metalness: .75, roughness: .2 });
     for (let i = 0; i < outline.length; i++) {
       const a = outline[i], b = outline[(i + 1) % outline.length];
       const segments = a.z > 8.99 && b.z > 8.99
         ? [[{ x: -3.8, y: 0, z: 9 }, { x: -C.drainHalfWidth, y: 0, z: 9 }], [{ x: C.drainHalfWidth, y: 0, z: 9 }, { x: 3.8, y: 0, z: 9 }]] : [[a, b]];
       for (const [v, w] of segments) {
         const length = Math.hypot(w.x - v.x, w.z - v.z), angle = -Math.atan2(w.z - v.z, w.x - v.x);
-        const block = new THREE.Mesh(new THREE.BoxGeometry(length + 0.12, 1, 0.22), white);
-        block.position.set((v.x + w.x) / 2, 0.5, (v.z + w.z) / 2); block.rotation.y = angle; this.scene.add(block);
-        this.scene.add(bar(v, w, 0.045, red, 0.95), bar(v, w, 0.035, led, 0.12), bar(v, w, 0.035, led, 1.02));
-        // Foreground remains open and readable. Glass is only on sides and the far end.
-        if (v.z < 6 && w.z < 6) {
-          const panel = new THREE.Mesh(new THREE.BoxGeometry(length, 0.55, 0.025), glass);
-          panel.position.copy(block.position); panel.position.y = 1.3; panel.rotation.y = angle; this.scene.add(panel);
+        const board = rounded(this.staticArt, (v.x + w.x) / 2, .43, (v.z + w.z) / 2, length + .09, .86, .17, white, .018); board.rotation.y = angle;
+        const rail = rounded(this.staticArt, (v.x + w.x) / 2, .9, (v.z + w.z) / 2, length + .1, .16, .29, navy, .025); rail.rotation.y = angle;
+        for (const [y, r, mat] of [[.095, .035, this.led], [.84, .025, red], [1.0, .04, this.led]] as const) rod(this.staticArt, [v.x, y, v.z], [w.x, y, w.z], r, mat);
+        if (Math.min(v.z, w.z) < 6) {
+          const vz = Math.min(5.65, v.z), wz = Math.min(5.65, w.z), glassLength = Math.hypot(w.x - v.x, wz - vz);
+          const panel = new T.Mesh(new T.BoxGeometry(glassLength, .93, .018), glass); panel.position.set(board.position.x, 1.46, (vz + wz) / 2); panel.rotation.y = angle; this.staticArt.add(panel);
+          rod(this.staticArt, [v.x, 1.94, vz], [w.x, 1.94, wz], .013, glassEdges);
+          if (i % 3 === 0) rod(this.staticArt, [v.x, .95, vz], [v.x, 1.93, vz], .018, glassEdges);
+          for (let j = 1; j < glassLength / 2.6; j++) {
+            const f = j * 2.6 / glassLength, x = T.MathUtils.lerp(v.x, w.x, f), z = T.MathUtils.lerp(vz, wz, f);
+            rod(this.staticArt, [x, .95, z], [x, 1.93, z], .015, glassEdges); this.lamp(x, 1.04, z);
+          }
         }
       }
-      if (i % 3 === 0) {
-        const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.095, 8, 6), led); bulb.position.set(a.x, 1.06, a.z); this.scene.add(bulb);
-      }
+      if (i % 4 === 0) this.lamp(a.x, 1.04, a.z);
+      const oa = outer[i], ob = outer[(i + 1) % outer.length]; rod(this.staticArt, [oa.x, -.02, oa.z], [ob.x, -.02, ob.z], .028, this.led);
     }
-    for (const p of guides) { const m = polygon(p, 0.6, navy); this.scene.add(m); this.scene.add(bar(p[0], p[1], 0.045, led, 0.63), bar(p[1], p[2], 0.045, led, 0.63)); }
-    if (match) for (const p of returnApron) {
-      this.scene.add(polygon(p, .55, navy), bar(p[0], p[1], .035, led, .57), bar(p[1], p[2], .035, led, .57));
-    }
-    if (match) for (const p of cradleGuides) {
-      this.scene.add(polygon(p, .6, navy), bar(p[1], p[2], .035, led, .62));
-    }
-
-    for (const lane of LANES) {
-      const slot = new THREE.Mesh(new THREE.BoxGeometry(0.095, 0.016, lane.max - lane.min), material(0x172b3b)); slot.position.set(lane.x, 0.025, (lane.min + lane.max) / 2); this.scene.add(slot);
+    for (const p of guides) { this.staticArt.add(polygon(p, .6, navy)); rod(this.staticArt, [p[0].x, .63, p[0].z], [p[1].x, .63, p[1].z], .035, this.led); }
+    if (match) for (const p of returnApron) { this.staticArt.add(polygon(p, .55, navy)); rod(this.staticArt, [p[0].x, .57, p[0].z], [p[1].x, .57, p[1].z], .028, this.led); }
+    if (match) for (const p of cradleGuides) { this.staticArt.add(polygon(p, .6, navy)); rod(this.staticArt, [p[1].x, .62, p[1].z], [p[2].x, .62, p[2].z], .027, this.led); }
+    const lanes = LANES.slice(0, match ? MATCH_SKATERS : 5).map((lane, i) => ({ ...lane, max: match && MATCH_SKATERS === 3 && MATCH_EXTENDED_WINGS && i < 2 ? LANES[i + 3].max : lane.max }));
+    for (const lane of lanes) {
+      rounded(this.staticArt, lane.x, .023, (lane.min + lane.max) / 2, .135, .02, lane.max - lane.min + .12, chrome, .006);
+      rounded(this.staticArt, lane.x, .035, (lane.min + lane.max) / 2, .095, .018, lane.max - lane.min + .04, paint.black, .008);
     }
     this.makeGoal();
     for (let side = 0; side < 2; side++) {
-      const g = new THREE.Group(); g.position.set(side === 0 ? -C.pivotX : C.pivotX, 0.02, C.pivotZ);
-      const radius = C.flipperWidth / 2;
-      const shape = capsuleShape(C.flipperLength + radius, C.flipperWidth);
-      const base = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: 0.48, bevelEnabled: false, curveSegments: 12 }), red);
-      base.rotation.x = -Math.PI / 2; base.position.x = -radius; g.add(base);
-      const top = new THREE.Mesh(new THREE.ExtrudeGeometry(capsuleShape(C.flipperLength + radius - 0.05, C.flipperWidth - 0.06), { depth: 0.07, bevelEnabled: false, curveSegments: 12 }), material(0xfff1c8, { roughness: 0.3 }));
-      top.rotation.x = -Math.PI / 2; top.position.set(0.025 - radius, 0.48, 0); g.add(top);
-      const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.08, 24), chrome); pin.position.set(0, 0.59, 0); g.add(pin);
-      const glow = new THREE.Mesh(new THREE.CircleGeometry(0.31, 24), new THREE.MeshBasicMaterial({ color: 0x1199ff, transparent: true, opacity: 0.18 })); glow.rotation.x = -Math.PI / 2; glow.position.set(0, -0.003, 0); g.add(glow);
+      const g = new T.Group(); g.position.set(side === 0 ? -C.pivotX : C.pivotX, .02, C.pivotZ); const radius = C.flipperWidth / 2;
+      // Outer rubber envelope is unchanged; beveled caps stay inside it.
+      const base = new T.Mesh(new T.ExtrudeGeometry(capsuleShape(C.flipperLength + radius, C.flipperWidth), { depth: .6, bevelEnabled: false, curveSegments: 20 }), paint.rubber); base.rotation.x = -Math.PI / 2; base.position.x = -radius; g.add(base);
+      const cap = new T.Mesh(new T.ExtrudeGeometry(capsuleShape(C.flipperLength + radius - .09, C.flipperWidth - .1), { depth: .025, bevelEnabled: true, bevelSize: .026, bevelThickness: .026, bevelSegments: 3, curveSegments: 20 }), paint.cream); cap.rotation.x = -Math.PI / 2; cap.position.set(.045 - radius, .62, 0); g.add(cap);
+      const pin = new T.Mesh(new T.CylinderGeometry(.225, .24, .07, 32), navy); pin.position.set(0, .71, 0); g.add(pin); sphere(g, 0, .735, 0, .195, chrome, [1, .3, 1]); rod(g, [-.09, .796, 0], [.09, .796, 0], .008, navy);
       this.flippers.push(g); this.scene.add(g);
     }
-    const disk = new THREE.Mesh(new THREE.CylinderGeometry(C.puckRadius, C.puckRadius, C.puckHalfHeight * 2, 32), material(0x121820, { roughness: 0.65 })); this.puck.add(disk);
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.21, 0.018, 6, 24), material(0xb8d8e3)); ring.rotation.x = -Math.PI / 2; ring.position.y = C.puckHalfHeight + 0.002; this.puck.add(ring); this.scene.add(this.puck);
-    this.shadow = new THREE.Mesh(new THREE.CircleGeometry(0.35, 32), new THREE.MeshBasicMaterial({ color: 0x051b29, transparent: true, opacity: 0.27, depthWrite: false })); this.shadow.rotation.x = -Math.PI / 2; this.shadow.position.y = 0.04; this.scene.add(this.shadow);
-    this.puckHalo = new THREE.Mesh(new THREE.RingGeometry(.3, .335, 24), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: .65, depthTest: false, depthWrite: false }));
-    this.puckHalo.rotation.x = -Math.PI / 2; this.puckHalo.renderOrder = 10; this.scene.add(this.puckHalo);
-    for (let i = 0; i < 5; i++) this.makeActor(`skater-${i}`, false, i + 1);
-    this.makeActor('goalie', true, 0);
-    const blade = new THREE.Mesh(new THREE.BoxGeometry(2.04, 0.52, 0.3), red); blade.position.y = 0.29; this.stick.add(blade);
-    const peg = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.23, 0.9, 12), chrome); peg.position.y = 0.55; this.stick.add(peg); this.scene.add(this.stick);
+    const disk = new T.Mesh(new T.CylinderGeometry(C.puckRadius, C.puckRadius, C.puckHalfHeight * 2, 40), surface(0x09121b, { roughness: .43 })); this.puck.add(disk);
+    const ring = new T.Mesh(new T.TorusGeometry(.21, .01, 6, 32), surface(0x74858b)); ring.rotation.x = -Math.PI / 2; ring.position.y = C.puckHalfHeight + .002; this.puck.add(ring); this.scene.add(this.puck);
+    this.shadow = groundShadow(this.scene, .86, .86, .62, this.glowMap);
+    this.puckHalo = new T.Mesh(new T.RingGeometry(.292, .315, 32), new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: .58, depthTest: false, depthWrite: false })); this.puckHalo.rotation.x = -Math.PI / 2; this.puckHalo.renderOrder = 10; this.scene.add(this.puckHalo);
+    for (let i = 0; i < (match ? MATCH_SKATERS : 5); i++) this.makeActor(`skater-${i}`, false, [17, 9, 23, 6, 12][i]); this.makeActor('goalie', true, 1);
+    rounded(this.stick, 0, .29, 0, 2.04, .52, .3, red); rod(this.stick, [0, .1, 0], [0, 1, 0], .17, chrome); this.scene.add(this.stick);
+    this.makeCrowd(); batchStatic(this.staticArt);
+    const particles = new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute(new Float32Array(72 * 3), 3)); for (let i = 0; i < 72; i++) this.confettiSeeds.push((i * .61803398875) % 1);
+    this.confetti = new T.Points(particles, new T.PointsMaterial({ color: 0x82ddff, size: .095, transparent: true, opacity: .9, depthWrite: false })); this.confetti.visible = false; this.scene.add(this.confetti);
     this.observer = new ResizeObserver(() => this.resize()); this.observer.observe(host); this.resize();
   }
+  private lamp(x: number, y: number, z: number) {
+    const socket = new T.Mesh(new T.CylinderGeometry(.115, .13, .055, 16), paint.chrome); socket.position.set(x, y, z); this.staticArt.add(socket); sphere(this.staticArt, x, y + .025, z, .084, this.led, [1, .5, 1]);
+    const glow = new T.Sprite(new T.SpriteMaterial({ map: this.glowMap, color: 0x189fff, transparent: true, opacity: .6, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false })); glow.position.set(x, y + .06, z); glow.scale.setScalar(.7); this.glows.push(glow); this.scene.add(glow);
+  }
   private makeActor(id: string, goalie: boolean, number: number) {
-    const group = new THREE.Group(); group.visible = false;
-    const black = material(0x141b25), skin = material(0xf0b88d), wood = material(0xc8aa7e);
-    const box = (x: number, y: number, z: number, w: number, h: number, d: number, mat: THREE.Material) => {
-      const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); mesh.position.set(x, y, z); group.add(mesh); return mesh;
-    };
-    const sphere = (x: number, y: number, z: number, radius: number, mat: THREE.Material) => {
-      const mesh = new THREE.Mesh(new THREE.SphereGeometry(radius, 12, 8), mat); mesh.position.set(x, y, z); group.add(mesh); return mesh;
-    };
-    const shaft = (a: THREE.Vector3, b: THREE.Vector3, radius: number, mat: THREE.Material, parent = group) => {
-      const delta = b.clone().sub(a), mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, delta.length(), 8), mat);
-      mesh.position.copy(a).add(b).multiplyScalar(.5); mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), delta.normalize()); parent.add(mesh);
-    };
-    const ring = new THREE.Mesh(new THREE.RingGeometry(.48, .56, 24), new THREE.MeshBasicMaterial({ color: 0xffbd4a, transparent: true, opacity: .8, depthWrite: false }));
-    ring.rotation.x = -Math.PI / 2; ring.position.y = .045; group.add(ring);
-    const shadow = new THREE.Mesh(new THREE.CircleGeometry(.45, 16), new THREE.MeshBasicMaterial({ color: 0x16252e, transparent: true, opacity: .15, depthWrite: false })); shadow.rotation.x = -Math.PI / 2; shadow.position.y = .033; group.add(shadow);
-    if (goalie) {
-      // Lower pad and blade dimensions match the actual collision footprint.
-      box(-.24, .28, 0, .46, .56, .34, white); box(.24, .28, 0, .46, .56, .34, white);
-      for (const y of [.12, .3, .45]) box(0, y, .176, .86, .025, .01, navy);
-      box(0, .72, 0, .53, .47, .34, red); box(0, .59, 0, .54, .07, .35, white);
-      sphere(-.38, .74, .03, .14, red); sphere(.38, .68, .06, .14, white);
-      sphere(0, 1.08, 0, .23, red); box(0, 1.05, .205, .3, .18, .04, white);
-      const blade = new THREE.Group(); blade.position.z = .42;
-      const face = new THREE.Mesh(new THREE.BoxGeometry(.9, .22, .14), black); face.position.y = .16; blade.add(face);
-      shaft(new THREE.Vector3(.32, .76, -.25), new THREE.Vector3(.32, .16, 0), .045, wood, blade); group.add(blade);
-      this.actors.set(id, { group, ring, blade });
-    } else {
-      for (const z of [-.16, .16]) {
-        box(0, .1, z, .42, .16, .13, black); box(0, .29, z, .14, .3, .14, white); box(0, .39, z, .15, .065, .15, red);
-      }
-      box(0, .49, 0, .4, .24, .38, navy);
-      box(0, .76, 0, .49, .4, .46, red); box(0, .62, 0, .5, .065, .47, white);
-      sphere(0, 1.08, 0, .19, skin); sphere(-.035, 1.16, 0, .22, red);
-      box(.178, 1.08, 0, .025, .12, .26, black);
-      shaft(new THREE.Vector3(.15, .89, -.22), new THREE.Vector3(.43, .62, -.04), .095, red);
-      shaft(new THREE.Vector3(.12, .83, .22), new THREE.Vector3(.55, .51, .03), .095, red);
-      sphere(.43, .62, -.04, .095, black); sphere(.55, .51, .03, .095, black);
-      shaft(new THREE.Vector3(.3, .76, 0), new THREE.Vector3(1.06, .18, 0), .035, wood);
-      box(1.06, .18, 0, .48, .32, .18, black);
-      const canvas = document.createElement('canvas'); canvas.width = canvas.height = 64;
-      const context = canvas.getContext('2d')!; context.fillStyle = '#db2447'; context.fillRect(0, 0, 64, 64); context.fillStyle = 'white'; context.font = 'bold 48px Arial'; context.textAlign = 'center'; context.fillText(String(number), 32, 50);
-      const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
-      const patch = new THREE.Mesh(new THREE.PlaneGeometry(.27, .29), new THREE.MeshBasicMaterial({ map: texture })); patch.rotation.y = -Math.PI / 2; patch.position.set(-.251, .79, 0); group.add(patch);
-      this.actors.set(id, { group, ring });
-    }
-    this.scene.add(group);
+    const { group, blade } = hockeyFigure(goalie, number); group.visible = false;
+    const ring = new T.Mesh(new T.RingGeometry(.46, .53, 32), new T.MeshBasicMaterial({ color: 0xffbd4a, transparent: true, opacity: .8, depthWrite: false })); ring.rotation.x = -Math.PI / 2; ring.position.y = .047; group.add(ring); groundShadow(group, goalie ? 1.3 : 1.1, .95, .48, this.glowMap);
+    this.actors.set(id, { group, ring, blade }); this.scene.add(group);
   }
-  setCelebration(kind: 'you' | 'cpu' | null) { led.color.setHex(kind === 'you' ? 0x83ffcf : kind === 'cpu' ? 0xff6c86 : 0x29baff); }
   private makeGoal() {
-    // The shoulder is visible, so the closed dead space is not an invisible wall.
-    for (let i = 0; i < rearArc.length - 1; i++) {
-      const a = rearArc[i], b = rearArc[i + 1];
-      this.scene.add(polygon([a, b, { ...b, z: -9.1 }, { ...a, z: -9.1 }], 0.58, navy));
-      this.scene.add(bar(a, b, 0.11, red, 0.14));
+    // Rear/side bumper colliders stay in physics; only the actual net piping is visible.
+    for (let i = 0; i < rearArc.length - 1; i++) { const a = rearArc[i], b = rearArc[i + 1]; rod(this.staticArt, [a.x, .14, a.z], [b.x, .14, b.z], .11, paint.red); }
+    for (const x of [-1.5, 1.5]) rod(this.staticArt, [x, .03, C.goalZ], [x, 1.4, C.goalZ], .085, paint.red); rod(this.staticArt, [-1.5, 1.4, C.goalZ], [1.5, 1.4, C.goalZ], .085, paint.red);
+    const net: number[] = [], add = (a: number[], b: number[]) => net.push(...a, ...b);
+    for (let j = 0; j < 24; j++) {
+      const a = rearArc[j], b = rearArc[j + 1]; for (let row = 0; row < 10; row++) { const y = .15 + row * .123; add([a.x, y, a.z], [b.x, y + .123, b.z]); add([b.x, y, b.z], [a.x, y + .123, a.z]); }
+      add([a.x, 1.38, a.z], [b.x, 1.38, b.z]); add([a.x, 1.38, a.z], [a.x, 1.4, C.goalZ]);
     }
-    for (const x of [-C.goalHalfWidth, C.goalHalfWidth]) {
-      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.085, 1.4, 12), red); post.position.set(x, 0.7, C.goalZ); this.scene.add(post);
-    }
-    this.scene.add(bar({ x: -1.5, y: 0, z: C.goalZ }, { x: 1.5, y: 0, z: C.goalZ }, 0.085, red, 1.4));
-    const points: THREE.Vector3[] = [];
-    for (let i = 0; i <= 6; i++) {
-      const y = i * 0.2 + 0.14;
-      for (let j = 0; j < rearArc.length - 1; j++) points.push(new THREE.Vector3(rearArc[j].x, y, rearArc[j].z), new THREE.Vector3(rearArc[j + 1].x, y, rearArc[j + 1].z));
-    }
-    for (const a of rearArc) points.push(new THREE.Vector3(a.x, 0.14, a.z), new THREE.Vector3(a.x, 1.34, a.z));
-    this.scene.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(points), new THREE.LineBasicMaterial({ color: 0xf4ffff, transparent: true, opacity: 0.65 })));
+    for (let i = 1; i < 10; i++) { const z = C.goalZ - i * .12, x = 1.5 * Math.sqrt(1 - Math.pow((C.goalZ - z) / 1.3, 2)); add([-x, 1.39, z], [x, 1.39, z]); }
+    this.staticArt.add(new T.LineSegments(new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute(net, 3)), new T.LineBasicMaterial({ color: 0xd0d9d8, transparent: true, opacity: .62 })));
+    groundShadow(this.staticArt, 3.4, 1.9, .18, this.glowMap).position.set(0, .033, -8.15);
   }
+  private makeCrowd() {
+    const colors = [0x123d62, 0x267898, 0x872540, 0x4f6177, 0xc4c8c5].map(c => surface(c, { roughness: .85 }));
+    for (const side of [-1, 1]) for (let row = 0; row < 3; row++) {
+      rounded(this.crowd, side * (6.7 + row * .65), -.12 + row * .36, -.6, .7, .28, 16.8, paint.navy);
+      for (let i = 0; i < 23; i++) {
+        const x = side * (6.65 + row * .65), y = .13 + row * .36, z = -8.4 + i * .7;
+        rounded(this.crowd, x, y + .18, z, .31, .4, .33, colors[(i * 3 + row * 2 + side + 1) % colors.length], .07); sphere(this.crowd, x, y + .51, z, .13, i % 4 ? paint.skin : paint.pad);
+        for (const arm of [-1, 1]) rod(this.crowd, [x, y + .29, z + arm * .18], [x - side * .16, y + (i % 7 === 0 ? .58 : .1), z + arm * .22], .055, colors[(i * 3 + row * 2 + side + 1) % colors.length]);
+      }
+    }
+    batchStatic(this.crowd);
+  }
+  setCelebration(kind: 'you' | 'cpu' | null) { this.celebration = kind; this.celebrationStart = performance.now(); }
   setReduced(value: boolean) { this.reduced = value; this.resize(); }
+  setReducedMotion(value: boolean) { this.reducedMotion = value; }
   private resize() {
-    const w = this.host.clientWidth, h = this.host.clientHeight;
-    const aspect = w / h, halfH = Math.max(8.6, 6.3 / aspect);
-    this.camera.left = -halfH * aspect; this.camera.right = halfH * aspect; this.camera.top = halfH; this.camera.bottom = -halfH;
-    this.camera.updateProjectionMatrix(); this.renderer.setPixelRatio(this.reduced ? 1 : Math.min(window.devicePixelRatio, 1.5)); this.renderer.setSize(w, h);
-    const size = this.renderer.getDrawingBufferSize(new THREE.Vector2()); this.resolution = `${size.x} × ${size.y}`;
+    const w = Math.max(1, this.host.clientWidth), h = Math.max(1, this.host.clientHeight), aspect = w / h; this.camera.aspect = aspect;
+    // Fit every corner, including glass. Wider views reveal crowds without shrinking the rink.
+    const elevation = 57 * Math.PI / 180, s = Math.sin(elevation), c = Math.cos(elevation), tan = Math.tan(this.camera.fov * Math.PI / 360); let distance = 0;
+    for (const x of [-6.02, 6.02]) for (const y of [-.7, 1.96]) for (const z of [-9.62, 9.7]) { const depth = y * s + z * c, up = y * c - z * s; distance = Math.max(distance, depth + Math.abs(x) / (tan * aspect * .965), depth + Math.abs(up) / (tan * .965)); }
+    this.camera.position.set(0, distance * s, distance * c); this.camera.lookAt(0, 0, 0); this.camera.updateProjectionMatrix(); this.renderer.setPixelRatio(this.reduced ? 1 : Math.min(window.devicePixelRatio, 1.75)); this.renderer.setSize(w, h); this.crowd.visible = !this.reduced && aspect > .82;
+    const size = this.renderer.getDrawingBufferSize(new T.Vector2()); this.resolution = `${size.x} × ${size.y}`;
   }
+  get presentation() { return { camera: 'perspective', elevation: 57, crowd: this.crowd.visible, reducedMotion: this.reducedMotion, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, celebration: this.celebration }; }
   render(prev: State, now: State, alpha: number, stickEnabled: boolean) {
-    const lerp = THREE.MathUtils.lerp;
-    this.puck.visible = this.shadow.visible = now.active;
-    this.puck.position.set(lerp(prev.puck.x, now.puck.x, alpha), lerp(prev.puck.y, now.puck.y, alpha), lerp(prev.puck.z, now.puck.z, alpha));
-    this.shadow.position.x = this.puck.position.x; this.shadow.position.z = this.puck.position.z;
+    const lerp = T.MathUtils.lerp; this.puck.visible = this.shadow.visible = now.active;
+    this.puck.position.set(lerp(prev.puck.x, now.puck.x, alpha), lerp(prev.puck.y, now.puck.y, alpha), lerp(prev.puck.z, now.puck.z, alpha)); this.shadow.position.x = this.puck.position.x; this.shadow.position.z = this.puck.position.z;
     this.puckHalo.visible = now.active; this.puckHalo.position.copy(this.puck.position); this.puckHalo.position.y += .11;
-    const hop = Math.max(0, this.puck.position.y - 0.11); this.shadow.scale.setScalar(1 + hop); (this.shadow.material as THREE.MeshBasicMaterial).opacity = 0.27 - hop * 0.25;
-    this.flippers.forEach((g, side) => { const a = lerp(prev.angles[side], now.angles[side], alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); });
-    this.stick.visible = stickEnabled; this.stick.position.z = lerp(prev.stickZ, now.stickZ, alpha); this.stick.rotation.y = lerp(prev.stickAngle, now.stickAngle, alpha);
+    const hop = Math.max(0, this.puck.position.y - .11); this.shadow.scale.setScalar(1 + hop); (this.shadow.material as T.MeshBasicMaterial).opacity = Math.max(.18, .62 - hop * .45);
+    this.flippers.forEach((g, side) => { const a = lerp(prev.angles[side], now.angles[side], alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); }); this.stick.visible = stickEnabled; this.stick.position.z = lerp(prev.stickZ, now.stickZ, alpha); this.stick.rotation.y = lerp(prev.stickAngle, now.stickAngle, alpha);
     for (const [id, visual] of this.actors) {
-      const pose = now.actors.find(a => a.id === id); visual.group.visible = !!pose;
-      if (!pose) continue;
-      const before = prev.actors.find(a => a.id === id) ?? pose;
-      visual.group.position.set(lerp(before.x, pose.x, alpha), 0, lerp(before.z, pose.z, alpha));
-      visual.group.rotation.y = pose.kind === 'skater' ? -lerp(before.angle, pose.angle, alpha) : 0;
-      visual.ring.visible = ['windup', 'swing', 'clear', 'checked'].includes(pose.stage);
-      (visual.ring.material as THREE.MeshBasicMaterial).color.setHex(pose.stage === 'checked' ? 0x8eeaff : 0xffbd4a);
-      if (visual.blade) visual.blade.position.z = .42 + lerp(before.kick, pose.kick, alpha) * .4;
+      const pose = now.actors.find(a => a.id === id); visual.group.visible = !!pose; if (!pose) continue; const before = prev.actors.find(a => a.id === id) ?? pose;
+      visual.group.position.set(lerp(before.x, pose.x, alpha), 0, lerp(before.z, pose.z, alpha)); visual.group.rotation.y = pose.kind === 'skater' ? -lerp(before.angle, pose.angle, alpha) : 0;
+      visual.ring.visible = ['windup', 'swing', 'clear', 'checked'].includes(pose.stage); (visual.ring.material as T.MeshBasicMaterial).color.setHex(pose.stage === 'checked' ? 0x8eeaff : 0xffbd4a); if (visual.blade) visual.blade.position.z = .42 + lerp(before.kick, pose.kick, alpha) * .4;
     }
+    const t = (performance.now() - this.celebrationStart) / 1000, celebrating = this.celebration !== null && t < 2.5, color = celebrating ? this.celebration === 'you' ? 0x83ffe5 : 0xff5774 : 0x35baff; this.led.color.setHex(color);
+    for (const glow of this.glows) { const mat = glow.material as T.SpriteMaterial; mat.color.setHex(color); mat.opacity = celebrating && !this.reducedMotion ? .45 + .15 * Math.sin(t * 4) : .45; }
+    this.confetti.visible = celebrating && this.celebration === 'you' && !this.reducedMotion;
+    if (this.confetti.visible) { const p = this.confetti.geometry.getAttribute('position'); for (let i = 0; i < p.count; i++) { const r = this.confettiSeeds[i], side = i % 2 ? -1 : 1; p.setXYZ(i, side * (5.85 + r * 2.4 + t * .4), 1.8 + r * 2 + t * (2 + r) - t * t * 1.7, -7.8 + ((i * .381966) % 1) * 15); } p.needsUpdate = true; (this.confetti.material as T.PointsMaterial).opacity = Math.max(0, 1 - t / 2.5); }
     this.renderer.render(this.scene, this.camera);
   }
 }
