@@ -1,0 +1,345 @@
+{
+  "date": "2026-10-01T20:20:59.354Z",
+  "passed": 46,
+  "failed": 0,
+  "observations": [
+    {
+      "target": "left-body",
+      "hops": false,
+      "escapedAt": 0.3416666666666667
+    },
+    {
+      "target": "right-body",
+      "hops": false,
+      "escapedAt": 0.3416666666666667
+    },
+    {
+      "target": "center-body",
+      "hops": false,
+      "escapedAt": 0.3416666666666667
+    },
+    {
+      "target": "left-blade",
+      "hops": false,
+      "escapedAt": 0.3833333333333333
+    },
+    {
+      "target": "right-blade",
+      "hops": false,
+      "escapedAt": 0.3833333333333333
+    },
+    {
+      "target": "center-blade",
+      "hops": false,
+      "escapedAt": 0.3833333333333333
+    },
+    {
+      "target": "goalie-pad",
+      "hops": false,
+      "escapedAt": 0.2833333333333333
+    },
+    {
+      "target": "goalie-blade",
+      "hops": false,
+      "escapedAt": 0.425
+    },
+    {
+      "target": "left-body",
+      "hops": true,
+      "escapedAt": 0.35
+    },
+    {
+      "target": "right-body",
+      "hops": true,
+      "escapedAt": 0.35
+    },
+    {
+      "target": "center-body",
+      "hops": true,
+      "escapedAt": 0.35
+    },
+    {
+      "target": "left-blade",
+      "hops": true,
+      "escapedAt": 0.3416666666666667
+    },
+    {
+      "target": "right-blade",
+      "hops": true,
+      "escapedAt": 0.3416666666666667
+    },
+    {
+      "target": "center-blade",
+      "hops": true,
+      "escapedAt": 0.3416666666666667
+    },
+    {
+      "target": "goalie-pad",
+      "hops": true,
+      "escapedAt": 0.2833333333333333
+    },
+    {
+      "target": "goalie-blade",
+      "hops": true,
+      "escapedAt": 0.31666666666666665
+    },
+    {
+      "kind": "safety",
+      "difficulty": "easy",
+      "index": 0,
+      "seconds": 2,
+      "travel": 1.901218443710877,
+      "peakSpeed": 3.702419937895428
+    },
+    {
+      "kind": "safety",
+      "difficulty": "easy",
+      "index": 1,
+      "seconds": 2,
+      "travel": 1.7900384530840594,
+      "peakSpeed": 3.545351997691626
+    },
+    {
+      "kind": "safety",
+      "difficulty": "easy",
+      "index": 2,
+      "seconds": 2,
+      "travel": 1.6829370543736226,
+      "peakSpeed": 3.4992125224676376
+    },
+    {
+      "kind": "safety",
+      "difficulty": "normal",
+      "index": 0,
+      "seconds": 2,
+      "travel": 1.8107585817548548,
+      "peakSpeed": 4.224904991430851
+    },
+    {
+      "kind": "safety",
+      "difficulty": "normal",
+      "index": 1,
+      "seconds": 2,
+      "travel": 1.8001121596312621,
+      "peakSpeed": 4.250823719547723
+    },
+    {
+      "kind": "safety",
+      "difficulty": "normal",
+      "index": 2,
+      "seconds": 2,
+      "travel": 1.6338168561109268,
+      "peakSpeed": 4.472400272585098
+    },
+    {
+      "kind": "safety",
+      "difficulty": "hard",
+      "index": 0,
+      "seconds": 2,
+      "travel": 1.8360541681128968,
+      "peakSpeed": 4.740463998373731
+    },
+    {
+      "kind": "safety",
+      "difficulty": "hard",
+      "index": 1,
+      "seconds": 2,
+      "travel": 1.9016640190700764,
+      "peakSpeed": 4.759564294636588
+    },
+    {
+      "kind": "safety",
+      "difficulty": "hard",
+      "index": 2,
+      "seconds": 2,
+      "travel": 1.6273961575538647,
+      "peakSpeed": 4.995287236620695
+    }
+  ],
+  "checks": [
+    {
+      "name": "left-body: deep overlap escapes horizontally, hops false",
+      "passed": true
+    },
+    {
+      "name": "right-body: deep overlap escapes horizontally, hops false",
+      "passed": true
+    },
+    {
+      "name": "center-body: deep overlap escapes horizontally, hops false",
+      "passed": true
+    },
+    {
+      "name": "left-blade: deep overlap escapes horizontally, hops false",
+      "passed": true
+    },
+    {
+      "name": "right-blade: deep overlap escapes horizontally, hops false",
+      "passed": true
+    },
+    {
+      "name": "center-blade: deep overlap escapes horizontally, hops false",
+      "passed": true
+    },
+    {
+      "name": "goalie-pad: deep overlap escapes horizontally, hops false",
+      "passed": true
+    },
+    {
+      "name": "goalie-blade: deep overlap escapes horizontally, hops false",
+      "passed": true
+    },
+    {
+      "name": "left-body: deep overlap escapes horizontally, hops true",
+      "passed": true
+    },
+    {
+      "name": "right-body: deep overlap escapes horizontally, hops true",
+      "passed": true
+    },
+    {
+      "name": "center-body: deep overlap escapes horizontally, hops true",
+      "passed": true
+    },
+    {
+      "name": "left-blade: deep overlap escapes horizontally, hops true",
+      "passed": true
+    },
+    {
+      "name": "right-blade: deep overlap escapes horizontally, hops true",
+      "passed": true
+    },
+    {
+      "name": "center-blade: deep overlap escapes horizontally, hops true",
+      "passed": true
+    },
+    {
+      "name": "goalie-pad: deep overlap escapes horizontally, hops true",
+      "passed": true
+    },
+    {
+      "name": "goalie-blade: deep overlap escapes horizontally, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 0 frees a puck at his feet: easy, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 1 frees a puck at his feet: easy, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 2 frees a puck at his feet: easy, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 0 frees a puck at his feet: easy, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 1 frees a puck at his feet: easy, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 2 frees a puck at his feet: easy, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 0 frees a puck at his feet: normal, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 1 frees a puck at his feet: normal, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 2 frees a puck at his feet: normal, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 0 frees a puck at his feet: normal, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 1 frees a puck at his feet: normal, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 2 frees a puck at his feet: normal, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 0 frees a puck at his feet: hard, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 1 frees a puck at his feet: hard, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 2 frees a puck at his feet: hard, hops false",
+      "passed": true
+    },
+    {
+      "name": "moving skater 0 frees a puck at his feet: hard, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 1 frees a puck at his feet: hard, hops true",
+      "passed": true
+    },
+    {
+      "name": "moving skater 2 frees a puck at his feet: hard, hops true",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: easy, skater 0",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: easy, skater 1",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: easy, skater 2",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: normal, skater 0",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: normal, skater 1",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: normal, skater 2",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: hard, skater 0",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: hard, skater 1",
+      "passed": true
+    },
+    {
+      "name": "safety whistle bounds a carried/jittering trap: hard, skater 2",
+      "passed": true
+    },
+    {
+      "name": "a vibrating stationary wedge cannot keep resetting the no-progress timer",
+      "passed": true
+    },
+    {
+      "name": "an unreachable apron wedge restarts promptly: side -1",
+      "passed": true
+    },
+    {
+      "name": "an unreachable apron wedge restarts promptly: side 1",
+      "passed": true
+    }
+  ]
+}

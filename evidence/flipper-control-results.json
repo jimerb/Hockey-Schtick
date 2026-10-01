@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-01T19:38:39.789Z",
+  "date": "2026-10-01T20:20:55.528Z",
   "passed": 111,
   "failed": 0,
   "fastCases": 72,
@@ -270,8 +270,20 @@
       "kind": "full-team-control-demo",
       "difficulty": "easy",
       "hops": false,
-      "catches": 12,
+      "catches": 13,
       "releaseAttempts": 12,
+      "score": {
+        "you": 0,
+        "cpu": 2
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team-control-demo",
+      "difficulty": "easy",
+      "hops": true,
+      "catches": 14,
+      "releaseAttempts": 14,
       "score": {
         "you": 0,
         "cpu": 4
@@ -280,34 +292,10 @@
     },
     {
       "kind": "full-team-control-demo",
-      "difficulty": "easy",
-      "hops": true,
-      "catches": 15,
-      "releaseAttempts": 14,
-      "score": {
-        "you": 0,
-        "cpu": 5
-      },
-      "recoveries": 0
-    },
-    {
-      "kind": "full-team-control-demo",
       "difficulty": "normal",
       "hops": false,
-      "catches": 9,
-      "releaseAttempts": 9,
-      "score": {
-        "you": 0,
-        "cpu": 5
-      },
-      "recoveries": 0
-    },
-    {
-      "kind": "full-team-control-demo",
-      "difficulty": "normal",
-      "hops": true,
-      "catches": 12,
-      "releaseAttempts": 12,
+      "catches": 10,
+      "releaseAttempts": 10,
       "score": {
         "you": 0,
         "cpu": 3
@@ -316,10 +304,10 @@
     },
     {
       "kind": "full-team-control-demo",
-      "difficulty": "hard",
-      "hops": false,
-      "catches": 7,
-      "releaseAttempts": 7,
+      "difficulty": "normal",
+      "hops": true,
+      "catches": 15,
+      "releaseAttempts": 15,
       "score": {
         "you": 0,
         "cpu": 5
@@ -329,12 +317,24 @@
     {
       "kind": "full-team-control-demo",
       "difficulty": "hard",
-      "hops": true,
-      "catches": 4,
-      "releaseAttempts": 4,
+      "hops": false,
+      "catches": 11,
+      "releaseAttempts": 10,
       "score": {
         "you": 0,
         "cpu": 2
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team-control-demo",
+      "difficulty": "hard",
+      "hops": true,
+      "catches": 1,
+      "releaseAttempts": 1,
+      "score": {
+        "you": 0,
+        "cpu": 0
       },
       "recoveries": 0
     }

@@ -62,18 +62,21 @@ export class Opponents {
     for (const index of indices) {
       const lane = this.lanes[index];
       const body = sim.world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased().setTranslation(lane.x, 0, lane.home));
-      const torso = sim.world.createCollider(RAPIER.ColliderDesc.cylinder(.56, .27).setTranslation(0, .58, 0).setRestitution(.72), body);
-      const blade = sim.world.createCollider(RAPIER.ColliderDesc.cuboid(.24, .16, .09).setTranslation(1.06, .18, 0).setFriction(.02).setRestitution(.9), body);
+      // Extend ice-level shapes below the ice, keeping their tops and footprints.
+      // Otherwise a deep contact can choose the underside as its escape direction
+      // and pin a puck against the ice (or its locked vertical axis).
+      const torso = sim.world.createCollider(RAPIER.ColliderDesc.cylinder(.82, .27).setTranslation(0, .32, 0).setRestitution(.72), body);
+      const blade = sim.world.createCollider(RAPIER.ColliderDesc.cuboid(.24, .42, .09).setTranslation(1.06, -.08, 0).setFriction(.02).setRestitution(.9), body);
       sim.registerCollider(torso, `skater-${index}`); sim.registerCollider(blade, `skater-${index}-blade`);
       this.skaters.push({ index, body, torso, blade, z: lane.home, angle: Math.PI / 2, stage: 'idle', timer: 0, cooldown: 0, phi: 0, sign: 1, target: { x: 0, z: 8 }, pass: false, push: false, struck: false, receiver: -1, meetAt: 0, roamZ: lane.home, roamTimer: 0, speed: 0, gentleOpening: false, bodyContact: false, lastBump: -1000,
         previousZ: lane.home, previousAngle: 0, checkTime: 0, checkDuration: 0, checkFrom: lane.home, checkDistance: 0, checkStrength: 0, lastCheck: -1000, paddleContact: [false, false] });
     }
     this.goalie = sim.world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased().setTranslation(0, 0, -6.95));
-    this.goaliePad = sim.world.createCollider(RAPIER.ColliderDesc.roundCuboid(.43, .24, .13, .04).setTranslation(0, .28, 0).setRestitution(.78), this.goalie);
+    this.goaliePad = sim.world.createCollider(RAPIER.ColliderDesc.roundCuboid(.43, .51, .13, .04).setTranslation(0, .01, 0).setRestitution(.78), this.goalie);
     const upper = sim.world.createCollider(RAPIER.ColliderDesc.cylinder(.38, .26).setTranslation(0, .78, 0).setRestitution(.65), this.goalie);
     sim.registerCollider(this.goaliePad, 'goalie-pad'); sim.registerCollider(upper, 'goalie-body');
     this.goalieStick = sim.world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased().setTranslation(0, .16, -6.53));
-    this.goalieBlade = sim.world.createCollider(RAPIER.ColliderDesc.cuboid(.45, .11, .07).setRestitution(.85), this.goalieStick);
+    this.goalieBlade = sim.world.createCollider(RAPIER.ColliderDesc.cuboid(.45, .385, .07).setTranslation(0, -.275, 0).setRestitution(.85), this.goalieStick);
     sim.registerCollider(this.goalieBlade, 'goalie-stick');
     this.reset('normal', 1);
   }

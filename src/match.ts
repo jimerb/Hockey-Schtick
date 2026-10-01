@@ -5,7 +5,8 @@ import type { Difficulty } from './opponents';
 import type { Contact, RinkPhysics } from './physics';
 
 export type MatchPhase = 'idle' | 'countdown' | 'playing' | 'goal' | 'finished';
-export type MatchEvent = { kind: 'start' | 'drop' | 'goal' | 'recovery' | 'finished'; message: string; scorer?: 'you' | 'cpu' };
+type RecoveryReason = 'stationary' | 'actor-pin' | 'fault';
+export type MatchEvent = { kind: 'start' | 'drop' | 'goal' | 'recovery' | 'finished'; message: string; scorer?: 'you' | 'cpu'; reason?: RecoveryReason };
 export class HockeyMatch {
   team: Opponents;
   phase: MatchPhase = 'idle';
@@ -25,6 +26,7 @@ export class HockeyMatch {
   onContact?: (contact: Contact) => void;
   private stalled = 0;
   private anchor = { x: 0, z: 0 };
+  private actorPins = new Map<number, { time: number; separated: number }>();
   private lastReturn = -1000;
   private lastGoalie = -1000;
   private lastBank = -1000;
@@ -46,6 +48,7 @@ export class HockeyMatch {
     this.elapsed = this.drops = this.recoveries = this.returns = this.goalieSaves = this.bankGoals = 0;
     this.lastBank = this.lastReturn = this.lastGoalie = -1000;
     this.team.reset(difficulty, seed); this.phase = 'idle'; this.timer = this.stalled = 0; this.message = 'First to seven';
+    this.actorPins.clear();
   }
   start(difficulty: Difficulty = 'normal', seed = 1) {
     this.prepare(difficulty, seed); this.countdown(2.4); this.message = 'Get ready';
@@ -54,6 +57,7 @@ export class HockeyMatch {
   private countdown(seconds: number) {
     this.sim.reset(); this.team.reset(this.difficulty, this.seed + this.drops * 71, false);
     this.phase = 'countdown'; this.timer = seconds; this.stalled = 0;
+    this.actorPins.clear();
   }
   private drop() {
     this.phase = 'playing'; this.drops++; this.message = 'Play'; this.lastBank = this.lastReturn = -1000;
@@ -62,7 +66,7 @@ export class HockeyMatch {
   }
   private result(result: Result) {
     if (this.phase !== 'playing') return;
-    if (result === 'fault') { this.recover(); return; }
+    if (result === 'fault') { this.recover('fault'); return; }
     const scorer = result === 'goal' ? 'you' : 'cpu'; this.score[scorer]++;
     if (scorer === 'you' && this.lastBank > this.lastReturn && this.lastReturn >= 0 && this.sim.tick - this.lastBank < 360) this.bankGoals++;
     this.sim.held = [false, false];
@@ -74,9 +78,32 @@ export class HockeyMatch {
       this.onEvent?.({ kind: 'goal', message: scorer === 'you' ? 'GOAL!' : 'CPU GOAL', scorer });
     }
   }
-  private recover() {
+  private recover(reason: RecoveryReason) {
     this.recoveries++; this.message = 'Whistle · neutral restart'; this.countdown(1.6);
-    this.onEvent?.({ kind: 'recovery', message: 'WHISTLE · NEW PUCK' });
+    this.onEvent?.({ kind: 'recovery', message: 'WHISTLE · NEW PUCK', reason });
+  }
+  private pinnedToActor() {
+    // Absolute puck speed cannot detect a puck carried by a moving figure.
+    // Watch sustained actual shape contact; brief separation tolerates solver jitter.
+    const groups = [
+      ...this.team.skaters.map(s => ({ id: s.index, colliders: [s.torso, s.blade] })),
+      { id: -1, colliders: [this.team.goaliePad, this.team.goalieBlade] },
+    ];
+    const p = this.sim.puck.translation();
+    for (const { id, colliders } of groups) {
+      const contact = colliders.some(c => {
+        if (!c.isEnabled() || !c.parent()?.isEnabled()) return false;
+        const q = c.translation();
+        return Math.hypot(p.x - q.x, p.z - q.z) < 1 && !!this.sim.puckCollider.contactCollider(c, .02);
+      });
+      const pin = this.actorPins.get(id) ?? { time: 0, separated: 0 };
+      pin.separated = contact ? 0 : pin.separated + C.dt;
+      if (pin.separated > .2) { this.actorPins.delete(id); continue; }
+      if (contact || pin.time > 0) pin.time += C.dt;
+      this.actorPins.set(id, pin);
+      if (contact && pin.time >= 2) return true;
+    }
+    return false;
   }
   step() {
     if (this.phase === 'idle' || this.phase === 'finished') return;
@@ -86,9 +113,21 @@ export class HockeyMatch {
     this.team.preStep(); this.sim.step();
     if (this.phase !== 'playing') return;
     this.team.postStep();
-    const p = this.sim.puck.translation(), v = this.sim.puck.linvel();
-    if (this.sim.cradledSide() !== null || Math.hypot(p.x - this.anchor.x, p.z - this.anchor.z) > .12 || Math.hypot(v.x, v.z) > .28) {
+    const p = this.sim.puck.translation();
+    if (this.sim.cradledSide() !== null) {
+      this.stalled = 0; this.anchor = { x: p.x, z: p.z }; this.actorPins.clear(); return;
+    }
+    if (this.pinnedToActor()) { this.recover('actor-pin'); return; }
+    // Judge progress by position, not instantaneous velocity: a vibrating wedge
+    // can have nonzero velocity indefinitely without going anywhere.
+    if (Math.hypot(p.x - this.anchor.x, p.z - this.anchor.z) > .12) {
       this.stalled = 0; this.anchor = { x: p.x, z: p.z };
-    } else { this.stalled += C.dt; if (this.stalled > 3.5) this.recover(); }
+    } else {
+      this.stalled += C.dt;
+      // A motionless puck behind the bats is out of play. Elsewhere allow the
+      // existing settling time, including a hopping puck approaching a cradle.
+      const limit = p.z > C.pivotZ + 1 ? 1.25 : 3.5;
+      if (this.stalled > limit) this.recover('stationary');
+    }
   }
 }
