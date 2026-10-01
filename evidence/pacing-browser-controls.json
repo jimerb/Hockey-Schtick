@@ -1,0 +1,357 @@
+{
+  "keyboard": {
+    "code": "KeyL",
+    "requested": 2033,
+    "applied": 2034
+  },
+  "pauseBefore": {
+    "active": true,
+    "paused": true,
+    "started": true,
+    "phase": "playing",
+    "winner": null,
+    "elapsed": 26.824999999999118,
+    "countdown": -0.008333333333327397,
+    "tick": 32069,
+    "held": [
+      false,
+      false
+    ],
+    "physicalHeld": [
+      false,
+      false
+    ],
+    "angles": [
+      0.32,
+      0.32
+    ],
+    "puck": {
+      "x": 0.15462251007556915,
+      "y": 0.10999999940395355,
+      "z": 2.846426248550415
+    },
+    "velocity": {
+      "x": 13.883719444274902,
+      "y": 0,
+      "z": -3.8858964443206787
+    },
+    "scores": {
+      "you": 0,
+      "cpu": 0
+    },
+    "drops": 1,
+    "recoveries": 0,
+    "returns": 14,
+    "goalieSaves": 0,
+    "actors": [
+      {
+        "id": "skater-0",
+        "kind": "skater",
+        "x": -2.8,
+        "z": -4.1,
+        "angle": 0,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "skater-1",
+        "kind": "skater",
+        "x": 2.8,
+        "z": -4.1,
+        "angle": 3.141592653589793,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "skater-2",
+        "kind": "skater",
+        "x": 0,
+        "z": -1.65,
+        "angle": 0,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "skater-3",
+        "kind": "skater",
+        "x": -2.8,
+        "z": 3.000000000000001,
+        "angle": 12.566370614359172,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "skater-4",
+        "kind": "skater",
+        "x": 2.8,
+        "z": 3.2,
+        "angle": 8.966444627436053,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "goalie",
+        "kind": "goalie",
+        "x": 0.18666666666666581,
+        "z": -6.95,
+        "angle": 1.5707963267948966,
+        "stage": "guard",
+        "kick": 0
+      }
+    ],
+    "team": {
+      "shots": 7,
+      "passes": 3,
+      "pushes": 0,
+      "misses": 5,
+      "goalieContacts": 0,
+      "clears": 0,
+      "strikes": 10,
+      "peakCommitted": 1
+    },
+    "bindings": [
+      {
+        "code": "KeyA",
+        "label": "A"
+      },
+      {
+        "code": "KeyL",
+        "label": "L"
+      }
+    ],
+    "lastInput": {
+      "code": "KeyL",
+      "requested": 2033,
+      "applied": 2034
+    },
+    "contacts": 1040,
+    "settings": {
+      "version": "0.3.1",
+      "difficulty": "normal",
+      "seed": 4090085181,
+      "actors": 6,
+      "hops": false,
+      "reduced": false,
+      "render30": false,
+      "physicsHz": 120,
+      "downhill": 3.2,
+      "resolution": "793 × 565",
+      "viewport": "1040 × 593",
+      "devicePixelRatio": 2.7200000286102295,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+    },
+    "benchmarkResult": {
+      "date": "2026-09-30T19:31:24.812Z",
+      "completed": true,
+      "reason": null,
+      "activeSeconds": 120,
+      "measuredFrames": 7021,
+      "medianFrameMs": 16.7,
+      "p95FrameMs": 16.8,
+      "medianDrawIntervalMs": 16.7,
+      "p95DrawIntervalMs": 16.8,
+      "stallsOver100ms": 0,
+      "p95PhysicsPerFrameMs": 0.3,
+      "contacts": 534,
+      "goals": 1,
+      "conceded": 1,
+      "neutralRestarts": 0,
+      "completedMatches": 0,
+      "assistedStrikes": 14,
+      "settings": {
+        "version": "0.3.1",
+        "difficulty": "normal",
+        "seed": 1024,
+        "actors": 6,
+        "hops": false,
+        "reduced": false,
+        "render30": false,
+        "physicsHz": 120,
+        "downhill": 3.2,
+        "resolution": "793 × 565",
+        "viewport": "1040 × 593",
+        "devicePixelRatio": 2.7200000286102295,
+        "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+      }
+    },
+    "benchmarkRunning": false,
+    "benchmarkElapsed": 0
+  },
+  "pauseAfter": {
+    "active": true,
+    "paused": true,
+    "started": true,
+    "phase": "playing",
+    "winner": null,
+    "elapsed": 26.824999999999118,
+    "countdown": -0.008333333333327397,
+    "tick": 32069,
+    "held": [
+      false,
+      false
+    ],
+    "physicalHeld": [
+      false,
+      false
+    ],
+    "angles": [
+      0.32,
+      0.32
+    ],
+    "puck": {
+      "x": 0.15462251007556915,
+      "y": 0.10999999940395355,
+      "z": 2.846426248550415
+    },
+    "velocity": {
+      "x": 13.883719444274902,
+      "y": 0,
+      "z": -3.8858964443206787
+    },
+    "scores": {
+      "you": 0,
+      "cpu": 0
+    },
+    "drops": 1,
+    "recoveries": 0,
+    "returns": 14,
+    "goalieSaves": 0,
+    "actors": [
+      {
+        "id": "skater-0",
+        "kind": "skater",
+        "x": -2.8,
+        "z": -4.1,
+        "angle": 0,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "skater-1",
+        "kind": "skater",
+        "x": 2.8,
+        "z": -4.1,
+        "angle": 3.141592653589793,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "skater-2",
+        "kind": "skater",
+        "x": 0,
+        "z": -1.65,
+        "angle": 0,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "skater-3",
+        "kind": "skater",
+        "x": -2.8,
+        "z": 3.000000000000001,
+        "angle": 12.566370614359172,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "skater-4",
+        "kind": "skater",
+        "x": 2.8,
+        "z": 3.2,
+        "angle": 8.966444627436053,
+        "stage": "idle",
+        "kick": 0
+      },
+      {
+        "id": "goalie",
+        "kind": "goalie",
+        "x": 0.18666666666666581,
+        "z": -6.95,
+        "angle": 1.5707963267948966,
+        "stage": "guard",
+        "kick": 0
+      }
+    ],
+    "team": {
+      "shots": 7,
+      "passes": 3,
+      "pushes": 0,
+      "misses": 5,
+      "goalieContacts": 0,
+      "clears": 0,
+      "strikes": 10,
+      "peakCommitted": 1
+    },
+    "bindings": [
+      {
+        "code": "KeyA",
+        "label": "A"
+      },
+      {
+        "code": "KeyL",
+        "label": "L"
+      }
+    ],
+    "lastInput": {
+      "code": "KeyL",
+      "requested": 2033,
+      "applied": 2034
+    },
+    "contacts": 1040,
+    "settings": {
+      "version": "0.3.1",
+      "difficulty": "normal",
+      "seed": 4090085181,
+      "actors": 6,
+      "hops": false,
+      "reduced": false,
+      "render30": false,
+      "physicsHz": 120,
+      "downhill": 3.2,
+      "resolution": "793 × 565",
+      "viewport": "1040 × 593",
+      "devicePixelRatio": 2.7200000286102295,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+    },
+    "benchmarkResult": {
+      "date": "2026-09-30T19:31:24.812Z",
+      "completed": true,
+      "reason": null,
+      "activeSeconds": 120,
+      "measuredFrames": 7021,
+      "medianFrameMs": 16.7,
+      "p95FrameMs": 16.8,
+      "medianDrawIntervalMs": 16.7,
+      "p95DrawIntervalMs": 16.8,
+      "stallsOver100ms": 0,
+      "p95PhysicsPerFrameMs": 0.3,
+      "contacts": 534,
+      "goals": 1,
+      "conceded": 1,
+      "neutralRestarts": 0,
+      "completedMatches": 0,
+      "assistedStrikes": 14,
+      "settings": {
+        "version": "0.3.1",
+        "difficulty": "normal",
+        "seed": 1024,
+        "actors": 6,
+        "hops": false,
+        "reduced": false,
+        "render30": false,
+        "physicsHz": 120,
+        "downhill": 3.2,
+        "resolution": "793 × 565",
+        "viewport": "1040 × 593",
+        "devicePixelRatio": 2.7200000286102295,
+        "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+      }
+    },
+    "benchmarkRunning": false,
+    "benchmarkElapsed": 0
+  }
+}

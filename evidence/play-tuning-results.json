@@ -1,0 +1,269 @@
+{
+  "date": "2026-10-01T18:07:42.976Z",
+  "passed": 30,
+  "failed": 0,
+  "openings": [
+    {
+      "difficulty": "easy",
+      "seeds": 24,
+      "minTarget": -3.583629231387749,
+      "maxTarget": 3.571231681620702,
+      "intercepted": 24,
+      "reactionSeconds": 0.3
+    },
+    {
+      "difficulty": "normal",
+      "seeds": 24,
+      "minTarget": -3.583629231387749,
+      "maxTarget": 3.571231681620702,
+      "intercepted": 24,
+      "reactionSeconds": 0.3
+    },
+    {
+      "difficulty": "hard",
+      "seeds": 24,
+      "minTarget": -3.583629231387749,
+      "maxTarget": 3.571231681620702,
+      "intercepted": 24,
+      "reactionSeconds": 0.3
+    }
+  ],
+  "bumps": [
+    {
+      "kind": "rear",
+      "angle": 0,
+      "speed": 3,
+      "hops": false,
+      "ordinary": {
+        "x": -2.147883653640747,
+        "y": 0,
+        "z": -3.6533317167532144e-16
+      },
+      "tuned": {
+        "x": -4.5478835105896,
+        "y": 0,
+        "z": -3.6533317167532144e-16
+      },
+      "extraSpeed": 2.3999998569488525
+    },
+    {
+      "kind": "rear",
+      "angle": 0,
+      "speed": 3,
+      "hops": true,
+      "ordinary": {
+        "x": -2.1329612731933594,
+        "y": -0.000018270080545335077,
+        "z": 0
+      },
+      "tuned": {
+        "x": -4.532961368560791,
+        "y": -0.000018270080545335077,
+        "z": 0
+      },
+      "extraSpeed": 2.4000000953674316
+    },
+    {
+      "kind": "rear",
+      "angle": 0,
+      "speed": 8,
+      "hops": false,
+      "ordinary": {
+        "x": -5.748012065887451,
+        "y": 0,
+        "z": -9.776784620058564e-16
+      },
+      "tuned": {
+        "x": -8.148012161254883,
+        "y": 0,
+        "z": -9.776784620058564e-16
+      },
+      "extraSpeed": 2.4000000953674316
+    },
+    {
+      "kind": "rear",
+      "angle": 0,
+      "speed": 8,
+      "hops": true,
+      "ordinary": {
+        "x": -5.742805480957031,
+        "y": 1.649999976158142,
+        "z": 0.0000547000345250126
+      },
+      "tuned": {
+        "x": -8.142805099487305,
+        "y": 1.649999976158142,
+        "z": 0.0000775599546614103
+      },
+      "extraSpeed": 2.3999996186391432
+    },
+    {
+      "kind": "rear",
+      "angle": 1.5707963267948966,
+      "speed": 3,
+      "hops": false,
+      "ordinary": {
+        "x": -3.9535058995791535e-16,
+        "y": 0,
+        "z": -2.1478590965270996
+      },
+      "tuned": {
+        "x": -8.365954896408776e-16,
+        "y": 0,
+        "z": -4.547859191894531
+      },
+      "extraSpeed": 2.4000000953674316
+    },
+    {
+      "kind": "rear",
+      "angle": 1.5707963267948966,
+      "speed": 3,
+      "hops": true,
+      "ordinary": {
+        "x": -0.00045708942343480885,
+        "y": -0.0000022837948563392274,
+        "z": -2.132962703704834
+      },
+      "tuned": {
+        "x": -0.0009714043117128313,
+        "y": -0.0000022837948563392274,
+        "z": -4.532962799072266
+      },
+      "extraSpeed": 2.4000001504757216
+    },
+    {
+      "kind": "rear",
+      "angle": 1.5707963267948966,
+      "speed": 8,
+      "hops": false,
+      "ordinary": {
+        "x": -1.0558916844103055e-15,
+        "y": 0,
+        "z": -5.747988224029541
+      },
+      "tuned": {
+        "x": -1.4967651336761172e-15,
+        "y": 0,
+        "z": -8.147988319396973
+      },
+      "extraSpeed": 2.4000000953674316
+    },
+    {
+      "kind": "rear",
+      "angle": 1.5707963267948966,
+      "speed": 8,
+      "hops": true,
+      "ordinary": {
+        "x": 0.000034807388146873564,
+        "y": 1.649999976158142,
+        "z": -5.742820739746094
+      },
+      "tuned": {
+        "x": 0.00004935383185511455,
+        "y": 1.649999976158142,
+        "z": -8.142820358276367
+      },
+      "extraSpeed": 2.3999996185743564
+    },
+    {
+      "kind": "rear",
+      "angle": 0.7,
+      "speed": 3,
+      "hops": false,
+      "ordinary": {
+        "x": -1.6453356742858887,
+        "y": 0,
+        "z": -1.380690574645996
+      },
+      "tuned": {
+        "x": -3.4821481704711914,
+        "y": 0,
+        "z": -2.9253976345062256
+      },
+      "extraSpeed": 2.4000000097759413
+    },
+    {
+      "kind": "rear",
+      "angle": 0.7,
+      "speed": 3,
+      "hops": true,
+      "ordinary": {
+        "x": -1.6242371797561646,
+        "y": -0.000002277895873703528,
+        "z": -1.3823294639587402
+      },
+      "tuned": {
+        "x": -3.4519317150115967,
+        "y": -0.000002277895873703528,
+        "z": -2.937814235687256
+      },
+      "extraSpeed": 2.400000039433725
+    },
+    {
+      "kind": "rear",
+      "angle": 0.7,
+      "speed": 8,
+      "hops": false,
+      "ordinary": {
+        "x": -4.386471748352051,
+        "y": 0,
+        "z": -3.7146499156951904
+      },
+      "tuned": {
+        "x": -6.220371723175049,
+        "y": 0,
+        "z": -5.262813568115234
+      },
+      "extraSpeed": 2.3999999609021585
+    },
+    {
+      "kind": "rear",
+      "angle": 0.7,
+      "speed": 8,
+      "hops": true,
+      "ordinary": {
+        "x": -4.376936435699463,
+        "y": 1.649999976158142,
+        "z": -3.7178022861480713
+      },
+      "tuned": {
+        "x": -6.206127643585205,
+        "y": 1.649999976158142,
+        "z": -5.27152681350708
+      },
+      "extraSpeed": 2.4000000795673895
+    }
+  ],
+  "checks": [
+    "easy: 24 isolated center openings vary and can be intercepted",
+    "normal: 24 isolated center openings vary and can be intercepted",
+    "hard: 24 isolated center openings vary and can be intercepted",
+    "center opening varies again after a goal, while the neutral drop stays centered",
+    "rear bumper: heading 0, incoming 3, hops false",
+    "rear bumper: heading 0, incoming 3, hops true",
+    "rear bumper: heading 0, incoming 8, hops false",
+    "rear bumper: heading 0, incoming 8, hops true",
+    "rear bumper: heading 1.5707963267948966, incoming 3, hops false",
+    "rear bumper: heading 1.5707963267948966, incoming 3, hops true",
+    "rear bumper: heading 1.5707963267948966, incoming 8, hops false",
+    "rear bumper: heading 1.5707963267948966, incoming 8, hops true",
+    "rear bumper: heading 0.7, incoming 3, hops false",
+    "rear bumper: heading 0.7, incoming 3, hops true",
+    "rear bumper: heading 0.7, incoming 8, hops false",
+    "rear bumper: heading 0.7, incoming 8, hops true",
+    "side body contact stays identical: heading 0, hops false",
+    "side body contact stays identical: heading 0, hops true",
+    "side body contact stays identical: heading 0.7, hops false",
+    "side body contact stays identical: heading 0.7, hops true",
+    "front body contact stays identical: heading 0, hops false",
+    "front body contact stays identical: heading 0, hops true",
+    "front body contact stays identical: heading 0.7, hops false",
+    "front body contact stays identical: heading 0.7, hops true",
+    "an angled rear impact follows the contact surface: offset -0.35",
+    "an angled rear impact follows the contact surface: offset 0.35",
+    "fast rear rebounds are not accelerated beyond the moderate bumper limit",
+    "a slow touch does not repeatedly pump energy into the puck",
+    "enabling rear bumpers preserves the first actual blade strike exactly",
+    "a rear deflection can travel into the opponents own net and counts as your goal"
+  ]
+}

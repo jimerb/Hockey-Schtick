@@ -1,0 +1,788 @@
+{
+  "date": "2026-10-01T18:07:48.256Z",
+  "passed": 111,
+  "failed": 0,
+  "fastCases": 72,
+  "tuning": {
+    "heldRestitution": 0.12,
+    "passiveRestitution": 0.3,
+    "strikeRestitution": 0.94,
+    "friction": 0.2
+  },
+  "observations": [
+    {
+      "kind": "cushion",
+      "side": 0,
+      "hops": false,
+      "hard": {
+        "x": -4.734055995941162,
+        "y": 0,
+        "z": -3.1356492042541504
+      },
+      "soft": {
+        "x": -2.733062982559204,
+        "y": 0,
+        "z": 0.707909882068634
+      }
+    },
+    {
+      "kind": "cushion",
+      "side": 0,
+      "hops": true,
+      "hard": {
+        "x": -4.5774030685424805,
+        "y": -0.0000022956701286602765,
+        "z": -3.1925108432769775
+      },
+      "soft": {
+        "x": -2.235273838043213,
+        "y": -2.9308318971743574e-7,
+        "z": 0.45191293954849243
+      }
+    },
+    {
+      "kind": "cushion",
+      "side": 1,
+      "hops": false,
+      "hard": {
+        "x": 4.734055995941162,
+        "y": 0,
+        "z": -3.1356492042541504
+      },
+      "soft": {
+        "x": 2.733062982559204,
+        "y": 0,
+        "z": 0.707909882068634
+      }
+    },
+    {
+      "kind": "cushion",
+      "side": 1,
+      "hops": true,
+      "hard": {
+        "x": 4.5774126052856445,
+        "y": 5.738795039178513e-7,
+        "z": -3.1924962997436523
+      },
+      "soft": {
+        "x": 2.2352726459503174,
+        "y": 7.333434126621796e-8,
+        "z": 0.45191651582717896
+      }
+    },
+    {
+      "kind": "aim",
+      "early": {
+        "side": 0,
+        "releaseSeconds": 0.5,
+        "hops": false,
+        "released": {
+          "x": -3.9986793994903564,
+          "y": 0.10999999940395355,
+          "z": 5.509596824645996
+        },
+        "velocity": {
+          "x": -1.095239520072937,
+          "y": 0,
+          "z": -15.38968563079834
+        },
+        "result": null,
+        "goals": 0,
+        "faults": 0
+      },
+      "later": {
+        "side": 0,
+        "releaseSeconds": 0.75,
+        "hops": false,
+        "released": {
+          "x": -3.750732183456421,
+          "y": 0.10999999940395355,
+          "z": 5.7692551612854
+        },
+        "velocity": {
+          "x": 4.897522449493408,
+          "y": 0,
+          "z": -14.088007926940918
+        },
+        "result": null,
+        "goals": 0,
+        "faults": 0
+      },
+      "differenceDegrees": 23.24008997033706
+    },
+    {
+      "kind": "aim",
+      "early": {
+        "side": 0,
+        "releaseSeconds": 0.5,
+        "hops": true,
+        "released": {
+          "x": -4.026927471160889,
+          "y": 0.10497166961431503,
+          "z": 5.480043411254883
+        },
+        "velocity": {
+          "x": -1.3463693857192993,
+          "y": 0.4481593072414398,
+          "z": -14.640381813049316
+        },
+        "result": null,
+        "goals": 0,
+        "faults": 0
+      },
+      "later": {
+        "side": 0,
+        "releaseSeconds": 0.75,
+        "hops": true,
+        "released": {
+          "x": -3.8140296936035156,
+          "y": 0.10497166961431503,
+          "z": 5.702974796295166
+        },
+        "velocity": {
+          "x": 3.1253793239593506,
+          "y": 0.048045773059129715,
+          "z": -14.518938064575195
+        },
+        "result": "goal",
+        "goals": 1,
+        "faults": 0
+      },
+      "differenceDegrees": 17.40253859516361
+    },
+    {
+      "kind": "aim",
+      "early": {
+        "side": 1,
+        "releaseSeconds": 0.5,
+        "hops": false,
+        "released": {
+          "x": 3.9996461868286133,
+          "y": 0.10999999940395355,
+          "z": 5.508765697479248
+        },
+        "velocity": {
+          "x": 1.0955945253372192,
+          "y": 0,
+          "z": -15.368890762329102
+        },
+        "result": "conceded",
+        "goals": 0,
+        "faults": 0
+      },
+      "later": {
+        "side": 1,
+        "releaseSeconds": 0.75,
+        "hops": false,
+        "released": {
+          "x": 3.7522127628326416,
+          "y": 0.10999999940395355,
+          "z": 5.767720699310303
+        },
+        "velocity": {
+          "x": -4.88558292388916,
+          "y": 0,
+          "z": -14.051310539245605
+        },
+        "result": null,
+        "goals": 0,
+        "faults": 0
+      },
+      "differenceDegrees": 23.249871393870084
+    },
+    {
+      "kind": "aim",
+      "early": {
+        "side": 1,
+        "releaseSeconds": 0.5,
+        "hops": true,
+        "released": {
+          "x": 4.026866912841797,
+          "y": 0.10497166961431503,
+          "z": 5.480134963989258
+        },
+        "velocity": {
+          "x": 1.3463047742843628,
+          "y": 0.4481593072414398,
+          "z": -14.641536712646484
+        },
+        "result": null,
+        "goals": 0,
+        "faults": 0
+      },
+      "later": {
+        "side": 1,
+        "releaseSeconds": 0.75,
+        "hops": true,
+        "released": {
+          "x": 3.8139076232910156,
+          "y": 0.10497166961431503,
+          "z": 5.70310640335083
+        },
+        "velocity": {
+          "x": -3.126147985458374,
+          "y": 0.048045773059129715,
+          "z": -14.521469116210938
+        },
+        "result": "goal",
+        "goals": 1,
+        "faults": 0
+      },
+      "differenceDegrees": 17.402719741551437
+    },
+    {
+      "side": 0,
+      "releaseSeconds": 1,
+      "hops": false,
+      "released": {
+        "x": -3.3836123943328857,
+        "y": 0.10999999940395355,
+        "z": 5.957820415496826
+      },
+      "velocity": {
+        "x": 4.038517951965332,
+        "y": 0,
+        "z": -23.954483032226562
+      },
+      "result": "goal",
+      "goals": 1,
+      "faults": 0
+    },
+    {
+      "side": 1,
+      "releaseSeconds": 1,
+      "hops": false,
+      "released": {
+        "x": 3.3861606121063232,
+        "y": 0.10999999940395355,
+        "z": 5.957064151763916
+      },
+      "velocity": {
+        "x": -3.7057015895843506,
+        "y": 0,
+        "z": -23.75358772277832
+      },
+      "result": "goal",
+      "goals": 1,
+      "faults": 0
+    },
+    {
+      "kind": "full-team-control-demo",
+      "difficulty": "easy",
+      "hops": false,
+      "catches": 12,
+      "releaseAttempts": 12,
+      "score": {
+        "you": 0,
+        "cpu": 4
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team-control-demo",
+      "difficulty": "easy",
+      "hops": true,
+      "catches": 15,
+      "releaseAttempts": 14,
+      "score": {
+        "you": 0,
+        "cpu": 5
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team-control-demo",
+      "difficulty": "normal",
+      "hops": false,
+      "catches": 9,
+      "releaseAttempts": 9,
+      "score": {
+        "you": 0,
+        "cpu": 5
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team-control-demo",
+      "difficulty": "normal",
+      "hops": true,
+      "catches": 12,
+      "releaseAttempts": 12,
+      "score": {
+        "you": 0,
+        "cpu": 3
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team-control-demo",
+      "difficulty": "hard",
+      "hops": false,
+      "catches": 7,
+      "releaseAttempts": 7,
+      "score": {
+        "you": 0,
+        "cpu": 5
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team-control-demo",
+      "difficulty": "hard",
+      "hops": true,
+      "catches": 4,
+      "releaseAttempts": 4,
+      "score": {
+        "you": 0,
+        "cpu": 2
+      },
+      "recoveries": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "a stationary left flipper cushions a real impact, hops false",
+      "passed": true
+    },
+    {
+      "name": "a stationary left flipper cushions a real impact, hops true",
+      "passed": true
+    },
+    {
+      "name": "a stationary right flipper cushions a real impact, hops false",
+      "passed": true
+    },
+    {
+      "name": "a stationary right flipper cushions a real impact, hops true",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 0, x 2, hops false",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 0, x 2, hops true",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 0, x 3, hops false",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 0, x 3, hops true",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 0, x 4, hops false",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 0, x 4, hops true",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 1, x 2, hops false",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 1, x 2, hops true",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 1, x 3, hops false",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 1, x 3, hops true",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 1, x 4, hops false",
+      "passed": true
+    },
+    {
+      "name": "a gentle feed reaches a physical cradle: side 1, x 4, hops true",
+      "passed": true
+    },
+    {
+      "name": "releasing the left cradle opens a feed toward the tip; waiting too long can drain",
+      "passed": true
+    },
+    {
+      "name": "releasing the right cradle opens a feed toward the tip; waiting too long can drain",
+      "passed": true
+    },
+    {
+      "name": "release timing changes the real shot direction: side 0, hops false",
+      "passed": true
+    },
+    {
+      "name": "release timing changes the real shot direction: side 0, hops true",
+      "passed": true
+    },
+    {
+      "name": "release timing changes the real shot direction: side 1, hops false",
+      "passed": true
+    },
+    {
+      "name": "release timing changes the real shot direction: side 1, hops true",
+      "passed": true
+    },
+    {
+      "name": "a deliberate release-and-shot can physically score from the left cradle",
+      "passed": true
+    },
+    {
+      "name": "a deliberate release-and-shot can physically score from the right cradle",
+      "passed": true
+    },
+    {
+      "name": "the same feed and catch/release inputs give the same shot",
+      "passed": true
+    },
+    {
+      "name": "pressing at a distant puck does not attach or steer it",
+      "passed": true
+    },
+    {
+      "name": "a deliberate held cradle does not trigger the match's stuck-puck whistle: side 0",
+      "passed": true
+    },
+    {
+      "name": "a deliberate held cradle does not trigger the match's stuck-puck whistle: side 1",
+      "passed": true
+    },
+    {
+      "name": "holding a flipper does not exempt an unrelated stationary wedge",
+      "passed": true
+    },
+    {
+      "name": "a moving opponent's physical blade can dislodge the left cradle",
+      "passed": true
+    },
+    {
+      "name": "a moving opponent's physical blade can dislodge the right cradle",
+      "passed": true
+    },
+    {
+      "name": "the actual wing logic can contest the left cradle without a near-goal shot assist",
+      "passed": true
+    },
+    {
+      "name": "the actual wing logic can contest the right cradle without a near-goal shot assist",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 8, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 8, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 8, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 20, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 20, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 20, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 35, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 35, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops false, speed 35, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 8, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 8, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 8, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 20, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 20, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 20, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 35, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 35, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised false, hops true, speed 35, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 8, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 8, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 8, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 20, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 20, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 20, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 35, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 35, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops false, speed 35, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 8, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 8, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 8, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 20, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 20, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 20, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 35, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 35, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 0, raised true, hops true, speed 35, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 8, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 8, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 8, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 20, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 20, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 20, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 35, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 35, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops false, speed 35, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 8, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 8, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 8, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 20, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 20, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 20, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 35, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 35, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised false, hops true, speed 35, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 8, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 8, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 8, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 20, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 20, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 20, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 35, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 35, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops false, speed 35, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 8, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 8, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 8, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 20, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 20, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 20, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 35, shaft 1.5",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 35, shaft 2",
+      "passed": true
+    },
+    {
+      "name": "rubber fast impact: side 1, raised true, hops true, speed 35, shaft 2.5",
+      "passed": true
+    },
+    {
+      "name": "catch-and-shoot demo uses real flippers against the full team: easy, hops false",
+      "passed": true
+    },
+    {
+      "name": "catch-and-shoot demo uses real flippers against the full team: easy, hops true",
+      "passed": true
+    },
+    {
+      "name": "catch-and-shoot demo uses real flippers against the full team: normal, hops false",
+      "passed": true
+    },
+    {
+      "name": "catch-and-shoot demo uses real flippers against the full team: normal, hops true",
+      "passed": true
+    },
+    {
+      "name": "catch-and-shoot demo uses real flippers against the full team: hard, hops false",
+      "passed": true
+    },
+    {
+      "name": "catch-and-shoot demo uses real flippers against the full team: hard, hops true",
+      "passed": true
+    }
+  ]
+}

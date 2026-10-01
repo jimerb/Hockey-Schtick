@@ -1,0 +1,296 @@
+{
+  "checks": [
+    {
+      "name": "side 0: a powered body check follows real contact, interrupts a play and eases up its rail",
+      "passed": true
+    },
+    {
+      "name": "side 0: a short finishing stroke makes a smaller shove than a full stroke",
+      "passed": true
+    },
+    {
+      "name": "side 0: a stick-only hit gives a gentler shove",
+      "passed": true
+    },
+    {
+      "name": "side 0: a held paddle never repeatedly pumps or flings a skater",
+      "passed": true
+    },
+    {
+      "name": "side 0: a return paddle never repeatedly pumps or flings a skater",
+      "passed": true
+    },
+    {
+      "name": "side 0: a swing cannot check a player outside its actual reach",
+      "passed": true
+    },
+    {
+      "name": "side 0: disabled checking leaves rod movement and paddle/puck settings untouched",
+      "passed": true
+    },
+    {
+      "name": "side 0: checking never adds a direct kick to a remote puck",
+      "passed": true
+    },
+    {
+      "name": "side 0: resetting after a check clears all pending shove and contact state",
+      "passed": true
+    },
+    {
+      "name": "side 0: the shove stops at the end of a restricted rail",
+      "passed": true
+    },
+    {
+      "name": "side 0: one contact produces one check, even while the paddle remains held",
+      "passed": true
+    },
+    {
+      "name": "side 1: a powered body check follows real contact, interrupts a play and eases up its rail",
+      "passed": true
+    },
+    {
+      "name": "side 1: a short finishing stroke makes a smaller shove than a full stroke",
+      "passed": true
+    },
+    {
+      "name": "side 1: a stick-only hit gives a gentler shove",
+      "passed": true
+    },
+    {
+      "name": "side 1: a held paddle never repeatedly pumps or flings a skater",
+      "passed": true
+    },
+    {
+      "name": "side 1: a return paddle never repeatedly pumps or flings a skater",
+      "passed": true
+    },
+    {
+      "name": "side 1: a swing cannot check a player outside its actual reach",
+      "passed": true
+    },
+    {
+      "name": "side 1: disabled checking leaves rod movement and paddle/puck settings untouched",
+      "passed": true
+    },
+    {
+      "name": "side 1: checking never adds a direct kick to a remote puck",
+      "passed": true
+    },
+    {
+      "name": "side 1: resetting after a check clears all pending shove and contact state",
+      "passed": true
+    },
+    {
+      "name": "side 1: the shove stops at the end of a restricted rail",
+      "passed": true
+    },
+    {
+      "name": "side 1: one contact produces one check, even while the paddle remains held",
+      "passed": true
+    },
+    {
+      "name": "mirrored full strokes have matching impact and rail distance",
+      "passed": true
+    },
+    {
+      "name": "the same inputs and initial conditions give the same check",
+      "passed": true
+    },
+    {
+      "name": "easy, hops false: two minutes of scrambling stays bounded with live opponents",
+      "passed": true
+    },
+    {
+      "name": "easy, hops true: two minutes of scrambling stays bounded with live opponents",
+      "passed": true
+    },
+    {
+      "name": "normal, hops false: two minutes of scrambling stays bounded with live opponents",
+      "passed": true
+    },
+    {
+      "name": "normal, hops true: two minutes of scrambling stays bounded with live opponents",
+      "passed": true
+    },
+    {
+      "name": "hard, hops false: two minutes of scrambling stays bounded with live opponents",
+      "passed": true
+    },
+    {
+      "name": "hard, hops true: two minutes of scrambling stays bounded with live opponents",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "kind": "body",
+      "side": 0,
+      "index": 0,
+      "strength": 0.936555802822113,
+      "impact": 23.035514337713103,
+      "part": "body",
+      "distance": 0.8969606511592864,
+      "tick": 8,
+      "moved": 0.8969606511592865
+    },
+    {
+      "kind": "full-versus-short",
+      "side": 0,
+      "full": {
+        "index": 0,
+        "side": 0,
+        "strength": 0.936555802822113,
+        "impact": 23.035514337713103,
+        "part": "body",
+        "distance": 0.8969606511592864,
+        "tick": 8
+      },
+      "short": {
+        "index": 0,
+        "side": 0,
+        "strength": 0.4955684109833124,
+        "impact": 13.003605013716733,
+        "part": "body",
+        "distance": 0.5282951915820492,
+        "tick": 22
+      },
+      "big": 0.8969606511592865,
+      "small": 0.5282951915820489
+    },
+    {
+      "kind": "stick",
+      "side": 0,
+      "index": 0,
+      "strength": 0.40125935290051207,
+      "impact": 17.34059143885998,
+      "part": "stick",
+      "distance": 0.44945281902482803,
+      "tick": 2,
+      "moved": 0.44945281902482837
+    },
+    {
+      "kind": "body",
+      "side": 1,
+      "index": 1,
+      "strength": 0.9365557432174683,
+      "impact": 23.035508676615038,
+      "part": "body",
+      "distance": 0.8969606013298035,
+      "tick": 8,
+      "moved": 0.8969606013298037
+    },
+    {
+      "kind": "full-versus-short",
+      "side": 1,
+      "full": {
+        "index": 1,
+        "side": 1,
+        "strength": 0.9365557432174683,
+        "impact": 23.035508676615038,
+        "part": "body",
+        "distance": 0.8969606013298035,
+        "tick": 8
+      },
+      "short": {
+        "index": 1,
+        "side": 1,
+        "strength": 0.4955684109833124,
+        "impact": 13.003605013716733,
+        "part": "body",
+        "distance": 0.5282951915820492,
+        "tick": 22
+      },
+      "big": 0.8969606013298037,
+      "small": 0.5282951915820489
+    },
+    {
+      "kind": "stick",
+      "side": 1,
+      "index": 1,
+      "strength": 0.4012592925189729,
+      "impact": 17.340588979926487,
+      "part": "stick",
+      "distance": 0.4494527685458613,
+      "tick": 2,
+      "moved": 0.4494527685458616
+    },
+    {
+      "kind": "scramble",
+      "difficulty": "easy",
+      "hops": false,
+      "seconds": 120,
+      "totalChecks": 7,
+      "maxDistance": 0.5556942206501961,
+      "score": {
+        "you": 2,
+        "cpu": 4
+      },
+      "restarts": 0
+    },
+    {
+      "kind": "scramble",
+      "difficulty": "easy",
+      "hops": true,
+      "seconds": 120,
+      "totalChecks": 13,
+      "maxDistance": 0.5610276623730772,
+      "score": {
+        "you": 1,
+        "cpu": 3
+      },
+      "restarts": 0
+    },
+    {
+      "kind": "scramble",
+      "difficulty": "normal",
+      "hops": false,
+      "seconds": 120,
+      "totalChecks": 6,
+      "maxDistance": 0.5496839005231857,
+      "score": {
+        "you": 0,
+        "cpu": 1
+      },
+      "restarts": 0
+    },
+    {
+      "kind": "scramble",
+      "difficulty": "normal",
+      "hops": true,
+      "seconds": 120,
+      "totalChecks": 10,
+      "maxDistance": 0.8722531504631043,
+      "score": {
+        "you": 0,
+        "cpu": 6
+      },
+      "restarts": 0
+    },
+    {
+      "kind": "scramble",
+      "difficulty": "hard",
+      "hops": false,
+      "seconds": 120,
+      "totalChecks": 8,
+      "maxDistance": 0.5556942206501961,
+      "score": {
+        "you": 2,
+        "cpu": 6
+      },
+      "restarts": 0
+    },
+    {
+      "kind": "scramble",
+      "difficulty": "hard",
+      "hops": true,
+      "seconds": 120,
+      "totalChecks": 7,
+      "maxDistance": 0.5465984740408405,
+      "score": {
+        "you": 1,
+        "cpu": 2
+      },
+      "restarts": 0
+    }
+  ]
+}

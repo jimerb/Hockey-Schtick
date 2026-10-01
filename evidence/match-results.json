@@ -1,0 +1,1624 @@
+{
+  "date": "2026-10-01T18:07:42.260Z",
+  "passed": 265,
+  "failed": 0,
+  "fastImpactCases": 216,
+  "observations": [
+    {
+      "kind": "extended-wing-coverage",
+      "seed": 42,
+      "visits": [
+        {
+          "low": true,
+          "back": true,
+          "min": -4.780477478378453,
+          "max": 4.4719138092128565
+        },
+        {
+          "low": true,
+          "back": true,
+          "min": -5.667594957142137,
+          "max": 4.438236411917024
+        }
+      ],
+      "differentPositions": true,
+      "rested": true
+    },
+    {
+      "skaters": 3,
+      "extendedWings": false,
+      "difficulty": "easy",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 5,
+        "cpu": 2
+      },
+      "stats": {
+        "shots": 9,
+        "passes": 1,
+        "pushes": 0,
+        "misses": 7,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 10,
+        "peakCommitted": 1,
+        "openingDeliveries": 8,
+        "rearBumps": 1,
+        "checks": 0
+      },
+      "returns": 56,
+      "goalieSaves": 22,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": false,
+      "difficulty": "easy",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 0
+      },
+      "stats": {
+        "shots": 3,
+        "passes": 0,
+        "pushes": 0,
+        "misses": 1,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 3,
+        "peakCommitted": 1,
+        "openingDeliveries": 1,
+        "rearBumps": 0,
+        "checks": 0
+      },
+      "returns": 55,
+      "goalieSaves": 10,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": false,
+      "difficulty": "normal",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 5,
+        "cpu": 2
+      },
+      "stats": {
+        "shots": 13,
+        "passes": 1,
+        "pushes": 0,
+        "misses": 9,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 14,
+        "peakCommitted": 1,
+        "openingDeliveries": 8,
+        "rearBumps": 2,
+        "checks": 0
+      },
+      "returns": 52,
+      "goalieSaves": 23,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": false,
+      "difficulty": "normal",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 1
+      },
+      "stats": {
+        "shots": 5,
+        "passes": 1,
+        "pushes": 0,
+        "misses": 3,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 6,
+        "peakCommitted": 1,
+        "openingDeliveries": 2,
+        "rearBumps": 0,
+        "checks": 0
+      },
+      "returns": 30,
+      "goalieSaves": 10,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": false,
+      "difficulty": "hard",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 1
+      },
+      "stats": {
+        "shots": 2,
+        "passes": 1,
+        "pushes": 0,
+        "misses": 5,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 3,
+        "peakCommitted": 1,
+        "openingDeliveries": 2,
+        "rearBumps": 0,
+        "checks": 0
+      },
+      "returns": 11,
+      "goalieSaves": 2,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": false,
+      "difficulty": "hard",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 0
+      },
+      "stats": {
+        "shots": 1,
+        "passes": 0,
+        "pushes": 0,
+        "misses": 1,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 1,
+        "peakCommitted": 1,
+        "openingDeliveries": 1,
+        "rearBumps": 0,
+        "checks": 0
+      },
+      "returns": 22,
+      "goalieSaves": 0,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "easy",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 2,
+        "cpu": 3
+      },
+      "stats": {
+        "shots": 12,
+        "passes": 7,
+        "pushes": 0,
+        "misses": 7,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 19,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 1,
+        "checks": 4
+      },
+      "returns": 50,
+      "goalieSaves": 11,
+      "neutralRestarts": 1
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "easy",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 1,
+        "cpu": 1
+      },
+      "stats": {
+        "shots": 15,
+        "passes": 7,
+        "pushes": 0,
+        "misses": 16,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 22,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 11,
+        "checks": 1
+      },
+      "returns": 39,
+      "goalieSaves": 9,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "normal",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 1,
+        "cpu": 3
+      },
+      "stats": {
+        "shots": 19,
+        "passes": 9,
+        "pushes": 0,
+        "misses": 28,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 28,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 5,
+        "checks": 1
+      },
+      "returns": 33,
+      "goalieSaves": 9,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "normal",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 1
+      },
+      "stats": {
+        "shots": 9,
+        "passes": 4,
+        "pushes": 0,
+        "misses": 7,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 13,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 3,
+        "checks": 0
+      },
+      "returns": 43,
+      "goalieSaves": 4,
+      "neutralRestarts": 1
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "hard",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 1,
+        "cpu": 2
+      },
+      "stats": {
+        "shots": 13,
+        "passes": 9,
+        "pushes": 0,
+        "misses": 46,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 22,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 1,
+        "checks": 0
+      },
+      "returns": 59,
+      "goalieSaves": 10,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "hard",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 3
+      },
+      "stats": {
+        "shots": 16,
+        "passes": 10,
+        "pushes": 0,
+        "misses": 48,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 26,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 3,
+        "checks": 0
+      },
+      "returns": 46,
+      "goalieSaves": 13,
+      "neutralRestarts": 1
+    },
+    {
+      "skaters": 3,
+      "extendedWings": true,
+      "difficulty": "easy",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 1,
+        "cpu": 1
+      },
+      "stats": {
+        "shots": 11,
+        "passes": 2,
+        "pushes": 0,
+        "misses": 6,
+        "goalieContacts": 1,
+        "clears": 0,
+        "strikes": 13,
+        "peakCommitted": 1,
+        "openingDeliveries": 4,
+        "rearBumps": 0,
+        "checks": 0
+      },
+      "returns": 49,
+      "goalieSaves": 20,
+      "neutralRestarts": 1
+    },
+    {
+      "skaters": 3,
+      "extendedWings": true,
+      "difficulty": "easy",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 1,
+        "cpu": 1
+      },
+      "stats": {
+        "shots": 10,
+        "passes": 0,
+        "pushes": 0,
+        "misses": 14,
+        "goalieContacts": 1,
+        "clears": 0,
+        "strikes": 10,
+        "peakCommitted": 1,
+        "openingDeliveries": 3,
+        "rearBumps": 4,
+        "checks": 11
+      },
+      "returns": 42,
+      "goalieSaves": 12,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": true,
+      "difficulty": "normal",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 2
+      },
+      "stats": {
+        "shots": 8,
+        "passes": 1,
+        "pushes": 0,
+        "misses": 15,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 9,
+        "peakCommitted": 1,
+        "openingDeliveries": 3,
+        "rearBumps": 1,
+        "checks": 9
+      },
+      "returns": 50,
+      "goalieSaves": 10,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": true,
+      "difficulty": "normal",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 1,
+        "cpu": 3
+      },
+      "stats": {
+        "shots": 17,
+        "passes": 1,
+        "pushes": 0,
+        "misses": 27,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 18,
+        "peakCommitted": 1,
+        "openingDeliveries": 5,
+        "rearBumps": 4,
+        "checks": 2
+      },
+      "returns": 36,
+      "goalieSaves": 13,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": true,
+      "difficulty": "hard",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 2
+      },
+      "stats": {
+        "shots": 10,
+        "passes": 2,
+        "pushes": 0,
+        "misses": 34,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 12,
+        "peakCommitted": 1,
+        "openingDeliveries": 3,
+        "rearBumps": 2,
+        "checks": 6
+      },
+      "returns": 59,
+      "goalieSaves": 25,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": true,
+      "difficulty": "hard",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 3
+      },
+      "stats": {
+        "shots": 18,
+        "passes": 1,
+        "pushes": 0,
+        "misses": 29,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 19,
+        "peakCommitted": 1,
+        "openingDeliveries": 5,
+        "rearBumps": 5,
+        "checks": 1
+      },
+      "returns": 43,
+      "goalieSaves": 25,
+      "neutralRestarts": 1
+    },
+    {
+      "kind": "complete-unattended-match",
+      "seed": 1,
+      "wallSimulationSeconds": 122.70833333333333,
+      "activePlaySeconds": 105.20000000002979,
+      "score": {
+        "you": 0,
+        "cpu": 7
+      },
+      "stats": {
+        "shots": 15,
+        "passes": 8,
+        "pushes": 6,
+        "misses": 32,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 29,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 0,
+        "checks": 0
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "complete-unattended-match",
+      "seed": 42,
+      "wallSimulationSeconds": 120.56666666666666,
+      "activePlaySeconds": 103.05833333336142,
+      "score": {
+        "you": 0,
+        "cpu": 7
+      },
+      "stats": {
+        "shots": 15,
+        "passes": 6,
+        "pushes": 6,
+        "misses": 31,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 27,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 0,
+        "checks": 0
+      },
+      "recoveries": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "first to seven: you, one count per goal, frozen final, rematch",
+      "passed": true
+    },
+    {
+      "name": "first to seven: cpu, one count per goal, frozen final, rematch",
+      "passed": true
+    },
+    {
+      "name": "no win-by-two; same neutral drop after either scorer",
+      "passed": true
+    },
+    {
+      "name": "new match setup stops a live rally and allows a fresh level",
+      "passed": true
+    },
+    {
+      "name": "fault and genuine stationary puck produce a neutral restart",
+      "passed": true
+    },
+    {
+      "name": "a stationary open-side puck accelerates steadily back toward the flippers",
+      "passed": true
+    },
+    {
+      "name": "a missed save flows along the visible apron into the goal: x -2.5, hops false",
+      "passed": true
+    },
+    {
+      "name": "a missed save flows along the visible apron into the goal: x -1.5, hops false",
+      "passed": true
+    },
+    {
+      "name": "a missed save flows along the visible apron into the goal: x 1.5, hops false",
+      "passed": true
+    },
+    {
+      "name": "a missed save flows along the visible apron into the goal: x 2.5, hops false",
+      "passed": true
+    },
+    {
+      "name": "a missed save flows along the visible apron into the goal: x -2.5, hops true",
+      "passed": true
+    },
+    {
+      "name": "a missed save flows along the visible apron into the goal: x -1.5, hops true",
+      "passed": true
+    },
+    {
+      "name": "a missed save flows along the visible apron into the goal: x 1.5, hops true",
+      "passed": true
+    },
+    {
+      "name": "a missed save flows along the visible apron into the goal: x 2.5, hops true",
+      "passed": true
+    },
+    {
+      "name": "match boards preserve a firm rebound instead of absorbing a shot",
+      "passed": true
+    },
+    {
+      "name": "one constrained skater and goalie form a working first slice",
+      "passed": true
+    },
+    {
+      "name": "three-skater layout leaves a physical return lane open at x -2.8, including after rematch",
+      "passed": true
+    },
+    {
+      "name": "three-skater layout leaves a physical return lane open at x 2.8, including after rematch",
+      "passed": true
+    },
+    {
+      "name": "extended side skaters visit the former lower range and return, with fixed columns and unchanged center limits",
+      "passed": true
+    },
+    {
+      "name": "extended wing 0 pursues and strikes a puck in the former lower lane at real blade contact",
+      "passed": true
+    },
+    {
+      "name": "extended wing 1 pursues and strikes a puck in the former lower lane at real blade contact",
+      "passed": true
+    },
+    {
+      "name": "extended travel switches off when the original five-skater lineup is restored",
+      "passed": true
+    },
+    {
+      "name": "goalie responds to delayed puck observation, within speed and travel limits",
+      "passed": true
+    },
+    {
+      "name": "goalie does not read flipper inputs",
+      "passed": true
+    },
+    {
+      "name": "a visible goalie clear requires actual stick contact and has bounded speed",
+      "passed": true
+    },
+    {
+      "name": "no remote strike when a puck leaves reach during windup",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, easy, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, easy, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, normal, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, normal, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, hard, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, hard, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "5 skaters, easy, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "5 skaters, easy, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "5 skaters, normal, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "5 skaters, normal, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "5 skaters, hard, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "5 skaters, hard, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, extended wings, easy, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, extended wings, easy, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, extended wings, normal, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, extended wings, normal, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, extended wings, hard, flat: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "3 skaters, extended wings, hard, hops: two minutes of real rallies",
+      "passed": true
+    },
+    {
+      "name": "same seed, controls, and physics produce the same match, extended wings false",
+      "passed": true
+    },
+    {
+      "name": "same seed, controls, and physics produce the same match, extended wings true",
+      "passed": true
+    },
+    {
+      "name": "original five-skater unscripted complete match, seed 1",
+      "passed": true
+    },
+    {
+      "name": "original five-skater unscripted complete match, seed 42",
+      "passed": true
+    },
+    {
+      "name": "actual flipper returns can score a bank goal against the full team",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops false: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset -0.18, hops true: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0, hops true: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 8, offset 0.18, hops true: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset -0.18, hops true: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0, hops true: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 20, offset 0.18, hops true: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset -0.18, hops true: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0, hops true: goalie stick",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 0 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 0 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 1 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 1 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 2 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 2 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 3 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 3 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 4 body",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: skater 4 blade",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: goalie pad",
+      "passed": true
+    },
+    {
+      "name": "fast 35, offset 0.18, hops true: goalie stick",
+      "passed": true
+    }
+  ]
+}

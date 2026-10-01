@@ -1,0 +1,119 @@
+{
+  "active": true,
+  "paused": false,
+  "started": true,
+  "phase": "playing",
+  "winner": null,
+  "elapsed": 30.508333333332242,
+  "countdown": -0.008333333333331616,
+  "tick": 3661,
+  "held": [
+    false,
+    false
+  ],
+  "physicalHeld": [
+    false,
+    false
+  ],
+  "angles": [
+    0.32,
+    0.32
+  ],
+  "puck": {
+    "x": 4.038311958312988,
+    "y": 0.10999999940395355,
+    "z": -2.8298468589782715
+  },
+  "velocity": {
+    "x": -5.80906343460083,
+    "y": 0,
+    "z": 8.499249458312988
+  },
+  "scores": {
+    "you": 0,
+    "cpu": 3
+  },
+  "drops": 4,
+  "recoveries": 0,
+  "returns": 11,
+  "goalieSaves": 0,
+  "actors": [
+    {
+      "id": "skater-0",
+      "kind": "skater",
+      "x": -2.8,
+      "z": -4.1,
+      "angle": 0,
+      "stage": "idle",
+      "kick": 0
+    },
+    {
+      "id": "skater-1",
+      "kind": "skater",
+      "x": 2.8,
+      "z": -3.4666666666666686,
+      "angle": -8.633111294102724,
+      "stage": "track",
+      "kick": 0
+    },
+    {
+      "id": "skater-2",
+      "kind": "skater",
+      "x": 0,
+      "z": -1.65,
+      "angle": 0,
+      "stage": "idle",
+      "kick": 0
+    },
+    {
+      "id": "goalie",
+      "kind": "goalie",
+      "x": 0.88,
+      "z": -6.95,
+      "angle": 1.5707963267948966,
+      "stage": "guard",
+      "kick": 0
+    }
+  ],
+  "team": {
+    "shots": 5,
+    "passes": 0,
+    "pushes": 2,
+    "misses": 7,
+    "goalieContacts": 0,
+    "clears": 0,
+    "strikes": 7,
+    "peakCommitted": 1
+  },
+  "bindings": [
+    {
+      "code": "KeyA",
+      "label": "A"
+    },
+    {
+      "code": "KeyL",
+      "label": "L"
+    }
+  ],
+  "lastInput": null,
+  "contacts": 71,
+  "settings": {
+    "version": "0.3.2",
+    "difficulty": "normal",
+    "seed": 4093596179,
+    "actors": 4,
+    "hops": false,
+    "reduced": false,
+    "render30": false,
+    "physicsHz": 120,
+    "downhill": 3.2,
+    "resolution": "958 × 756",
+    "viewport": "1280 × 720",
+    "devicePixelRatio": 2.7200000286102295,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+  },
+  "benchmarkResult": null,
+  "benchmarkRunning": false,
+  "benchmarkElapsed": 0
+}

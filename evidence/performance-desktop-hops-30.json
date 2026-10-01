@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-30T16:55:19.595Z",
+  "completed": true,
+  "reason": null,
+  "activeSeconds": 120,
+  "measuredFrames": 7020,
+  "medianFrameMs": 16.7,
+  "p95FrameMs": 16.8,
+  "stallsOver100ms": 0,
+  "p95PhysicsPerFrameMs": 0.3,
+  "feeds": 48,
+  "contacts": 115,
+  "goals": 13,
+  "conceded": 0,
+  "faults": 0,
+  "settings": {
+    "hops": true,
+    "fixture": true,
+    "reduced": false,
+    "render30": true,
+    "physicsHz": 120,
+    "resolution": "638 × 503",
+    "viewport": "1280 × 720",
+    "devicePixelRatio": 0.9999999914449802,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+  }
+}

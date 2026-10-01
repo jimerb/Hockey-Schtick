@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-30T18:17:52.978Z",
+  "completed": true,
+  "reason": null,
+  "activeSeconds": 120,
+  "measuredFrames": 7021,
+  "medianFrameMs": 16.7,
+  "p95FrameMs": 16.8,
+  "medianDrawIntervalMs": 16.7,
+  "p95DrawIntervalMs": 16.8,
+  "stallsOver100ms": 0,
+  "p95PhysicsPerFrameMs": 0.3,
+  "contacts": 75,
+  "goals": 0,
+  "conceded": 25,
+  "neutralRestarts": 0,
+  "completedMatches": 3,
+  "assistedStrikes": 25,
+  "settings": {
+    "difficulty": "normal",
+    "actors": 6,
+    "hops": false,
+    "reduced": false,
+    "render30": false,
+    "physicsHz": 120,
+    "resolution": "638 × 503",
+    "viewport": "1280 × 720",
+    "devicePixelRatio": 0.9999999914449802,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "hockey-schtick",
+  "version": "0.3.6",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort",
+    "test": "tsx tests/physics.ts && tsx tests/match.ts && tsx tests/play-tuning.ts && tsx tests/flipper-control.ts && tsx tests/checking.ts && tsx tests/pacing.ts",
+    "test:physics": "tsx tests/physics.ts",
+    "test:match": "tsx tests/match.ts",
+    "test:pacing": "tsx tests/pacing.ts",
+    "test:play-tuning": "tsx tests/play-tuning.ts",
+    "test:flipper-control": "tsx tests/flipper-control.ts",
+    "test:checking": "tsx tests/checking.ts"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "0.21.0",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "0.186.0",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.1"
+  }
+}
