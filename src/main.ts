@@ -11,25 +11,17 @@ import type { Difficulty } from './opponents';
 
 document.body.classList.add('match-game');
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-<header><div class="brand">HOCKEY <span>SCHTICK</span></div><div class="edition"><i></i> TABLETOP HOCKEY. PINBALL SOUL.</div><nav aria-label="Match controls"><button id="pause" class="secondary" disabled>Pause</button><button id="settings" class="secondary" aria-haspopup="dialog">Settings</button></nav></header>
+<header><div class="brand">HOCKEY <span>SCHTICK</span></div><div class="rally-label">FIRST TO SEVEN <small id="status">Loading rink…</small></div><nav aria-label="Match controls"><button id="pause" class="secondary" disabled>Pause</button><button id="settings" class="secondary" aria-haspopup="dialog">Settings</button></nav></header>
 <main>
-  <aside class="instructions">
-    <div class="eyebrow">YOUR END OF THE ICE</div><h1>Save it.<br>Win it.</h1>
-    <p>${MATCH_SKATERS === 3 ? 'Three' : 'Five'} rod skaters. One goalie.<br>Your two flippers take them on.</p>
-    <div class="key-pair"><div><kbd data-key="0">A</kbd><span>Left flipper</span></div><div><kbd data-key="1">L</kbd><span>Right flipper</span></div></div>
-    <p class="small">Tap to strike. Hold early to cushion and cradle the puck. Release to let it slide inward, then press again to aim your shot.</p>
-    <button id="controls" class="text-button">Change keys</button>
-    <div class="note">Gold rings warn of a shot or pass.<br>Swing at a nearby skater to check him back. A cyan ring marks the bump.<br>Bank shots count as one goal.</div>
-  </aside>
   <section class="arena" aria-label="Playable hockey match">
-    <div class="hud"><div><span>YOU</span><strong id="goals">0</strong></div><div class="rally-label">FIRST TO SEVEN <small id="status">Loading rink…</small></div><div class="conceded"><span>CPU</span><strong id="conceded">0</strong></div></div>
+    <div class="hud"><div class="score-card"><span>YOU</span><strong id="goals">0</strong></div><div class="score-card conceded"><span>CPU</span><strong id="conceded">0</strong></div></div>
     <div id="viewport"></div><div id="cue" class="cue" aria-live="polite"></div>
     <div id="curtain" class="curtain"><div class="start-card"><div id="card-eyebrow" class="eyebrow">ONE RINK. TWO FLIPPERS.</div><h2 id="curtain-title">Own your end.</h2><div id="final-score" hidden></div><p id="curtain-copy">Defend the near gap and fire past their goalie. First to seven wins.</p><button id="start" disabled>Loading…</button><button id="setup-options" class="text-button">Choose your level</button></div></div>
-    <div class="flipper-controls" aria-label="Flipper controls"><button id="left-flipper" class="flipper-control" data-side="0" aria-label="Hold left flipper" aria-pressed="false"><kbd data-key="0">A</kbd><span>LEFT FLIPPER</span><i>HOLD · RELEASE · SHOOT</i></button><p>Hold to cradle.<br>Release. Time your shot.</p><button id="right-flipper" class="flipper-control" data-side="1" aria-label="Hold right flipper" aria-pressed="false"><kbd data-key="1">L</kbd><span>RIGHT FLIPPER</span><i>HOLD · RELEASE · SHOOT</i></button></div>
-    <div class="rink-footer"><span class="led-dot"></span> THREE SKATERS · TWO FLIPPERS <span id="hop-label">· FLAT PUCK</span></div>
+    <div class="flipper-controls" aria-label="Flipper controls"><button id="left-flipper" class="flipper-control" data-side="0" aria-label="Hold left flipper" aria-pressed="false"><kbd data-key="0">A</kbd><span>LEFT FLIPPER</span></button><button id="right-flipper" class="flipper-control" data-side="1" aria-label="Hold right flipper" aria-pressed="false"><kbd data-key="1">L</kbd><span>RIGHT FLIPPER</span></button></div>
   </section>
 </main>
 <dialog id="settings-dialog" aria-labelledby="settings-title"><button id="settings-close" class="text-button dialog-close" aria-label="Close settings">Done</button><h2 id="settings-title">Your rink</h2>
+  <details id="how-to-play"><summary>How to play</summary><p>${MATCH_SKATERS === 3 ? 'Three' : 'Five'} rod skaters. One goalie. Defend your end with two flippers and score at the far net. First to seven wins.</p><div class="key-pair"><div><kbd data-key="0">A</kbd><span>Left flipper</span></div><div><kbd data-key="1">L</kbd><span>Right flipper</span></div></div><p>Tap to strike. Hold early to cushion and cradle the puck. Release to let it slide inward, then press again to aim your shot.</p><p>Gold rings warn of a shot or pass. Swing at a nearby skater to check him back; a cyan ring marks the bump. Bank shots count as one goal.</p></details>
   <aside class="test-panel match-panel">
     <div class="eyebrow">THE MATCHUP</div><h2>Race to seven</h2>
     <label class="difficulty-label" for="difficulty">Opponents</label><select id="difficulty"><option value="easy">Easy · more time to react</option><option value="normal" selected>Normal · balanced rallies</option><option value="hard">Hard · quicker preparation</option></select>
@@ -39,14 +31,15 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="match-stats"><div><span>Flipper returns</span><b id="returns">0</b></div><div><span>Their goalie saves</span><b id="saves">0</b></div></div>
     <div class="divider"></div><div class="eyebrow">THE FEEL OF THE ICE</div>
     <label class="toggle"><input id="hops" type="checkbox"><span>Low puck hops<small>Tiny lifts after harder impacts</small></span></label>
+    <p id="hop-label" class="small">· FLAT PUCK</p>
     <label class="toggle"><input id="sound" type="checkbox" checked><span>Rink sounds<small>Sticks, boards, checks and goal horns</small></span></label>
     <label class="toggle"><input id="reduced" type="checkbox"><span>Lower render resolution</span></label>
     <label class="toggle"><input id="motion" type="checkbox"><span>Reduce celebration motion</span></label><button id="touch-keys" class="text-button">Change keyboard controls</button>
-    <a class="practice-link" href="/practice.html">Puck & flipper practice ↗</a>
+    <a class="practice-link" href="/practice.html">Puck & flipper practice ↗</a><p class="build-label">HOCKEY SCHTICK · 0.4.2 · KEYBOARD & TOUCH</p>
     <details id="lab"><summary>Performance lab</summary><p class="small">A 120-second full-team run with automatic flipper taps and rematches. Measures this browser and device. You can stop it any time.</p><button id="benchmark" class="secondary" disabled>Run 120-second test</button><button id="catch-demo" class="secondary" disabled>Watch catch & shoot</button><p class="small">The demo holds, releases, and shoots with the same two flippers. Opponents keep playing. Select New match to take over.</p><div class="effect-previews"><button id="preview-you" class="secondary">Preview your goal</button><button id="preview-cpu" class="secondary">Preview CPU goal</button></div><label class="toggle"><input id="thirty" type="checkbox"><span>Render at 30 FPS<small>Physics stays at 120 Hz</small></span></label><pre id="metrics">Waiting for play</pre><button id="export" class="text-button" disabled>Download test results</button></details>
   </aside>
 </dialog>
-<footer>HOCKEY SCHTICK <span>•</span> 0.4.1 <span>•</span> KEYBOARD & TOUCH</footer><output id="qa-state" hidden></output>
+<output id="qa-state" hidden></output>
 <dialog id="key-dialog"><form method="dialog"><div class="eyebrow">MAKE IT YOURS</div><h2>Flipper keys</h2><p>Choose a flipper, then press the key you want. Left and right Shift can be assigned separately.</p><div class="bindings"><button type="button" data-bind="0">Left: A</button><button type="button" data-bind="1">Right: L</button></div><p id="bind-note" aria-live="polite">Two distinct keys let both flippers work together.</p><p class="small">Repeated Shift presses can trigger your Windows accessibility shortcut.</p><div class="dialog-actions"><button type="button" id="defaults" class="secondary">Restore A / L</button><button value="close">Done</button></div></form></dialog>`;
 
 const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -174,7 +167,6 @@ async function boot() {
   }
   el('preview-you').onclick = () => previewGoal('you'); el('preview-cpu').onclick = () => previewGoal('cpu');
   el('touch-keys').onclick = () => { settingsDialog.close(); pause('Controls'); bindingTarget = null; keyDialog.showModal(); };
-  el('controls').onclick = () => { pause('Controls'); bindingTarget = null; keyDialog.showModal(); };
   document.querySelectorAll<HTMLButtonElement>('[data-bind]').forEach(button => { button.onclick = () => { bindingTarget = Number(button.dataset.bind); el('bind-note').textContent = 'Press your new key. Escape cancels.'; }; });
   function saveBindings() { paintBindings(); try { localStorage.setItem('hockey-schtick-keys', JSON.stringify(bindings)); } catch {} bindingTarget = null; el('bind-note').textContent = 'Saved. Close this panel, then resume the match.'; }
   el('defaults').onclick = () => { bindings = [{ code: 'KeyA', label: 'A' }, { code: 'KeyL', label: 'L' }]; saveBindings(); };
@@ -202,7 +194,7 @@ async function boot() {
   document.addEventListener('visibilitychange', () => { if (document.hidden) { releaseKeys(); pause('Tab hidden'); } });
   window.addEventListener('orientationchange', () => { releaseKeys(); pause('Screen rotated'); });
   view.renderer.domElement.addEventListener('webglcontextlost', e => { e.preventDefault(); releaseKeys(); pause('Graphics interrupted'); });
-  function settings() { return { version: '0.4.1', presentation: view.presentation, difficulty: match.difficulty, seed: match.seed, actors: match.team.skaters.length + 1, extendedWings: match.team.extendedWings, playTuning: match.team.tuning, flipperRubber: sim.flipperRubber, checking: match.team.checking, skaterLanes: match.team.skaters.map(s => ({ index: s.index, ...match.team.lanes[s.index] })), hops: sim.hops, reduced: input('reduced').checked, render30: input('thirty').checked, physicsHz: 120, downhill: sim.downhill, resolution: view.resolution, viewport: `${innerWidth} × ${innerHeight}`, devicePixelRatio, gpu: view.gpu, browser: navigator.userAgent }; }
+  function settings() { return { version: '0.4.2', presentation: view.presentation, difficulty: match.difficulty, seed: match.seed, actors: match.team.skaters.length + 1, extendedWings: match.team.extendedWings, playTuning: match.team.tuning, flipperRubber: sim.flipperRubber, checking: match.team.checking, skaterLanes: match.team.skaters.map(s => ({ index: s.index, ...match.team.lanes[s.index] })), hops: sim.hops, reduced: input('reduced').checked, render30: input('thirty').checked, physicsHz: 120, downhill: sim.downhill, resolution: view.resolution, viewport: `${innerWidth} × ${innerHeight}`, devicePixelRatio, gpu: view.gpu, browser: navigator.userAgent }; }
   function finishBenchmark(reason: string | null) {
     if (!benchmark) return;
     benchmarkResult = { date: new Date().toISOString(), mode: benchmark.mode, catches: benchmark.demo.catches, releaseAttempts: benchmark.demo.shots, completed: reason === null, reason, activeSeconds: +Math.min((performance.now() - benchmark.start) / 1000, 120).toFixed(2), measuredFrames: benchmark.frames.length, medianFrameMs: +percentile(benchmark.frames, .5).toFixed(3), p95FrameMs: +percentile(benchmark.frames, .95).toFixed(3), medianDrawIntervalMs: +percentile(benchmark.draws, .5).toFixed(3), p95DrawIntervalMs: +percentile(benchmark.draws, .95).toFixed(3), stallsOver100ms: benchmark.frames.filter(v => v > 100).length, p95PhysicsPerFrameMs: +percentile(benchmark.physics, .95).toFixed(3), contacts: sim.contactCount - benchmark.contacts, goals: benchmark.goals, conceded: benchmark.conceded, neutralRestarts: benchmark.faults, completedMatches: benchmark.matches, assistedStrikes: benchmark.strikes + match.team.stats.strikes, checks: benchmark.checks, settings: benchmark.settings };

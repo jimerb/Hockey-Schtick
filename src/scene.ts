@@ -29,7 +29,7 @@ export class RinkView {
   private celebration: 'you' | 'cpu' | null = null; private celebrationStart = 0;
   private confetti: T.Points; private confettiSeeds: number[] = []; private reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   private crowd = new T.Group(); private staticArt = new T.Group();
-  constructor(host: HTMLElement, match = false) {
+  constructor(host: HTMLElement, private match = false) {
     this.host = host;
     this.renderer = new T.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     this.renderer.outputColorSpace = T.SRGBColorSpace; this.renderer.toneMapping = T.ACESFilmicToneMapping; this.renderer.toneMappingExposure = .96;
@@ -144,7 +144,19 @@ export class RinkView {
     // Fit every corner, including glass. Wider views reveal crowds without shrinking the rink.
     const elevation = 57 * Math.PI / 180, s = Math.sin(elevation), c = Math.cos(elevation), tan = Math.tan(this.camera.fov * Math.PI / 360); let distance = 0;
     for (const x of [-6.02, 6.02]) for (const y of [-.7, 1.96]) for (const z of [-9.62, 9.7]) { const depth = y * s + z * c, up = y * c - z * s; distance = Math.max(distance, depth + Math.abs(x) / (tan * aspect * .965), depth + Math.abs(up) / (tan * .965)); }
-    this.camera.position.set(0, distance * s, distance * c); this.camera.lookAt(0, 0, 0); this.camera.updateProjectionMatrix(); this.renderer.setPixelRatio(this.reduced ? 1 : Math.min(window.devicePixelRatio, 1.75)); this.renderer.setSize(w, h); this.crowd.visible = !this.reduced && aspect > .82;
+    let offset = 0;
+    if (this.match) {
+      // Center the projected cabinet, not the world origin. Fit the entire glass
+      // and near apron with equal top/bottom breathing room at the same angle.
+      const limit = tan * .975; let upper = -Infinity, lower = Infinity, horizontal = 0;
+      for (const x of [-6.02, 6.02]) for (const y of [-.7, 1.96]) for (const z of [-9.62, 9.7]) {
+        const depth = y * s + z * c, up = y * c - z * s;
+        upper = Math.max(upper, up + limit * depth); lower = Math.min(lower, up - limit * depth);
+        horizontal = Math.max(horizontal, depth + Math.abs(x) / (limit * aspect));
+      }
+      distance = Math.max(horizontal, (upper - lower) / (2 * limit)); offset = (upper + lower) / 2;
+    }
+    this.camera.position.set(0, distance * s + offset * c, distance * c - offset * s); this.camera.lookAt(0, offset * c, -offset * s); this.camera.updateProjectionMatrix(); this.renderer.setPixelRatio(this.reduced ? 1 : Math.min(window.devicePixelRatio, 1.75)); this.renderer.setSize(w, h); this.crowd.visible = !this.reduced && aspect > .82;
     const size = this.renderer.getDrawingBufferSize(new T.Vector2()); this.resolution = `${size.x} × ${size.y}`;
   }
   get presentation() { return { camera: 'perspective', elevation: 57, crowd: this.crowd.visible, reducedMotion: this.reducedMotion, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, celebration: this.celebration }; }
