@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-02T19:20:29.010Z",
+  "scope": "Geometry and animation logic; no WebGL, canvas pixels or live browser validation",
+  "passed": 15,
+  "failed": [],
+  "checks": [
+    {
+      "name": "skater geometry stays within the existing camera height and draw budget",
+      "passed": true
+    },
+    {
+      "name": "skater blade stays in the accepted collision footprint instead of lengthening reach",
+      "passed": true
+    },
+    {
+      "name": "goalie geometry stays within the existing camera height and draw budget",
+      "passed": true
+    },
+    {
+      "name": "goalie stick remains a separately movable mesh inside its original blade footprint",
+      "passed": true
+    },
+    {
+      "name": "woven goal geometry is finite and batched within a small draw budget",
+      "passed": true
+    },
+    {
+      "name": "net covers only the roof, rear and sides, leaving the goal mouth open",
+      "passed": true
+    },
+    {
+      "name": "ice scuff and roughness maps use linear data and align with the color texture",
+      "passed": true
+    },
+    {
+      "name": "crowd density and geometry are bounded without one draw per person",
+      "passed": true
+    },
+    {
+      "name": "more distant tiers have less contrast",
+      "passed": true
+    },
+    {
+      "name": "idle crowd motion moves shared instance poses",
+      "passed": true
+    },
+    {
+      "name": "pause, reduced motion or a hidden crowd suppress all animation writes",
+      "passed": true
+    },
+    {
+      "name": "goal reaction changes the pose without waiting for another idle frame",
+      "passed": true
+    },
+    {
+      "name": "decorative updates are throttled below the game physics rate",
+      "passed": true
+    },
+    {
+      "name": "reduced-motion reset returns to the initial crowd pose",
+      "passed": true
+    },
+    {
+      "name": "sustained idle/goal animation stays finite and off the ice",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "kind": "skater",
+      "meshes": 12,
+      "triangles": 27276,
+      "bounds": {
+        "min": [
+          -0.26500001549720764,
+          0.014999999664723873,
+          -0.34299999475479126
+        ],
+        "max": [
+          1.3000200986862183,
+          1.3947139978408813,
+          0.328000009059906
+        ]
+      }
+    },
+    {
+      "kind": "goalie",
+      "meshes": 16,
+      "triangles": 23232,
+      "bounds": {
+        "min": [
+          -0.5550000071525574,
+          0.004999992903321981,
+          -0.278
+        ],
+        "max": [
+          0.6299999952316284,
+          1.4617999792099,
+          0.9100000095367431
+        ]
+      }
+    },
+    {
+      "kind": "goal",
+      "meshes": 7,
+      "triangles": 7056
+    },
+    {
+      "kind": "crowd",
+      "spectators": 224,
+      "instancedMeshes": 7,
+      "animationHz": 30,
+      "fadedTiers": 4
+    },
+    {
+      "kind": "animation-cpu-only",
+      "samples": 300,
+      "medianMs": 0.19610000000000127,
+      "p95Ms": 0.27499999999997726,
+      "caveat": "Node CPU only; does not measure browser GPU rendering or FPS"
+    }
+  ]
+}

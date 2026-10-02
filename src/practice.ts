@@ -220,7 +220,7 @@ async function boot() {
         if (benchmark && now - benchmark.start >= 120000) finishBenchmark(null);
       }
     }
-    if (!input('thirty').checked || now - lastDraw >= 1000 / 30 - 0.3) { view.render(sim.previous, sim.current, paused || !started ? 1 : accumulator / C.dt, sim.stickEnabled); lastDraw = now; }
+    if (!input('thirty').checked || now - lastDraw >= 1000 / 30 - 0.3) { view.render(sim.previous, sim.current, paused || !started ? 1 : accumulator / C.dt, sim.stickEnabled, !paused); lastDraw = now; }
     if (now - lastMetrics > 700) {
       lastMetrics = now; updateHUD(); el('qa-state').textContent = JSON.stringify(qaState());
       if (!benchmarkResult) el('metrics').textContent = `${benchmark ? `${Math.floor((now - benchmark.start) / 1000)} / 120 seconds\n` : ''}Frame median  ${percentile(rafSamples, 0.5).toFixed(1)} ms\nFrame p95     ${percentile(rafSamples, 0.95).toFixed(1)} ms\nPhysics p95   ${percentile(physicsSamples, 0.95).toFixed(2)} ms/frame\nPhysics       120 Hz\nResolution    ${view.resolution}\nContacts      ${sim.contactCount}\nOut of play   ${sim.scores.fault}`;

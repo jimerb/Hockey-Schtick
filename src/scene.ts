@@ -1,9 +1,11 @@
 import * as T from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { C, OFFENSE, LANES, MATCH_SKATERS, MATCH_EXTENDED_WINGS, cradleGuides, guides, outline, rearArc, returnApron } from './config';
+import { C, OFFENSE, LANES, MATCH_SKATERS, MATCH_EXTENDED_WINGS, cradleGuides, guides, outline, returnApron } from './config';
 import type { State } from './physics';
 import type { Vec } from './config';
-import { paint, surface, rounded, rod, sphere, softTexture, groundShadow, iceTexture, hockeyFigure, batchStatic } from './art';
+import { paint, surface, rounded, rod, sphere, softTexture, groundShadow, iceTextures, hockeyFigure, batchStatic } from './art';
+import { ArenaCrowd } from './crowd';
+import { hockeyGoal } from './goal-art';
 
 function polygon(p: Vec[], height: number, mat: T.Material) {
   const shape = new T.Shape(p.map(v => new T.Vector2(v.x, -v.z)));
@@ -30,7 +32,7 @@ export class RinkView {
   private glowMap = softTexture(); private glows: T.Sprite[] = [];
   private celebration: 'you' | 'cpu' | null = null; private celebrationStart = 0;
   private confetti: T.Points; private confettiSeeds: number[] = []; private reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  private crowd = new T.Group(); private staticArt = new T.Group();
+  private crowd = new ArenaCrowd(); private staticArt = new T.Group(); private lastVisualTime = performance.now();
   constructor(host: HTMLElement, private match = false) {
     this.host = host;
     this.renderer = new T.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
@@ -38,20 +40,27 @@ export class RinkView {
     host.append(this.renderer.domElement); this.renderer.domElement.setAttribute('aria-label', 'Angled tabletop hockey rink, viewed from behind your two flippers');
     const gl = this.renderer.getContext(), debug = gl.getExtension('WEBGL_debug_renderer_info'); if (debug) this.gpu = gl.getParameter(debug.UNMASKED_RENDERER_WEBGL);
     const environment = new RoomEnvironment(), pmrem = new T.PMREMGenerator(this.renderer);
-    const env = pmrem.fromScene(environment, .04); this.scene.environment = env.texture; this.scene.environmentIntensity = .6; environment.dispose(); pmrem.dispose();
-    this.scene.add(new T.HemisphereLight(0xd4eaff, 0x20344d, 1.25));
-    const key = new T.DirectionalLight(0xfff8ed, 1.9); key.position.set(-4, 12, 4); this.scene.add(key);
-    const fill = new T.DirectionalLight(0x4faaff, .8); fill.position.set(6, 8, -9); this.scene.add(fill);
-    this.scene.add(this.staticArt, this.crowd);
+    // Broad studio strips give lacquer, chrome and ice a common reflected light source.
+    for (const x of [-4.5, 4.5]) {
+      const panel = new T.Mesh(new T.PlaneGeometry(1.4, 10), new T.MeshBasicMaterial({ color: 0xc4eaff }));
+      panel.position.set(x, 6, -2); panel.rotation.x = Math.PI / 2; environment.add(panel);
+    }
+    const env = pmrem.fromScene(environment, .035); this.scene.environment = env.texture; this.scene.environmentIntensity = .85; environment.dispose(); pmrem.dispose();
+    this.scene.add(new T.HemisphereLight(0xd4eaff, 0x14253a, .8));
+    const key = new T.DirectionalLight(0xfff6e8, 2.15); key.position.set(-4, 13, -8); this.scene.add(key);
+    const fill = new T.DirectionalLight(0x91caff, .85); fill.position.set(6, 8, 3); this.scene.add(fill);
+    const rim = new T.DirectionalLight(0x47a8ff, .65); rim.position.set(-8, 4, -5); this.scene.add(rim);
+    this.scene.add(this.staticArt, this.crowd.group);
     const { navy, chrome, white, red } = paint;
     const outer = outline.map(v => ({ ...v, x: v.x * 1.11, z: v.z * 1.06 }));
     const cabinet = polygon(outer, .62, navy); cabinet.position.y = -.68; this.staticArt.add(cabinet);
-    // Baked light reflections keep the painted lines and skate scuffs legible on small screens.
-    const ice = polygon(outline, 0, new T.MeshBasicMaterial({ map: iceTexture(), toneMapped: false }));
+    // One physical surface: scuffs affect its relief/gloss while rink paint remains legible.
+    const ice = polygon(outline, 0, new T.MeshPhysicalMaterial({ ...iceTextures(), roughness: .48, bumpScale: .007,
+      metalness: .025, clearcoat: .6, clearcoatRoughness: .25, ior: 1.31, envMapIntensity: .5 }));
     const pos = ice.geometry.getAttribute('position'), uv = ice.geometry.getAttribute('uv');
     for (let i = 0; i < pos.count; i++) uv.setXY(i, (pos.getX(i) + 5.4) / 10.8, (pos.getY(i) + 9) / 18);
     uv.needsUpdate = true; ice.position.y = .01; this.staticArt.add(ice);
-    const glass = new T.MeshPhysicalMaterial({ color: 0xaccbdf, transparent: true, opacity: .13, roughness: .1, metalness: .05, depthWrite: false, side: T.DoubleSide });
+    const glass = new T.MeshPhysicalMaterial({ color: 0xb5dcf2, transparent: true, opacity: .12, roughness: .14, metalness: .08, clearcoat: .6, depthWrite: false, side: T.DoubleSide });
     const glassEdges = surface(0x99cbe8, { metalness: .75, roughness: .2 });
     for (let i = 0; i < outline.length; i++) {
       const a = outline[i], b = outline[(i + 1) % outline.length];
@@ -122,7 +131,7 @@ export class RinkView {
     this.puckHalo = new T.Mesh(new T.RingGeometry(.292, .315, 32), new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: .58, depthTest: false, depthWrite: false })); this.puckHalo.rotation.x = -Math.PI / 2; this.puckHalo.renderOrder = 10; this.scene.add(this.puckHalo);
     for (let i = 0; i < (match ? MATCH_SKATERS : 5); i++) this.makeActor(`skater-${i}`, false, [17, 9, 23, 6, 12][i]); this.makeActor('goalie', true, 1);
     rounded(this.stick, 0, .29, 0, 2.04, .52, .3, red); rod(this.stick, [0, .1, 0], [0, 1, 0], .17, chrome); this.scene.add(this.stick);
-    this.makeCrowd(); batchStatic(this.staticArt);
+    batchStatic(this.staticArt);
     const particles = new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute(new Float32Array(72 * 3), 3)); for (let i = 0; i < 72; i++) this.confettiSeeds.push((i * .61803398875) % 1);
     this.confetti = new T.Points(particles, new T.PointsMaterial({ color: 0x82ddff, size: .095, transparent: true, opacity: .9, depthWrite: false })); this.confetti.visible = false; this.scene.add(this.confetti);
     this.observer = new ResizeObserver(() => this.resize()); this.observer.observe(host); this.resize();
@@ -138,32 +147,12 @@ export class RinkView {
   }
   private makeGoal() {
     // Rear/side bumper colliders stay in physics; only the actual net piping is visible.
-    for (let i = 0; i < rearArc.length - 1; i++) { const a = rearArc[i], b = rearArc[i + 1]; rod(this.staticArt, [a.x, .14, a.z], [b.x, .14, b.z], .11, paint.red); }
-    for (const x of [-1.5, 1.5]) rod(this.staticArt, [x, .03, C.goalZ], [x, 1.4, C.goalZ], .085, paint.red); rod(this.staticArt, [-1.5, 1.4, C.goalZ], [1.5, 1.4, C.goalZ], .085, paint.red);
-    const net: number[] = [], add = (a: number[], b: number[]) => net.push(...a, ...b);
-    for (let j = 0; j < 24; j++) {
-      const a = rearArc[j], b = rearArc[j + 1]; for (let row = 0; row < 10; row++) { const y = .15 + row * .123; add([a.x, y, a.z], [b.x, y + .123, b.z]); add([b.x, y, b.z], [a.x, y + .123, a.z]); }
-      add([a.x, 1.38, a.z], [b.x, 1.38, b.z]); add([a.x, 1.38, a.z], [a.x, 1.4, C.goalZ]);
-    }
-    for (let i = 1; i < 10; i++) { const z = C.goalZ - i * .12, x = 1.5 * Math.sqrt(1 - Math.pow((C.goalZ - z) / 1.3, 2)); add([-x, 1.39, z], [x, 1.39, z]); }
-    this.staticArt.add(new T.LineSegments(new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute(net, 3)), new T.LineBasicMaterial({ color: 0xd0d9d8, transparent: true, opacity: .62 })));
+    this.staticArt.add(hockeyGoal());
     groundShadow(this.staticArt, 3.4, 1.9, .18, this.glowMap).position.set(0, .033, -8.15);
-  }
-  private makeCrowd() {
-    const colors = [0x123d62, 0x267898, 0x872540, 0x4f6177, 0xc4c8c5].map(c => surface(c, { roughness: .85 }));
-    for (const side of [-1, 1]) for (let row = 0; row < 3; row++) {
-      rounded(this.crowd, side * (6.7 + row * .65), -.12 + row * .36, -.6, .7, .28, 16.8, paint.navy);
-      for (let i = 0; i < 23; i++) {
-        const x = side * (6.65 + row * .65), y = .13 + row * .36, z = -8.4 + i * .7;
-        rounded(this.crowd, x, y + .18, z, .31, .4, .33, colors[(i * 3 + row * 2 + side + 1) % colors.length], .07); sphere(this.crowd, x, y + .51, z, .13, i % 4 ? paint.skin : paint.pad);
-        for (const arm of [-1, 1]) rod(this.crowd, [x, y + .29, z + arm * .18], [x - side * .16, y + (i % 7 === 0 ? .58 : .1), z + arm * .22], .055, colors[(i * 3 + row * 2 + side + 1) % colors.length]);
-      }
-    }
-    batchStatic(this.crowd);
   }
   setCelebration(kind: 'you' | 'cpu' | null) { this.celebration = kind; this.celebrationStart = performance.now(); }
   setReduced(value: boolean) { this.reduced = value; this.resize(); }
-  setReducedMotion(value: boolean) { this.reducedMotion = value; }
+  setReducedMotion(value: boolean) { this.reducedMotion = value; if (value) this.crowd.resetMotion(); }
   private resize() {
     const w = Math.max(1, this.host.clientWidth), h = Math.max(1, this.host.clientHeight), aspect = w / h; this.camera.aspect = aspect;
     // Fit every corner, including glass. Wider views reveal crowds without shrinking the rink.
@@ -181,11 +170,11 @@ export class RinkView {
       }
       distance = Math.max(horizontal, (upper - lower) / (2 * limit)); offset = (upper + lower) / 2;
     }
-    this.camera.position.set(0, distance * s + offset * c, distance * c - offset * s); this.camera.lookAt(0, offset * c, -offset * s); this.camera.updateProjectionMatrix(); this.renderer.setPixelRatio(this.reduced ? 1 : Math.min(window.devicePixelRatio, 1.75)); this.renderer.setSize(w, h); this.crowd.visible = !this.reduced && aspect > .82;
+    this.camera.position.set(0, distance * s + offset * c, distance * c - offset * s); this.camera.lookAt(0, offset * c, -offset * s); this.camera.updateProjectionMatrix(); this.renderer.setPixelRatio(this.reduced ? 1 : Math.min(window.devicePixelRatio, 1.75)); this.renderer.setSize(w, h); this.crowd.group.visible = !this.reduced && aspect > .82;
     const size = this.renderer.getDrawingBufferSize(new T.Vector2()); this.resolution = `${size.x} × ${size.y}`;
   }
-  get presentation() { return { camera: 'perspective', elevation: 57, crowd: this.crowd.visible, reducedMotion: this.reducedMotion, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, celebration: this.celebration }; }
-  render(prev: State, now: State, alpha: number, stickEnabled: boolean) {
+  get presentation() { return { camera: 'perspective', elevation: 57, crowd: this.crowd.group.visible, crowdDetail: this.crowd.presentation, ice: 'scuffed physical clearcoat with studio reflections', reducedMotion: this.reducedMotion, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, celebration: this.celebration }; }
+  render(prev: State, now: State, alpha: number, stickEnabled: boolean, motionActive = true) {
     const lerp = T.MathUtils.lerp; this.puck.visible = this.shadow.visible = now.active;
     this.puck.position.set(lerp(prev.puck.x, now.puck.x, alpha), lerp(prev.puck.y, now.puck.y, alpha), lerp(prev.puck.z, now.puck.z, alpha)); this.shadow.position.x = this.puck.position.x; this.shadow.position.z = this.puck.position.z;
     this.puckHalo.visible = now.active; this.puckHalo.position.copy(this.puck.position); this.puckHalo.position.y += .11;
@@ -198,6 +187,8 @@ export class RinkView {
       visual.ring.visible = ['windup', 'swing', 'clear', 'checked'].includes(pose.stage); (visual.ring.material as T.MeshBasicMaterial).color.setHex(pose.stage === 'checked' ? 0x8eeaff : 0xffbd4a); if (visual.blade) visual.blade.position.z = .42 + lerp(before.kick, pose.kick, alpha) * .4;
     }
     const t = (performance.now() - this.celebrationStart) / 1000, celebrating = this.celebration !== null && t < 2.5, color = celebrating ? this.celebration === 'you' ? 0x83ffe5 : 0xff5774 : 0x35baff; this.led.color.setHex(color);
+    const visualNow = performance.now(), delta = (visualNow - this.lastVisualTime) / 1000; this.lastVisualTime = visualNow;
+    this.crowd.update(delta, celebrating, motionActive && !this.reducedMotion && this.crowd.group.visible);
     for (const glow of this.glows) { const mat = glow.material as T.SpriteMaterial; mat.color.setHex(color); mat.opacity = celebrating && !this.reducedMotion ? .45 + .15 * Math.sin(t * 4) : .45; }
     this.confetti.visible = celebrating && this.celebration === 'you' && !this.reducedMotion;
     if (this.confetti.visible) { const p = this.confetti.geometry.getAttribute('position'); for (let i = 0; i < p.count; i++) { const r = this.confettiSeeds[i], side = i % 2 ? -1 : 1; p.setXYZ(i, side * (5.85 + r * 2.4 + t * .4), 1.8 + r * 2 + t * (2 + r) - t * t * 1.7, -7.8 + ((i * .381966) % 1) * 15); } p.needsUpdate = true; (this.confetti.material as T.PointsMaterial).opacity = Math.max(0, 1 - t / 2.5); }
