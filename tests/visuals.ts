@@ -77,14 +77,17 @@ check('ice scuff and roughness maps use linear data and align with the color tex
 const crowd = new ArenaCrowd(), instances: T.InstancedMesh[] = [];
 crowd.group.traverse(node => { if (node instanceof T.InstancedMesh) instances.push(node); });
 const matrices = () => instances.map(mesh => [...mesh.instanceMatrix.array]);
+const cabinetClearance = (x: number, z: number) => Math.hypot(Math.max(Math.abs(x) - 3.8, 0), Math.max(Math.abs(z) - 7.4, 0));
 check('crowd density and geometry are bounded without one draw per person', () => {
-  assert.ok(crowd.fans.length >= 128 && crowd.fans.length <= 300); assert.ok(instances.length <= 8);
-  assert.ok(crowd.fans.every(f => Math.abs(f.x) > 6.0));
+  assert.ok(crowd.fans.length >= 300 && crowd.fans.length <= 400); assert.ok(instances.length <= 13);
+  assert.ok(crowd.fans.every(f => cabinetClearance(f.x, f.z) > 2.5));
+  assert.ok(crowd.fans.filter(f => f.z < -9.6).length > 60, 'far end is populated');
+  assert.ok(crowd.fans.some(f => f.z > 7.5), 'near corners wrap around');
   assert.ok(new Set(crowd.fans.map(f => f.height)).size > 40);
   observations.push({ kind: 'crowd', ...crowd.presentation });
 });
 check('more distant tiers have less contrast', () => {
-  const brightness = (row: number) => crowd.fans.filter(f => f.row === row).reduce((sum, f) => sum + f.skin.r + f.skin.g + f.skin.b, 0);
+  const brightness = (row: number) => { const fans = crowd.fans.filter(f => f.row === row); return fans.reduce((sum, f) => sum + f.skin.r + f.skin.g + f.skin.b, 0) / fans.length; };
   assert.ok(brightness(3) < brightness(0) * .75);
 });
 check('idle crowd motion moves shared instance poses', () => {
@@ -112,9 +115,20 @@ check('sustained idle/goal animation stays finite and off the ice', () => {
   for (let i = 0; i < 300; i++) { const start = performance.now(); crowd.update(1 / 30, i % 90 < 40, true); timings.push(performance.now() - start); }
   for (const mesh of instances) for (let i = 0; i < mesh.count; i++) {
     mesh.getMatrixAt(i, matrix); assert.ok(matrix.elements.every(Number.isFinite)); point.setFromMatrixPosition(matrix);
-    assert.ok(Math.abs(point.x) > 5.8); assert.ok(point.y > -.1 && point.y < 2);
+    assert.ok(cabinetClearance(point.x, point.z) > 2.1); assert.ok(point.y > -.35 && point.y < 2.2);
   }
   timings.sort((a, b) => a - b); observations.push({ kind: 'animation-cpu-only', samples: timings.length, medianMs: timings[150], p95Ms: timings[285], caveat: 'Node CPU only; does not measure browser GPU rendering or FPS' });
+});
+check('human-goal cheer survives the countdown and freezes while paused', () => {
+  crowd.celebrate(); crowd.update(1 / 30, false, true);
+  assert.equal(crowd.presentation.cheering, true);
+  for (let i = 0; i < 90; i++) crowd.update(1 / 30, false, true);
+  assert.equal(crowd.presentation.cheering, true, 'still cheering after the 2.5-second goal/countdown sequence');
+  const remaining = crowd.presentation.goalSeconds, before = matrices();
+  for (let i = 0; i < 300; i++) crowd.update(1 / 30, false, false);
+  assert.equal(crowd.presentation.goalSeconds, remaining); assert.deepEqual(matrices(), before);
+  for (let i = 0; i < 45; i++) crowd.update(1 / 30, false, true);
+  assert.equal(crowd.presentation.cheering, false);
 });
 const failed = checks.filter(c => !c.passed);
 writeFileSync('evidence/visual-upgrade-results.json', JSON.stringify({ date: new Date().toISOString(), scope: 'Geometry and animation logic; no WebGL, canvas pixels or live browser validation', passed: checks.length - failed.length, failed, checks, observations }, null, 2));

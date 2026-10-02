@@ -1,7 +1,7 @@
 {
-  "date": "2026-10-02T20:10:40.133Z",
+  "date": "2026-10-02T22:11:27.336Z",
   "scope": "Geometry and animation logic; no WebGL, canvas pixels or live browser validation",
-  "passed": 16,
+  "passed": 17,
   "failed": [],
   "checks": [
     {
@@ -67,6 +67,10 @@
     {
       "name": "sustained idle/goal animation stays finite and off the ice",
       "passed": true
+    },
+    {
+      "name": "human-goal cheer survives the countdown and freezes while paused",
+      "passed": true
     }
   ],
   "observations": [
@@ -111,16 +115,20 @@
     },
     {
       "kind": "crowd",
-      "spectators": 224,
-      "instancedMeshes": 7,
+      "spectators": 368,
+      "instancedMeshes": 13,
       "animationHz": 30,
-      "fadedTiers": 4
+      "fadedTiers": 4,
+      "wraparound": true,
+      "uiVignettes": 0,
+      "cheering": false,
+      "goalSeconds": 0
     },
     {
       "kind": "animation-cpu-only",
       "samples": 300,
-      "medianMs": 0.1811999999999898,
-      "p95Ms": 0.26319999999998345,
+      "medianMs": 0.7001999999999953,
+      "p95Ms": 1.1485000000000127,
       "caveat": "Node CPU only; does not measure browser GPU rendering or FPS"
     }
   ]

@@ -35,7 +35,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <label class="toggle"><input id="sound" type="checkbox" checked><span>Rink sounds<small>Sticks, boards, checks and goal horns</small></span></label>
     <label class="toggle"><input id="reduced" type="checkbox"><span>Lower graphics detail</span></label>
     <label class="toggle"><input id="motion" type="checkbox"><span>Reduce decorative motion<small>Freeze crowd movement and celebration effects</small></span></label><button id="touch-keys" class="text-button">Change keyboard controls</button>
-    <a class="practice-link" href="/practice.html">Puck & flipper practice ↗</a><p class="build-label">HOCKEY SCHTICK · 0.4.7 · KEYBOARD & TOUCH</p>
+    <a class="practice-link" href="/practice.html">Puck & flipper practice ↗</a><p class="build-label">HOCKEY SCHTICK · 0.4.8 · KEYBOARD & TOUCH</p>
     <details id="lab"><summary>Performance lab</summary><p class="small">A 120-second full-team run with automatic flipper taps and rematches. Measures this browser and device. You can stop it any time.</p><button id="benchmark" class="secondary" disabled>Run 120-second test</button><button id="catch-demo" class="secondary" disabled>Watch catch & shoot</button><p class="small">The demo holds, releases, and shoots with the same two flippers. Opponents keep playing. Select New match to take over.</p><div class="effect-previews"><button id="preview-you" class="secondary">Preview your goal</button><button id="preview-cpu" class="secondary">Preview CPU goal</button></div><label class="toggle"><input id="thirty" type="checkbox"><span>Render at 30 FPS<small>Physics stays at 120 Hz</small></span></label><pre id="metrics">Waiting for play</pre><button id="export" class="text-button" disabled>Download test results</button></details>
   </aside>
 </dialog>
@@ -118,7 +118,7 @@ async function boot() {
   match.team.onCheck = c => { sound('check', c.strength); if (benchmark) benchmark.checks++; };
   match.onEvent = event => {
     if (event.kind === 'start') { lastCountdown = -1; releaseKeys(); view.setCelebration(null); }
-    if (event.kind === 'drop') { cue('PLAY', .35); view.setCelebration(null); sound('drop'); }
+    if (event.kind === 'drop') { cue('PLAY', .35); sound('drop'); }
     if (event.kind === 'goal' || event.kind === 'finished') {
       releaseKeys(); view.setCelebration(event.scorer ?? null); sound(event.scorer === 'you' ? 'goal' : 'cpu');
       const score = el(event.scorer === 'you' ? 'goals' : 'conceded'); score.classList.remove('scored'); void score.offsetWidth; score.classList.add('scored');
@@ -162,7 +162,7 @@ async function boot() {
   el('settings-close').onclick = () => settingsDialog.close();
   function previewGoal(scorer: 'you' | 'cpu') {
     pause('Effects preview'); releaseKeys(); settingsDialog.close(); el('curtain').classList.add('hidden');
-    const token = ++effectPreview; unlockAudio(); view.setCelebration(scorer); sound(scorer === 'you' ? 'goal' : 'cpu'); cue(scorer === 'you' ? 'YOUR GOAL · PREVIEW' : 'CPU GOAL · PREVIEW', 2.5);
+    const token = ++effectPreview; unlockAudio(); view.setCelebration(scorer, true); sound(scorer === 'you' ? 'goal' : 'cpu'); cue(scorer === 'you' ? 'YOUR GOAL · PREVIEW' : 'CPU GOAL · PREVIEW', 2.5);
     window.setTimeout(() => { if (token !== effectPreview) return; view.setCelebration(null); el('cue').classList.remove('show'); if (paused || !started || match.phase === 'finished') el('curtain').classList.remove('hidden'); if (paused) audio.mute(true); }, 2500);
   }
   el('preview-you').onclick = () => previewGoal('you'); el('preview-cpu').onclick = () => previewGoal('cpu');
@@ -195,7 +195,7 @@ async function boot() {
   document.addEventListener('visibilitychange', () => { if (document.hidden) { releaseKeys(); pause('Tab hidden'); } });
   window.addEventListener('orientationchange', () => { releaseKeys(); pause('Screen rotated'); });
   view.renderer.domElement.addEventListener('webglcontextlost', e => { e.preventDefault(); releaseKeys(); pause('Graphics interrupted'); });
-  function settings() { return { version: '0.4.7', presentation: view.presentation, difficulty: match.difficulty, seed: match.seed, actors: match.team.skaters.length + 1, extendedWings: match.team.extendedWings, playTuning: match.team.tuning, flipperRubber: sim.flipperRubber, checking: match.team.checking, offensePaddles: OFFENSE, skaterLanes: match.team.skaters.map(s => ({ index: s.index, ...match.team.lanes[s.index] })), hops: sim.hops, reduced: input('reduced').checked, render30: input('thirty').checked, physicsHz: 120, downhill: sim.downhill, resolution: view.resolution, viewport: `${innerWidth} × ${innerHeight}`, devicePixelRatio, gpu: view.gpu, browser: navigator.userAgent }; }
+  function settings() { return { version: '0.4.8', presentation: view.presentation, difficulty: match.difficulty, seed: match.seed, actors: match.team.skaters.length + 1, extendedWings: match.team.extendedWings, playTuning: match.team.tuning, flipperRubber: sim.flipperRubber, checking: match.team.checking, offensePaddles: OFFENSE, skaterLanes: match.team.skaters.map(s => ({ index: s.index, ...match.team.lanes[s.index] })), hops: sim.hops, reduced: input('reduced').checked, render30: input('thirty').checked, physicsHz: 120, downhill: sim.downhill, resolution: view.resolution, viewport: `${innerWidth} × ${innerHeight}`, devicePixelRatio, gpu: view.gpu, browser: navigator.userAgent }; }
   function finishBenchmark(reason: string | null) {
     if (!benchmark) return;
     benchmarkResult = { date: new Date().toISOString(), mode: benchmark.mode, catches: benchmark.demo.catches, releaseAttempts: benchmark.demo.shots, completed: reason === null, reason, activeSeconds: +Math.min((performance.now() - benchmark.start) / 1000, 120).toFixed(2), measuredFrames: benchmark.frames.length, medianFrameMs: +percentile(benchmark.frames, .5).toFixed(3), p95FrameMs: +percentile(benchmark.frames, .95).toFixed(3), medianDrawIntervalMs: +percentile(benchmark.draws, .5).toFixed(3), p95DrawIntervalMs: +percentile(benchmark.draws, .95).toFixed(3), stallsOver100ms: benchmark.frames.filter(v => v > 100).length, p95PhysicsPerFrameMs: +percentile(benchmark.physics, .95).toFixed(3), contacts: sim.contactCount - benchmark.contacts, goals: benchmark.goals, conceded: benchmark.conceded, neutralRestarts: benchmark.faults, completedMatches: benchmark.matches, assistedStrikes: benchmark.strikes + match.team.stats.strikes, checks: benchmark.checks, settings: benchmark.settings };
@@ -231,7 +231,7 @@ async function boot() {
           upperHeld.forEach((held, side) => { if (held) sim.shootOffense(side); else sim.releaseOffense(side); });
           const beforeTick = sim.tick; match.step(); accumulator -= C.dt;
           if (pendingInput && sim.tick > beforeTick) { inputTick = { ...pendingInput, applied: sim.tick }; pendingInput = null; }
-          if (match.phase === 'countdown') { const count = Math.ceil(match.timer); if (count !== lastCountdown) { lastCountdown = count; cue(String(count), .8); view.setCelebration(null); } }
+          if (match.phase === 'countdown') { const count = Math.ceil(match.timer); if (count !== lastCountdown) { lastCountdown = count; cue(String(count), .8); } }
           if (cueTime > 0) { cueTime -= C.dt; if (cueTime <= 0) el('cue').classList.remove('show'); }
           if (match.winner !== null) { accumulator = 0; break; }
         }

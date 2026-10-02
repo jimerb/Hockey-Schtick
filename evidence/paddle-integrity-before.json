@@ -1,0 +1,1930 @@
+{
+  "date": "2026-10-02T22:01:52.128Z",
+  "legacyHeight": true,
+  "passed": 398,
+  "failed": 66,
+  "checks": [
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.02, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.02, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.25, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.25, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.5, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.5, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.75, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.75, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.98, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops false, along 0.98, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.02, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.093836210668087"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.02, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.093836210668087"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.25, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.25, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.5, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.5, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.75, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.75, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.98, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.093836210668087"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 0, hops true, along 0.98, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.093836210668087"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.02, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.02, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.25, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.25, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.5, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.5, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.75, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.75, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.98, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops false, along 0.98, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.02, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.093836210668087"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.02, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.093836210668087"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.25, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.25, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.5, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.5, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.75, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.75, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.09386084973812103"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.98, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.093836210668087"
+    },
+    {
+      "name": "deep overlap separates across ice: upper false, side 1, hops true, along 0.98, front 0.12",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.093836210668087"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.02, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.02, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.25, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.25, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.5, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.5, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.75, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.75, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.98, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops false, along 0.98, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.02, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.08857359737157822"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.02, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.25, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.0886065736413002"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.25, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.5, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.0886065736413002"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.5, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.75, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.0886065736413002"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.75, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.98, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.08857358992099762"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 0, hops true, along 0.98, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.02, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.02, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.25, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.25, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.5, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.5, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.75, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.75, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.98, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: puck remained inside the paddle"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops false, along 0.98, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.02, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.08857357501983643"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.02, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.25, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.0886065736413002"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.25, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.5, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.0886065736413002"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.5, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.75, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.0886065736413002"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.75, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.98, front 0.02",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: vertical escape at 0.08857357501983643"
+    },
+    {
+      "name": "deep overlap separates across ice: upper true, side 1, hops true, along 0.98, front 0.12",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, held, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, release, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 25, along 0.7",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: crossed shaft at {\"along\":2.7825025333818196,\"front\":-0.17326599525618414,\"y\":0.10999999940395355}"
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 25, along 0.92",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: crossed shaft at {\"along\":3.6777091932113457,\"front\":-0.18821598822039132,\"y\":0.10999999940395355}"
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops false, restrike, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, held, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, release, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 25, along 0.92",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: crossed shaft at {\"along\":3.6991474820206496,\"front\":-0.18667869532892145,\"y\":0.14368364214897156}"
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 0, hops true, restrike, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, held, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, release, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 25, along 0.7",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: crossed shaft at {\"along\":2.7825025333818196,\"front\":-0.17326599525618414,\"y\":0.10999999940395355}"
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 25, along 0.92",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: crossed shaft at {\"along\":3.6777103231680877,\"front\":-0.18823418713120166,\"y\":0.10999999940395355}"
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops false, restrike, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, held, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, release, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 25, along 0.92",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: crossed shaft at {\"along\":3.6991451415835277,\"front\":-0.18667037921426122,\"y\":0.14368367195129395}"
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper false, side 1, hops true, restrike, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, held, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, release, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops false, restrike, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, held, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, release, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 0, hops true, restrike, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, held, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, release, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops false, restrike, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, held, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, release, speed 40, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 0, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 0, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 0, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 0, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 8, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 8, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 8, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 8, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 25, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 25, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 25, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 25, along 0.92",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 40, along 0.1",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 40, along 0.4",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 40, along 0.7",
+      "passed": true
+    },
+    {
+      "name": "face cannot be crossed: upper true, side 1, hops true, restrike, speed 40, along 0.92",
+      "passed": true
+    }
+  ]
+}

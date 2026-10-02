@@ -32,7 +32,7 @@ export class RinkView {
   private host: HTMLElement; private observer: ResizeObserver; private reduced = false;
   private led = new T.MeshBasicMaterial({ color: 0x35baff, toneMapped: false });
   private glowMap = softTexture(); private glows: T.Sprite[] = [];
-  private celebration: 'you' | 'cpu' | null = null; private celebrationStart = 0;
+  private celebration: 'you' | 'cpu' | null = null; private celebrationStart = 0; private celebrationPreview = false;
   private confetti: T.Points; private confettiSeeds: number[] = []; private reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   private crowd = new ArenaCrowd(); private staticArt = new T.Group(); private lastVisualTime = performance.now();
   constructor(host: HTMLElement, private match = false) {
@@ -189,7 +189,10 @@ export class RinkView {
     const net = hockeyGoal(); net.traverse(node => { if (node instanceof T.Mesh) { node.castShadow = true; node.receiveShadow = true; } }); this.scene.add(net);
     groundShadow(this.staticArt, 3.7, 2.3, .32, this.glowMap).position.set(0, .033, -8.15);
   }
-  setCelebration(kind: 'you' | 'cpu' | null) { this.celebration = kind; this.celebrationStart = performance.now(); }
+  setCelebration(kind: 'you' | 'cpu' | null, preview = false) {
+    this.celebration = kind; this.celebrationStart = performance.now(); this.celebrationPreview = preview;
+    if (kind === 'you') this.crowd.celebrate(); else this.crowd.clearCelebration();
+  }
   setReduced(value: boolean) { this.reduced = value; this.iceReflection.visible = !value; this.renderer.shadowMap.enabled = !value; this.resize(); }
   setReducedMotion(value: boolean) { this.reducedMotion = value; if (value) this.crowd.resetMotion(); }
   private resize() {
@@ -211,6 +214,12 @@ export class RinkView {
     }
     this.camera.position.set(0, distance * s + offset * c, distance * c - offset * s); this.camera.lookAt(0, offset * c, -offset * s); this.camera.updateProjectionMatrix(); this.renderer.setPixelRatio(this.reduced ? 1 : Math.min(window.devicePixelRatio, 1.75)); this.renderer.setSize(w, h); this.crowd.group.visible = !this.reduced && aspect > .82;
     const size = this.renderer.getDrawingBufferSize(new T.Vector2()); this.resolution = `${size.x} × ${size.y}`;
+    const host = this.host.getBoundingClientRect();
+    const boxes = [...(this.host.parentElement?.querySelectorAll('.score-card, .flipper-control') ?? [])].map(element => {
+      const rect = element.getBoundingClientRect();
+      return { x: (rect.x - host.x) / w, y: (rect.y - host.y) / h, width: rect.width / w, height: rect.height / h };
+    });
+    this.crowd.setViewport(size.x, size.y, boxes);
   }
   get presentation() { return { camera: 'perspective', elevation: 47, crowd: this.crowd.group.visible, crowdDetail: this.crowd.presentation, ice: 'scuffed clearcoat with softened planar reflections', reflections: this.iceReflection.visible, shadows: this.renderer.shadowMap.enabled, reducedMotion: this.reducedMotion, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, celebration: this.celebration }; }
   render(prev: State, now: State, alpha: number, stickEnabled: boolean, motionActive = true) {
@@ -227,7 +236,7 @@ export class RinkView {
     }
     const t = (performance.now() - this.celebrationStart) / 1000, celebrating = this.celebration !== null && t < 2.5, color = celebrating ? this.celebration === 'you' ? 0x83ffe5 : 0xff5774 : 0x35baff; this.led.color.setHex(color);
     const visualNow = performance.now(), delta = (visualNow - this.lastVisualTime) / 1000; this.lastVisualTime = visualNow;
-    this.crowd.update(delta, celebrating, motionActive && !this.reducedMotion && this.crowd.group.visible);
+    this.crowd.update(delta, celebrating && this.celebration === 'you', (motionActive || this.celebrationPreview) && !this.reducedMotion && this.crowd.group.visible);
     for (const glow of this.glows) { const mat = glow.material as T.SpriteMaterial; mat.color.setHex(color); mat.opacity = celebrating && !this.reducedMotion ? .45 + .15 * Math.sin(t * 4) : .45; }
     this.confetti.visible = celebrating && this.celebration === 'you' && !this.reducedMotion;
     if (this.confetti.visible) { const p = this.confetti.geometry.getAttribute('position'); for (let i = 0; i < p.count; i++) { const r = this.confettiSeeds[i], side = i % 2 ? -1 : 1; p.setXYZ(i, side * (5.85 + r * 2.4 + t * .4), 1.8 + r * 2 + t * (2 + r) - t * t * 1.7, -7.8 + ((i * .381966) % 1) * 15); } p.needsUpdate = true; (this.confetti.material as T.PointsMaterial).opacity = Math.max(0, 1 - t / 2.5); }

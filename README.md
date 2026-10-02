@@ -1,4 +1,6 @@
-# Hockey Schtick — Phase 4 (0.4.7)
+# Hockey Schtick — Phase 4 (0.4.8)
+
+**0.4.8 paddle contact and crowd:** all four paddle collision shapes now extend through the ice and cover low puck hops, preventing deep contacts from escaping underneath. The upper paddles are exactly 10% longer (1.85 → 2.035), with matching visible blades and recessed board faces; their pivots, width and paired controls are retained. A 368-person crowd wraps around the far end and near corners, with shaped coats, faces, scarves, caps and seated legs, varied idle gestures, and a 4.2-second human-goal celebration that continues through the next puck drop. Spectators fade near scores and buttons. See [paddle and crowd validation](evidence/Paddles%20and%20Crowd.md).
 
 **0.4.7 visual finish:** restores strong red/blue rink markings, lowers the camera from 57° to 47°, and adds subtle live ice reflections plus player/net shadows. Skaters now have continuous shaped sleeves, double jersey stripes, red hockey pants, wider stances and slimmer blades. The goalie has separated angled pads and a face inside its mask; the net has rounded goalposts and a rectangular sloping roof. Lower graphics detail disables reflections, shadows and the crowd. The accepted physics and controls are unchanged. Real WebGL inspection and a 120-second RTX 3080 Ti run at 2880 × 1620 passed: 16.7 ms median frames, 16.8 ms p95, no stalls or browser errors. See [visual finish validation](evidence/Visual%20Finish.md) for screenshots, checks and device limits.
 

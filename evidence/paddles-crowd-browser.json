@@ -1,0 +1,304 @@
+{
+  "date": "2026-10-02T22:06:37.920Z",
+  "browser": "154.0.8037.93",
+  "errors": [],
+  "observations": [
+    {
+      "geometry": [
+        {
+          "min": [
+            -0.09000000357627869,
+            0.009999994039535526,
+            -0.09000000357627869
+          ],
+          "max": [
+            2.0349999982118607,
+            0.38150000125169753,
+            0.09000000357627869
+          ],
+          "faceMin": [
+            -5.475000002980233,
+            0.08999999940395356,
+            -5.73500000089407
+          ],
+          "faceMax": [
+            -5.24100000038743,
+            0.9999999998882413,
+            -3.654999957084656
+          ],
+          "pivot": [
+            -5.400000095367432,
+            -5.650000095367432
+          ]
+        },
+        {
+          "min": [
+            -0.09000000357627869,
+            0.009999994039535526,
+            -0.09000000357627869
+          ],
+          "max": [
+            2.0349999982118607,
+            0.38150000125169753,
+            0.09000000357627869
+          ],
+          "faceMin": [
+            5.24100000038743,
+            0.08999999940395356,
+            -5.73500000089407
+          ],
+          "faceMax": [
+            5.475000002980233,
+            0.9999999998882413,
+            -3.654999957084656
+          ],
+          "pivot": [
+            5.400000095367432,
+            -5.650000095367432
+          ]
+        }
+      ],
+      "idle": {
+        "camera": "perspective",
+        "elevation": 47,
+        "crowd": true,
+        "crowdDetail": {
+          "spectators": 368,
+          "instancedMeshes": 13,
+          "animationHz": 30,
+          "fadedTiers": 4,
+          "wraparound": true,
+          "uiVignettes": 4,
+          "cheering": false,
+          "goalSeconds": 0
+        },
+        "ice": "scuffed clearcoat with softened planar reflections",
+        "reflections": true,
+        "shadows": true,
+        "reducedMotion": false,
+        "drawCalls": 179,
+        "triangles": 170144,
+        "celebration": null
+      }
+    },
+    {
+      "goal": {
+        "before": {
+          "score": 0,
+          "heads": 1.0345248016326323,
+          "hands": 0.7585359055386938
+        },
+        "first": {
+          "elapsed": 0.20390000009536743,
+          "score": 1,
+          "phase": "goal",
+          "crowd": {
+            "spectators": 368,
+            "instancedMeshes": 13,
+            "animationHz": 30,
+            "fadedTiers": 4,
+            "wraparound": true,
+            "uiVignettes": 4,
+            "cheering": true,
+            "goalSeconds": 4.017099999904633
+          },
+          "heads": 1.1703583317930284,
+          "hands": 1.251921101189826,
+          "paused": false
+        },
+        "last": {
+          "elapsed": 3.1552999999523164,
+          "score": 1,
+          "phase": "playing",
+          "crowd": {
+            "spectators": 368,
+            "instancedMeshes": 13,
+            "animationHz": 30,
+            "fadedTiers": 4,
+            "wraparound": true,
+            "uiVignettes": 4,
+            "cheering": true,
+            "goalSeconds": 1.0665999999046218
+          },
+          "heads": 1.170332861011443,
+          "hands": 1.2518002664589363,
+          "paused": false
+        },
+        "phases": [
+          "goal",
+          "countdown",
+          "playing"
+        ],
+        "paused": false,
+        "maxHands": 1.2578354168521322,
+        "maxHeads": 1.1729095578193665
+      }
+    },
+    {
+      "hitTargets": [
+        {
+          "id": "pause",
+          "reachable": true,
+          "width": 79.171875,
+          "height": 36
+        },
+        {
+          "id": "settings",
+          "reachable": true,
+          "width": 76,
+          "height": 36
+        },
+        {
+          "id": "left-flipper",
+          "reachable": true,
+          "width": 158,
+          "height": 60
+        },
+        {
+          "id": "right-flipper",
+          "reachable": true,
+          "width": 158,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "reducedMotionFrozen": true
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "qa": {
+        "camera": "perspective",
+        "elevation": 47,
+        "crowd": true,
+        "crowdDetail": {
+          "spectators": 368,
+          "instancedMeshes": 13,
+          "animationHz": 30,
+          "fadedTiers": 4,
+          "wraparound": true,
+          "uiVignettes": 4,
+          "cheering": false,
+          "goalSeconds": 0
+        },
+        "ice": "scuffed clearcoat with softened planar reflections",
+        "reflections": true,
+        "shadows": true,
+        "reducedMotion": true,
+        "drawCalls": 181,
+        "triangles": 170086,
+        "celebration": null
+      },
+      "controls": [
+        {
+          "x": 73,
+          "y": 691,
+          "width": 158,
+          "height": 60,
+          "reachable": true
+        },
+        {
+          "x": 1049,
+          "y": 691,
+          "width": 158,
+          "height": 60,
+          "reachable": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "qa": {
+        "camera": "perspective",
+        "elevation": 47,
+        "crowd": false,
+        "crowdDetail": {
+          "spectators": 368,
+          "instancedMeshes": 13,
+          "animationHz": 30,
+          "fadedTiers": 4,
+          "wraparound": true,
+          "uiVignettes": 4,
+          "cheering": false,
+          "goalSeconds": 0
+        },
+        "ice": "scuffed clearcoat with softened planar reflections",
+        "reflections": true,
+        "shadows": true,
+        "reducedMotion": true,
+        "drawCalls": 182,
+        "triangles": 170088,
+        "celebration": null
+      },
+      "controls": [
+        {
+          "x": 17,
+          "y": 853,
+          "width": 189,
+          "height": 60,
+          "reachable": true
+        },
+        {
+          "x": 224,
+          "y": 853,
+          "width": 189,
+          "height": 60,
+          "reachable": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "qa": {
+        "camera": "perspective",
+        "elevation": 47,
+        "crowd": true,
+        "crowdDetail": {
+          "spectators": 368,
+          "instancedMeshes": 13,
+          "animationHz": 30,
+          "fadedTiers": 4,
+          "wraparound": true,
+          "uiVignettes": 4,
+          "cheering": false,
+          "goalSeconds": 0
+        },
+        "ice": "scuffed clearcoat with softened planar reflections",
+        "reflections": true,
+        "shadows": true,
+        "reducedMotion": true,
+        "drawCalls": 182,
+        "triangles": 170088,
+        "celebration": null
+      },
+      "controls": [
+        {
+          "x": 13,
+          "y": 291,
+          "width": 80,
+          "height": 82,
+          "reachable": true
+        },
+        {
+          "x": 751,
+          "y": 291,
+          "width": 80,
+          "height": 82,
+          "reachable": true
+        }
+      ],
+      "overflow": false
+    }
+  ]
+}

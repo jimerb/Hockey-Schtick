@@ -6,6 +6,9 @@ export type State = { puck: Vec; angles: number[]; offenseAngles: number[]; stic
 export type Contact = { label: string; speed: number; tick: number };
 const yaw = (a: number) => ({ x: 0, y: Math.sin(a / 2), z: 0, w: Math.cos(a / 2) });
 const move = (a: number, b: number, n: number) => a + Math.sign(b - a) * Math.min(Math.abs(b - a), n);
+// Keep the shortest way out of a deep paddle contact on the ice, never underneath.
+// The same XZ capsule covers the flat puck and the full permitted low-hop envelope.
+const paddleHalfHeight = 1.3, paddleCenterY = .3;
 
 export async function initPhysics() { await RAPIER.init(); }
 
@@ -60,9 +63,9 @@ export class RinkPhysics {
       const sign = side === 0 ? -1 : 1, radius = OFFENSE.width / 2, shaft = OFFENSE.length - radius;
       const body = this.world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased()
         .setTranslation(sign * OFFENSE.pivotX, .15, OFFENSE.pivotZ).setRotation(yaw(this.offenseBodyAngle(side))));
-      // Extend below the ice to prevent the flat puck wedging under a thin paddle.
-      const shapes = [RAPIER.ColliderDesc.cuboid(shaft / 2, .22, radius).setTranslation(shaft / 2, 0, 0),
-        RAPIER.ColliderDesc.cylinder(.22, radius), RAPIER.ColliderDesc.cylinder(.22, radius).setTranslation(shaft, 0, 0)];
+      const cy = paddleCenterY - .15;
+      const shapes = [RAPIER.ColliderDesc.cuboid(shaft / 2, paddleHalfHeight, radius).setTranslation(shaft / 2, cy, 0),
+        RAPIER.ColliderDesc.cylinder(paddleHalfHeight, radius).setTranslation(0, cy, 0), RAPIER.ColliderDesc.cylinder(paddleHalfHeight, radius).setTranslation(shaft, cy, 0)];
       for (const shape of shapes) this.registerCollider(this.world.createCollider(shape.setFriction(.03).setRestitution(.8), body), side === 0 ? 'left offensive paddle' : 'right offensive paddle');
       this.offensePaddles.push(body);
     }
@@ -134,8 +137,9 @@ export class RinkPhysics {
         .setTranslation(s * C.pivotX, 0.29, C.pivotZ).setRotation(yaw(this.bodyAngle(side))));
       const radius = C.flipperWidth / 2, shaft = C.flipperLength - radius;
       // An extruded capsule: the collider follows the visible rounded ends exactly.
-      const shapes = [RAPIER.ColliderDesc.cuboid(shaft / 2, 0.29, radius).setTranslation(shaft / 2, 0, 0),
-        RAPIER.ColliderDesc.cylinder(0.29, radius), RAPIER.ColliderDesc.cylinder(0.29, radius).setTranslation(shaft, 0, 0)];
+      const cy = paddleCenterY - .29;
+      const shapes = [RAPIER.ColliderDesc.cuboid(shaft / 2, paddleHalfHeight, radius).setTranslation(shaft / 2, cy, 0),
+        RAPIER.ColliderDesc.cylinder(paddleHalfHeight, radius).setTranslation(0, cy, 0), RAPIER.ColliderDesc.cylinder(paddleHalfHeight, radius).setTranslation(shaft, cy, 0)];
       for (const shape of shapes) {
         const col = this.world.createCollider(shape.setFriction(0.05).setRestitution(0.86), body);
         this.labels.set(col.handle, side === 0 ? 'left flipper' : 'right flipper');

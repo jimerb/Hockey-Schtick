@@ -127,7 +127,7 @@
       "side": 0,
       "index": 0,
       "strength": 0.936555802822113,
-      "impact": 23.034518170321753,
+      "impact": 23.037163963851725,
       "part": "body",
       "distance": 0.8969606511592864,
       "tick": 8,
@@ -140,7 +140,7 @@
         "index": 0,
         "side": 0,
         "strength": 0.936555802822113,
-        "impact": 23.034518170321753,
+        "impact": 23.037163963851725,
         "part": "body",
         "distance": 0.8969606511592864,
         "tick": 8
@@ -148,32 +148,32 @@
       "short": {
         "index": 0,
         "side": 0,
-        "strength": 0.49536602005917846,
-        "impact": 12.998695635745403,
+        "strength": 0.4954192762028238,
+        "impact": 12.999987962070776,
         "part": "body",
-        "distance": 0.5281259927694733,
+        "distance": 0.5281705149055607,
         "tick": 22
       },
       "big": 0.8969606511592865,
-      "small": 0.528125992769473
+      "small": 0.5281705149055611
     },
     {
       "kind": "stick",
       "side": 0,
       "index": 0,
-      "strength": 0.40125935290051207,
-      "impact": 17.34059143885998,
+      "strength": 0.40125924247212963,
+      "impact": 17.340587933441583,
       "part": "stick",
-      "distance": 0.44945281902482803,
+      "distance": 0.44945272670670033,
       "tick": 2,
-      "moved": 0.44945281902482837
+      "moved": 0.4494527267067001
     },
     {
       "kind": "body",
       "side": 1,
       "index": 1,
       "strength": 0.936555802822113,
-      "impact": 23.034518170321753,
+      "impact": 23.037161619282536,
       "part": "body",
       "distance": 0.8969606511592864,
       "tick": 8,
@@ -186,7 +186,7 @@
         "index": 1,
         "side": 1,
         "strength": 0.936555802822113,
-        "impact": 23.034518170321753,
+        "impact": 23.037161619282536,
         "part": "body",
         "distance": 0.8969606511592864,
         "tick": 8
@@ -194,36 +194,36 @@
       "short": {
         "index": 1,
         "side": 1,
-        "strength": 0.49536602005917846,
-        "impact": 12.998695635745403,
+        "strength": 0.4954191765784556,
+        "impact": 12.999985548980941,
         "part": "body",
-        "distance": 0.5281259927694733,
+        "distance": 0.5281704316195888,
         "tick": 22
       },
       "big": 0.8969606511592865,
-      "small": 0.528125992769473
+      "small": 0.5281704316195892
     },
     {
       "kind": "stick",
       "side": 1,
       "index": 1,
-      "strength": 0.40125935290051207,
-      "impact": 17.34059143885998,
+      "strength": 0.4012593028536615,
+      "impact": 17.340590392374928,
       "part": "stick",
-      "distance": 0.44945281902482803,
+      "distance": 0.44945277718566096,
       "tick": 2,
-      "moved": 0.44945281902482837
+      "moved": 0.4494527771856607
     },
     {
       "kind": "scramble",
       "difficulty": "easy",
       "hops": false,
       "seconds": 120,
-      "totalChecks": 9,
-      "maxDistance": 0.5608592234611512,
+      "totalChecks": 6,
+      "maxDistance": 0.5480504900693893,
       "score": {
-        "you": 2,
-        "cpu": 3
+        "you": 1,
+        "cpu": 4
       },
       "restarts": 0
     },
@@ -232,21 +232,8 @@
       "difficulty": "easy",
       "hops": true,
       "seconds": 120,
-      "totalChecks": 4,
-      "maxDistance": 0.5496839005231857,
-      "score": {
-        "you": 0,
-        "cpu": 2
-      },
-      "restarts": 2
-    },
-    {
-      "kind": "scramble",
-      "difficulty": "normal",
-      "hops": false,
-      "seconds": 120,
-      "totalChecks": 8,
-      "maxDistance": 0.5556942206501961,
+      "totalChecks": 9,
+      "maxDistance": 0.54968387311697,
       "score": {
         "you": 1,
         "cpu": 5
@@ -256,41 +243,54 @@
     {
       "kind": "scramble",
       "difficulty": "normal",
+      "hops": false,
+      "seconds": 120,
+      "totalChecks": 7,
+      "maxDistance": 0.5556941932439804,
+      "score": {
+        "you": 1,
+        "cpu": 5
+      },
+      "restarts": 0
+    },
+    {
+      "kind": "scramble",
+      "difficulty": "normal",
       "hops": true,
       "seconds": 120,
-      "totalChecks": 5,
-      "maxDistance": 0.5391091025829315,
+      "totalChecks": 7,
+      "maxDistance": 0.5463652544617653,
       "score": {
         "you": 0,
-        "cpu": 2
+        "cpu": 0
       },
-      "restarts": 1
+      "restarts": 3
     },
     {
       "kind": "scramble",
       "difficulty": "hard",
       "hops": false,
       "seconds": 120,
-      "totalChecks": 6,
-      "maxDistance": 0.5556942206501961,
+      "totalChecks": 8,
+      "maxDistance": 0.5556941932439804,
       "score": {
-        "you": 0,
-        "cpu": 1
+        "you": 2,
+        "cpu": 5
       },
-      "restarts": 0
+      "restarts": 1
     },
     {
       "kind": "scramble",
       "difficulty": "hard",
       "hops": true,
       "seconds": 120,
-      "totalChecks": 9,
-      "maxDistance": 0.5556942206501961,
+      "totalChecks": 11,
+      "maxDistance": 0.8760589270591735,
       "score": {
         "you": 0,
-        "cpu": 5
+        "cpu": 2
       },
-      "restarts": 2
+      "restarts": 1
     }
   ]
 }

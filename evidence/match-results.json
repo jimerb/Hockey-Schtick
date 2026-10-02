@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-02T20:03:36.655Z",
+  "date": "2026-10-02T22:11:15.785Z",
   "passed": 265,
   "failed": 0,
   "fastImpactCases": 216,
@@ -31,24 +31,24 @@
       "hops": false,
       "seconds": 120,
       "score": {
-        "you": 5,
-        "cpu": 1
+        "you": 3,
+        "cpu": 0
       },
       "stats": {
-        "shots": 9,
-        "passes": 2,
+        "shots": 7,
+        "passes": 0,
         "pushes": 0,
-        "misses": 5,
+        "misses": 6,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 11,
+        "strikes": 7,
         "peakCommitted": 1,
-        "openingDeliveries": 7,
-        "rearBumps": 1,
+        "openingDeliveries": 4,
+        "rearBumps": 2,
         "checks": 0
       },
-      "returns": 58,
-      "goalieSaves": 21,
+      "returns": 61,
+      "goalieSaves": 33,
       "neutralRestarts": 0
     },
     {
@@ -65,17 +65,17 @@
         "shots": 3,
         "passes": 0,
         "pushes": 0,
-        "misses": 5,
+        "misses": 0,
         "goalieContacts": 0,
         "clears": 0,
         "strikes": 3,
         "peakCommitted": 1,
         "openingDeliveries": 1,
-        "rearBumps": 0,
+        "rearBumps": 1,
         "checks": 0
       },
-      "returns": 10,
-      "goalieSaves": 5,
+      "returns": 3,
+      "goalieSaves": 4,
       "neutralRestarts": 0
     },
     {
@@ -85,24 +85,24 @@
       "hops": false,
       "seconds": 120,
       "score": {
-        "you": 1,
-        "cpu": 4
+        "you": 3,
+        "cpu": 0
       },
       "stats": {
-        "shots": 10,
+        "shots": 9,
         "passes": 1,
         "pushes": 0,
-        "misses": 10,
+        "misses": 11,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 11,
+        "strikes": 10,
         "peakCommitted": 1,
-        "openingDeliveries": 6,
-        "rearBumps": 2,
+        "openingDeliveries": 4,
+        "rearBumps": 5,
         "checks": 0
       },
-      "returns": 60,
-      "goalieSaves": 12,
+      "returns": 74,
+      "goalieSaves": 25,
       "neutralRestarts": 0
     },
     {
@@ -116,19 +116,19 @@
         "cpu": 0
       },
       "stats": {
-        "shots": 3,
+        "shots": 6,
         "passes": 0,
         "pushes": 0,
-        "misses": 3,
+        "misses": 4,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 3,
+        "strikes": 6,
         "peakCommitted": 1,
         "openingDeliveries": 1,
-        "rearBumps": 0,
+        "rearBumps": 1,
         "checks": 0
       },
-      "returns": 11,
+      "returns": 7,
       "goalieSaves": 4,
       "neutralRestarts": 0
     },
@@ -139,25 +139,25 @@
       "hops": false,
       "seconds": 120,
       "score": {
-        "you": 3,
-        "cpu": 2
+        "you": 1,
+        "cpu": 1
       },
       "stats": {
-        "shots": 16,
-        "passes": 0,
+        "shots": 14,
+        "passes": 1,
         "pushes": 0,
-        "misses": 22,
+        "misses": 19,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 16,
+        "strikes": 15,
         "peakCommitted": 1,
-        "openingDeliveries": 8,
-        "rearBumps": 2,
+        "openingDeliveries": 3,
+        "rearBumps": 1,
         "checks": 0
       },
-      "returns": 55,
+      "returns": 60,
       "goalieSaves": 21,
-      "neutralRestarts": 2
+      "neutralRestarts": 0
     },
     {
       "skaters": 3,
@@ -167,164 +167,56 @@
       "seconds": 120,
       "score": {
         "you": 0,
-        "cpu": 1
+        "cpu": 0
       },
       "stats": {
-        "shots": 15,
-        "passes": 3,
+        "shots": 3,
+        "passes": 1,
         "pushes": 0,
-        "misses": 25,
-        "goalieContacts": 0,
-        "clears": 0,
-        "strikes": 18,
-        "peakCommitted": 1,
-        "openingDeliveries": 3,
-        "rearBumps": 4,
-        "checks": 0
-      },
-      "returns": 67,
-      "goalieSaves": 25,
-      "neutralRestarts": 1
-    },
-    {
-      "skaters": 5,
-      "extendedWings": false,
-      "difficulty": "easy",
-      "hops": false,
-      "seconds": 120,
-      "score": {
-        "you": 0,
-        "cpu": 1
-      },
-      "stats": {
-        "shots": 1,
-        "passes": 3,
-        "pushes": 0,
-        "misses": 4,
+        "misses": 7,
         "goalieContacts": 0,
         "clears": 0,
         "strikes": 4,
         "peakCommitted": 1,
-        "openingDeliveries": 0,
+        "openingDeliveries": 1,
         "rearBumps": 0,
         "checks": 0
       },
-      "returns": 20,
-      "goalieSaves": 5,
+      "returns": 35,
+      "goalieSaves": 9,
       "neutralRestarts": 0
     },
     {
       "skaters": 5,
       "extendedWings": false,
       "difficulty": "easy",
-      "hops": true,
-      "seconds": 120,
-      "score": {
-        "you": 1,
-        "cpu": 1
-      },
-      "stats": {
-        "shots": 13,
-        "passes": 6,
-        "pushes": 0,
-        "misses": 10,
-        "goalieContacts": 0,
-        "clears": 0,
-        "strikes": 19,
-        "peakCommitted": 1,
-        "openingDeliveries": 0,
-        "rearBumps": 1,
-        "checks": 0
-      },
-      "returns": 49,
-      "goalieSaves": 12,
-      "neutralRestarts": 2
-    },
-    {
-      "skaters": 5,
-      "extendedWings": false,
-      "difficulty": "normal",
       "hops": false,
       "seconds": 120,
       "score": {
-        "you": 2,
-        "cpu": 3
-      },
-      "stats": {
-        "shots": 13,
-        "passes": 9,
-        "pushes": 0,
-        "misses": 25,
-        "goalieContacts": 0,
-        "clears": 0,
-        "strikes": 22,
-        "peakCommitted": 1,
-        "openingDeliveries": 0,
-        "rearBumps": 4,
-        "checks": 0
-      },
-      "returns": 41,
-      "goalieSaves": 10,
-      "neutralRestarts": 1
-    },
-    {
-      "skaters": 5,
-      "extendedWings": false,
-      "difficulty": "normal",
-      "hops": true,
-      "seconds": 120,
-      "score": {
         "you": 1,
-        "cpu": 3
+        "cpu": 0
       },
       "stats": {
-        "shots": 16,
-        "passes": 8,
+        "shots": 1,
+        "passes": 2,
         "pushes": 0,
-        "misses": 10,
+        "misses": 3,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 24,
+        "strikes": 3,
         "peakCommitted": 1,
         "openingDeliveries": 0,
-        "rearBumps": 2,
+        "rearBumps": 0,
         "checks": 1
       },
-      "returns": 26,
-      "goalieSaves": 8,
+      "returns": 11,
+      "goalieSaves": 4,
       "neutralRestarts": 0
     },
     {
       "skaters": 5,
       "extendedWings": false,
-      "difficulty": "hard",
-      "hops": false,
-      "seconds": 120,
-      "score": {
-        "you": 0,
-        "cpu": 1
-      },
-      "stats": {
-        "shots": 13,
-        "passes": 9,
-        "pushes": 0,
-        "misses": 50,
-        "goalieContacts": 0,
-        "clears": 0,
-        "strikes": 22,
-        "peakCommitted": 1,
-        "openingDeliveries": 0,
-        "rearBumps": 3,
-        "checks": 0
-      },
-      "returns": 53,
-      "goalieSaves": 23,
-      "neutralRestarts": 0
-    },
-    {
-      "skaters": 5,
-      "extendedWings": false,
-      "difficulty": "hard",
+      "difficulty": "easy",
       "hops": true,
       "seconds": 120,
       "score": {
@@ -333,20 +225,128 @@
       },
       "stats": {
         "shots": 2,
-        "passes": 2,
+        "passes": 1,
         "pushes": 0,
-        "misses": 6,
+        "misses": 4,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 4,
+        "strikes": 3,
         "peakCommitted": 1,
         "openingDeliveries": 0,
         "rearBumps": 0,
         "checks": 0
       },
-      "returns": 8,
-      "goalieSaves": 0,
-      "neutralRestarts": 1
+      "returns": 9,
+      "goalieSaves": 4,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "normal",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 2,
+        "cpu": 0
+      },
+      "stats": {
+        "shots": 10,
+        "passes": 6,
+        "pushes": 0,
+        "misses": 26,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 16,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 6,
+        "checks": 1
+      },
+      "returns": 68,
+      "goalieSaves": 11,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "normal",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 1,
+        "cpu": 0
+      },
+      "stats": {
+        "shots": 21,
+        "passes": 5,
+        "pushes": 0,
+        "misses": 24,
+        "goalieContacts": 1,
+        "clears": 0,
+        "strikes": 26,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 9,
+        "checks": 0
+      },
+      "returns": 56,
+      "goalieSaves": 21,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "hard",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 2,
+        "cpu": 1
+      },
+      "stats": {
+        "shots": 17,
+        "passes": 11,
+        "pushes": 0,
+        "misses": 51,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 28,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 4,
+        "checks": 0
+      },
+      "returns": 53,
+      "goalieSaves": 11,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 5,
+      "extendedWings": false,
+      "difficulty": "hard",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 0
+      },
+      "stats": {
+        "shots": 15,
+        "passes": 9,
+        "pushes": 0,
+        "misses": 53,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 24,
+        "peakCommitted": 1,
+        "openingDeliveries": 0,
+        "rearBumps": 5,
+        "checks": 0
+      },
+      "returns": 63,
+      "goalieSaves": 27,
+      "neutralRestarts": 0
     },
     {
       "skaters": 3,
@@ -356,24 +356,24 @@
       "seconds": 120,
       "score": {
         "you": 2,
-        "cpu": 2
+        "cpu": 0
       },
       "stats": {
-        "shots": 8,
-        "passes": 1,
+        "shots": 10,
+        "passes": 0,
         "pushes": 0,
-        "misses": 16,
+        "misses": 8,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 9,
+        "strikes": 10,
         "peakCommitted": 1,
-        "openingDeliveries": 6,
-        "rearBumps": 4,
-        "checks": 13
+        "openingDeliveries": 3,
+        "rearBumps": 2,
+        "checks": 5
       },
-      "returns": 36,
-      "goalieSaves": 17,
-      "neutralRestarts": 1
+      "returns": 52,
+      "goalieSaves": 20,
+      "neutralRestarts": 0
     },
     {
       "skaters": 3,
@@ -382,78 +382,78 @@
       "hops": true,
       "seconds": 120,
       "score": {
-        "you": 1,
-        "cpu": 0
-      },
-      "stats": {
-        "shots": 4,
-        "passes": 1,
-        "pushes": 0,
-        "misses": 7,
-        "goalieContacts": 0,
-        "clears": 0,
-        "strikes": 5,
-        "peakCommitted": 1,
-        "openingDeliveries": 2,
-        "rearBumps": 0,
-        "checks": 8
-      },
-      "returns": 59,
-      "goalieSaves": 7,
-      "neutralRestarts": 0
-    },
-    {
-      "skaters": 3,
-      "extendedWings": true,
-      "difficulty": "normal",
-      "hops": false,
-      "seconds": 120,
-      "score": {
-        "you": 1,
-        "cpu": 3
-      },
-      "stats": {
-        "shots": 16,
-        "passes": 2,
-        "pushes": 0,
-        "misses": 19,
-        "goalieContacts": 0,
-        "clears": 0,
-        "strikes": 18,
-        "peakCommitted": 1,
-        "openingDeliveries": 5,
-        "rearBumps": 2,
-        "checks": 0
-      },
-      "returns": 46,
-      "goalieSaves": 19,
-      "neutralRestarts": 1
-    },
-    {
-      "skaters": 3,
-      "extendedWings": true,
-      "difficulty": "normal",
-      "hops": true,
-      "seconds": 120,
-      "score": {
         "you": 0,
         "cpu": 0
       },
       "stats": {
-        "shots": 12,
+        "shots": 5,
         "passes": 1,
         "pushes": 0,
-        "misses": 23,
+        "misses": 14,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 13,
+        "strikes": 6,
         "peakCommitted": 1,
         "openingDeliveries": 1,
         "rearBumps": 4,
-        "checks": 4
+        "checks": 9
       },
-      "returns": 47,
-      "goalieSaves": 14,
+      "returns": 52,
+      "goalieSaves": 20,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": true,
+      "difficulty": "normal",
+      "hops": false,
+      "seconds": 120,
+      "score": {
+        "you": 2,
+        "cpu": 0
+      },
+      "stats": {
+        "shots": 9,
+        "passes": 0,
+        "pushes": 0,
+        "misses": 10,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 9,
+        "peakCommitted": 1,
+        "openingDeliveries": 3,
+        "rearBumps": 3,
+        "checks": 0
+      },
+      "returns": 60,
+      "goalieSaves": 23,
+      "neutralRestarts": 0
+    },
+    {
+      "skaters": 3,
+      "extendedWings": true,
+      "difficulty": "normal",
+      "hops": true,
+      "seconds": 120,
+      "score": {
+        "you": 0,
+        "cpu": 0
+      },
+      "stats": {
+        "shots": 10,
+        "passes": 4,
+        "pushes": 0,
+        "misses": 27,
+        "goalieContacts": 0,
+        "clears": 0,
+        "strikes": 14,
+        "peakCommitted": 1,
+        "openingDeliveries": 1,
+        "rearBumps": 2,
+        "checks": 2
+      },
+      "returns": 41,
+      "goalieSaves": 18,
       "neutralRestarts": 0
     },
     {
@@ -463,25 +463,25 @@
       "hops": false,
       "seconds": 120,
       "score": {
-        "you": 0,
-        "cpu": 4
+        "you": 4,
+        "cpu": 0
       },
       "stats": {
-        "shots": 15,
-        "passes": 3,
+        "shots": 16,
+        "passes": 1,
         "pushes": 0,
-        "misses": 30,
+        "misses": 24,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 18,
+        "strikes": 17,
         "peakCommitted": 1,
-        "openingDeliveries": 6,
-        "rearBumps": 1,
-        "checks": 2
+        "openingDeliveries": 5,
+        "rearBumps": 4,
+        "checks": 1
       },
-      "returns": 47,
-      "goalieSaves": 27,
-      "neutralRestarts": 1
+      "returns": 59,
+      "goalieSaves": 21,
+      "neutralRestarts": 0
     },
     {
       "skaters": 3,
@@ -490,43 +490,43 @@
       "hops": true,
       "seconds": 120,
       "score": {
-        "you": 0,
-        "cpu": 2
+        "you": 1,
+        "cpu": 0
       },
       "stats": {
-        "shots": 17,
-        "passes": 10,
+        "shots": 15,
+        "passes": 6,
         "pushes": 0,
-        "misses": 25,
+        "misses": 24,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 27,
+        "strikes": 21,
         "peakCommitted": 1,
-        "openingDeliveries": 5,
-        "rearBumps": 7,
-        "checks": 2
+        "openingDeliveries": 2,
+        "rearBumps": 1,
+        "checks": 0
       },
-      "returns": 46,
-      "goalieSaves": 12,
-      "neutralRestarts": 2
+      "returns": 39,
+      "goalieSaves": 18,
+      "neutralRestarts": 0
     },
     {
       "kind": "complete-unattended-match",
       "seed": 1,
-      "wallSimulationSeconds": 48.141666666666666,
-      "activePlaySeconds": 30.633333333332235,
+      "wallSimulationSeconds": 29.7,
+      "activePlaySeconds": 12.191666666666615,
       "score": {
         "you": 0,
         "cpu": 7
       },
       "stats": {
-        "shots": 4,
-        "passes": 2,
+        "shots": 2,
+        "passes": 1,
         "pushes": 6,
-        "misses": 12,
+        "misses": 1,
         "goalieContacts": 0,
         "clears": 0,
-        "strikes": 12,
+        "strikes": 9,
         "peakCommitted": 1,
         "openingDeliveries": 0,
         "rearBumps": 0,
@@ -537,8 +537,8 @@
     {
       "kind": "complete-unattended-match",
       "seed": 42,
-      "wallSimulationSeconds": 30.566666666666666,
-      "activePlaySeconds": 13.058333333333232,
+      "wallSimulationSeconds": 30.525,
+      "activePlaySeconds": 13.016666666666568,
       "score": {
         "you": 0,
         "cpu": 7
