@@ -17,11 +17,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="hud"><div class="score-card"><span>YOU</span><strong id="goals">0</strong></div><div class="score-card conceded"><span>CPU</span><strong id="conceded">0</strong></div></div>
     <div id="viewport"></div><div id="cue" class="cue" aria-live="polite"></div>
     <div id="curtain" class="curtain"><div class="start-card"><div id="card-eyebrow" class="eyebrow">ONE RINK. TWO FLIPPERS.</div><h2 id="curtain-title">Own your end.</h2><div id="final-score" hidden></div><p id="curtain-copy">Defend the near gap and fire past their goalie. First to seven wins.</p><button id="start" disabled>Loading…</button><button id="setup-options" class="text-button">Choose your level</button></div></div>
-    <div class="flipper-controls" aria-label="Flipper controls"><button id="left-flipper" class="flipper-control" data-side="0" aria-label="Hold left flipper" aria-pressed="false"><kbd data-key="0">A</kbd><span>LEFT FLIPPER</span></button><button id="offense-control" class="flipper-control offense-control" aria-label="Shoot both upper paddles" title="Space: shoot both upper paddles"><kbd>SPACE</kbd><span>UPPER PADDLES</span></button><button id="right-flipper" class="flipper-control" data-side="1" aria-label="Hold right flipper" aria-pressed="false"><kbd data-key="1">L</kbd><span>RIGHT FLIPPER</span></button></div>
+    <div class="flipper-controls" aria-label="Flipper controls"><button id="left-flipper" class="flipper-control" data-side="0" aria-label="Hold left flipper" aria-pressed="false"><kbd data-key="0">A</kbd><span>LEFT FLIPPER</span></button><button id="offense-control" class="flipper-control offense-control" aria-label="Hold both upper paddles" aria-pressed="false" title="Hold Space to extend both upper paddles; release to retract"><kbd>SPACE</kbd><span>UPPER PADDLES</span></button><button id="right-flipper" class="flipper-control" data-side="1" aria-label="Hold right flipper" aria-pressed="false"><kbd data-key="1">L</kbd><span>RIGHT FLIPPER</span></button></div>
   </section>
 </main>
 <dialog id="settings-dialog" aria-labelledby="settings-title"><button id="settings-close" class="text-button dialog-close" aria-label="Close settings">Done</button><h2 id="settings-title">Your rink</h2>
-  <details id="how-to-play"><summary>How to play</summary><p>${MATCH_SKATERS === 3 ? 'Three' : 'Five'} rod skaters. One goalie. Defend your end with two flippers and score at the far net. First to seven wins.</p><div class="key-pair"><div><kbd data-key="0">A</kbd><span>Left flipper</span></div><div><kbd data-key="1">L</kbd><span>Right flipper</span></div></div><p>Tap to strike. Hold early to cushion and cradle the puck. Release to let it slide inward, then press again to aim your shot.</p><p><b>Space shoots both upper paddles.</b> Time one short stroke when the puck reaches a paddle along the far-zone boards. They retract automatically; release Space before shooting again. Escape pauses or resumes. Enter starts a match.</p><p>Gold rings warn of a shot or pass. Swing at a nearby skater to check him back; a cyan ring marks the bump. Bank shots count as one goal.</p></details>
+  <details id="how-to-play"><summary>How to play</summary><p>${MATCH_SKATERS === 3 ? 'Three' : 'Five'} rod skaters. One goalie. Defend your end with two flippers and score at the far net. First to seven wins.</p><div class="key-pair"><div><kbd data-key="0">A</kbd><span>Left flipper</span></div><div><kbd data-key="1">L</kbd><span>Right flipper</span></div></div><p>Tap to strike. Hold early to cushion and cradle the puck. Release to let it slide inward, then press again to aim your shot.</p><p><b>Space operates both upper paddles.</b> Hold to keep them extended; release to recess them into the boards. Tap for a short shot, or release and press again to time another swing. Escape pauses or resumes. Enter starts a match.</p><p>Gold rings warn of a shot or pass. Swing at a nearby skater to check him back; a cyan ring marks the bump. Bank shots count as one goal.</p></details>
   <aside class="test-panel match-panel">
     <div class="eyebrow">THE MATCHUP</div><h2>Race to seven</h2>
     <label class="difficulty-label" for="difficulty">Opponents</label><select id="difficulty"><option value="easy">Easy · more time to react</option><option value="normal" selected>Normal · balanced rallies</option><option value="hard">Hard · quicker preparation</option></select>
@@ -35,7 +35,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <label class="toggle"><input id="sound" type="checkbox" checked><span>Rink sounds<small>Sticks, boards, checks and goal horns</small></span></label>
     <label class="toggle"><input id="reduced" type="checkbox"><span>Lower render resolution</span></label>
     <label class="toggle"><input id="motion" type="checkbox"><span>Reduce celebration motion</span></label><button id="touch-keys" class="text-button">Change keyboard controls</button>
-    <a class="practice-link" href="/practice.html">Puck & flipper practice ↗</a><p class="build-label">HOCKEY SCHTICK · 0.4.3 · KEYBOARD & TOUCH</p>
+    <a class="practice-link" href="/practice.html">Puck & flipper practice ↗</a><p class="build-label">HOCKEY SCHTICK · 0.4.4 · KEYBOARD & TOUCH</p>
     <details id="lab"><summary>Performance lab</summary><p class="small">A 120-second full-team run with automatic flipper taps and rematches. Measures this browser and device. You can stop it any time.</p><button id="benchmark" class="secondary" disabled>Run 120-second test</button><button id="catch-demo" class="secondary" disabled>Watch catch & shoot</button><p class="small">The demo holds, releases, and shoots with the same two flippers. Opponents keep playing. Select New match to take over.</p><div class="effect-previews"><button id="preview-you" class="secondary">Preview your goal</button><button id="preview-cpu" class="secondary">Preview CPU goal</button></div><label class="toggle"><input id="thirty" type="checkbox"><span>Render at 30 FPS<small>Physics stays at 120 Hz</small></span></label><pre id="metrics">Waiting for play</pre><button id="export" class="text-button" disabled>Download test results</button></details>
   </aside>
 </dialog>
@@ -65,7 +65,7 @@ async function boot() {
   let started = false, paused = false, ready = 0, accumulator = 0, cueTime = 0;
   let lastFrame = performance.now(), lastDraw = 0, lastMetrics = 0, lastCountdown = -1;
   const flipperInput = new FlipperInput();
-  const offenseSources = new Set<string>();
+  const offenseInput = new FlipperInput(12);
   let pendingInput: { code: string; requested: number } | null = null;
   let inputTick: { code: string; requested: number; applied: number } | null = null;
   let rafSamples: number[] = [], physicsSamples: number[] = [], drawSamples: number[] = [];
@@ -81,12 +81,11 @@ async function boot() {
   function unlockAudio() { audio.mute(!input('sound').checked); audio.unlock(); }
   function cue(text: string, seconds = .65) { el('cue').textContent = text; el('cue').classList.add('show'); cueTime = seconds; }
   function paintInput() { flipperInput.held.forEach((held, side) => { document.querySelectorAll(`[data-key="${side}"], [data-side="${side}"]`).forEach(e => e.classList.toggle('pressed', held)); el(side ? 'right-flipper' : 'left-flipper').setAttribute('aria-pressed', String(held)); }); }
-  function releaseKeys() { flipperInput.clear(); offenseSources.clear(); pendingInput = null; sim.held = [false, false]; sim.cancelOffense(); sim.syncStates(); paintInput(); }
+  function releaseKeys() { flipperInput.clear(); offenseInput.clear(); pendingInput = null; sim.held = [false, false]; sim.cancelOffense(); sim.syncStates(); paintInput(); }
   function pressOffense(source: string) {
-    if (offenseSources.has(source) || !started || paused || benchmark || match.phase !== 'playing') return false;
-    offenseSources.add(source);
-    if (sim.shootOffense()) { pendingInput = { code: source, requested: sim.tick }; unlockAudio(); sound('flipper'); return true; }
-    return false;
+    if (!started || paused || benchmark || match.phase !== 'playing') return false;
+    if (offenseInput.press(source, 0, sim.tick)) { pendingInput = { code: source, requested: sim.tick }; unlockAudio(); sound('flipper'); }
+    return true;
   }
   function pressFlipper(source: string, side: number) {
     if (!started || paused || benchmark || match.phase !== 'playing') return false;
@@ -105,11 +104,12 @@ async function boot() {
   });
   const offenseButton = el<HTMLButtonElement>('offense-control');
   offenseButton.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' && e.button !== 0) return; e.preventDefault(); pressOffense(`offense-pointer-${e.pointerId}`); offenseButton.setPointerCapture(e.pointerId); });
-  for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) offenseButton.addEventListener(event, e => offenseSources.delete(`offense-pointer-${(e as PointerEvent).pointerId}`));
+  offenseButton.addEventListener('pointerup', e => offenseInput.release(`offense-pointer-${e.pointerId}`));
+  for (const event of ['pointercancel', 'lostpointercapture']) offenseButton.addEventListener(event, e => offenseInput.cancel(`offense-pointer-${(e as PointerEvent).pointerId}`));
   offenseButton.addEventListener('contextmenu', e => e.preventDefault());
   offenseButton.addEventListener('keydown', e => { if (e.code === 'Enter') { e.preventDefault(); e.stopPropagation(); if (!e.repeat) pressOffense('offense-button'); } });
-  offenseButton.addEventListener('keyup', e => { if (e.code === 'Enter') { e.preventDefault(); offenseSources.delete('offense-button'); } });
-  offenseButton.addEventListener('blur', () => offenseSources.delete('offense-button'));
+  offenseButton.addEventListener('keyup', e => { if (e.code === 'Enter') { e.preventDefault(); offenseInput.release('offense-button'); } });
+  offenseButton.addEventListener('blur', () => offenseInput.cancel('offense-button'));
   function updateHUD() {
     el('goals').textContent = String(match.score.you); el('conceded').textContent = String(match.score.cpu);
     el('returns').textContent = String(match.returns); el('saves').textContent = String(match.goalieSaves);
@@ -204,12 +204,12 @@ async function boot() {
     const label = labelKey(e); if (label !== bindings[side].label) { bindings[side].label = label; paintBindings(); }
     pressFlipper(e.code, side);
   });
-  window.addEventListener('keyup', e => { if (e.code === 'Space') { offenseSources.delete('Space'); if (!settingsDialog.open && !keyDialog.open) e.preventDefault(); } flipperInput.release(e.code); paintInput(); });
+  window.addEventListener('keyup', e => { if (e.code === 'Space') { offenseInput.release('Space'); if (!settingsDialog.open && !keyDialog.open) e.preventDefault(); } flipperInput.release(e.code); paintInput(); });
   window.addEventListener('blur', () => { releaseKeys(); pause('Focus lost'); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) { releaseKeys(); pause('Tab hidden'); } });
   window.addEventListener('orientationchange', () => { releaseKeys(); pause('Screen rotated'); });
   view.renderer.domElement.addEventListener('webglcontextlost', e => { e.preventDefault(); releaseKeys(); pause('Graphics interrupted'); });
-  function settings() { return { version: '0.4.3', presentation: view.presentation, difficulty: match.difficulty, seed: match.seed, actors: match.team.skaters.length + 1, extendedWings: match.team.extendedWings, playTuning: match.team.tuning, flipperRubber: sim.flipperRubber, checking: match.team.checking, offensePaddles: OFFENSE, skaterLanes: match.team.skaters.map(s => ({ index: s.index, ...match.team.lanes[s.index] })), hops: sim.hops, reduced: input('reduced').checked, render30: input('thirty').checked, physicsHz: 120, downhill: sim.downhill, resolution: view.resolution, viewport: `${innerWidth} × ${innerHeight}`, devicePixelRatio, gpu: view.gpu, browser: navigator.userAgent }; }
+  function settings() { return { version: '0.4.4', presentation: view.presentation, difficulty: match.difficulty, seed: match.seed, actors: match.team.skaters.length + 1, extendedWings: match.team.extendedWings, playTuning: match.team.tuning, flipperRubber: sim.flipperRubber, checking: match.team.checking, offensePaddles: OFFENSE, skaterLanes: match.team.skaters.map(s => ({ index: s.index, ...match.team.lanes[s.index] })), hops: sim.hops, reduced: input('reduced').checked, render30: input('thirty').checked, physicsHz: 120, downhill: sim.downhill, resolution: view.resolution, viewport: `${innerWidth} × ${innerHeight}`, devicePixelRatio, gpu: view.gpu, browser: navigator.userAgent }; }
   function finishBenchmark(reason: string | null) {
     if (!benchmark) return;
     benchmarkResult = { date: new Date().toISOString(), mode: benchmark.mode, catches: benchmark.demo.catches, releaseAttempts: benchmark.demo.shots, completed: reason === null, reason, activeSeconds: +Math.min((performance.now() - benchmark.start) / 1000, 120).toFixed(2), measuredFrames: benchmark.frames.length, medianFrameMs: +percentile(benchmark.frames, .5).toFixed(3), p95FrameMs: +percentile(benchmark.frames, .95).toFixed(3), medianDrawIntervalMs: +percentile(benchmark.draws, .5).toFixed(3), p95DrawIntervalMs: +percentile(benchmark.draws, .95).toFixed(3), stallsOver100ms: benchmark.frames.filter(v => v > 100).length, p95PhysicsPerFrameMs: +percentile(benchmark.physics, .95).toFixed(3), contacts: sim.contactCount - benchmark.contacts, goals: benchmark.goals, conceded: benchmark.conceded, neutralRestarts: benchmark.faults, completedMatches: benchmark.matches, assistedStrikes: benchmark.strikes + match.team.stats.strikes, checks: benchmark.checks, settings: benchmark.settings };
@@ -227,7 +227,7 @@ async function boot() {
   el('benchmark').onclick = () => beginBenchmark('rally');
   el('catch-demo').onclick = () => beginBenchmark('control');
   el('export').onclick = () => { if (!benchmarkResult) return; const url = URL.createObjectURL(new Blob([JSON.stringify(benchmarkResult, null, 2)], { type: 'application/json' })); const link = document.createElement('a'); link.href = url; link.download = 'hockey-schtick-match-performance.json'; link.click(); URL.revokeObjectURL(url); };
-  function qaState() { return { active: sim.active, paused, started, phase: match.phase, winner: match.winner, elapsed: match.elapsed, countdown: match.timer, tick: sim.tick, held: [...sim.held], physicalHeld: flipperInput.held, angles: [...sim.angles], offense: { angle: sim.offenseAngle, phase: sim.offensePhase, strokes: sim.offenseStrokes }, puck: sim.current.puck, velocity: { ...sim.puck.linvel() }, cradledSide: sim.cradledSide(), demo: benchmark?.mode === 'control' ? { stage: benchmark.demo.stage, catches: benchmark.demo.catches, releaseAttempts: benchmark.demo.shots } : null, scores: { ...match.score }, drops: match.drops, recoveries: match.recoveries, returns: match.returns, goalieSaves: match.goalieSaves, actors: sim.current.actors, lastCheck: match.team.lastCheck, checkSounds, soundEvents: { ...soundEvents }, soundEnabled: input('sound').checked, audioState: audio.state, team: { ...match.team.stats }, bindings: bindings.map(b => ({ ...b })), lastInput: inputTick, contacts: sim.contactCount, settings: settings(), benchmarkResult, benchmarkRunning: !!benchmark, benchmarkElapsed: benchmark ? (performance.now() - benchmark.start) / 1000 : 0 }; }
+  function qaState() { return { active: sim.active, paused, started, phase: match.phase, winner: match.winner, elapsed: match.elapsed, countdown: match.timer, tick: sim.tick, held: [...sim.held], physicalHeld: flipperInput.held, angles: [...sim.angles], offense: { angle: sim.offenseAngle, phase: sim.offensePhase, held: sim.offenseHeld, physicalHeld: offenseInput.held[0], strokes: sim.offenseStrokes }, puck: sim.current.puck, velocity: { ...sim.puck.linvel() }, cradledSide: sim.cradledSide(), demo: benchmark?.mode === 'control' ? { stage: benchmark.demo.stage, catches: benchmark.demo.catches, releaseAttempts: benchmark.demo.shots } : null, scores: { ...match.score }, drops: match.drops, recoveries: match.recoveries, returns: match.returns, goalieSaves: match.goalieSaves, actors: sim.current.actors, lastCheck: match.team.lastCheck, checkSounds, soundEvents: { ...soundEvents }, soundEnabled: input('sound').checked, audioState: audio.state, team: { ...match.team.stats }, bindings: bindings.map(b => ({ ...b })), lastInput: inputTick, contacts: sim.contactCount, settings: settings(), benchmarkResult, benchmarkRunning: !!benchmark, benchmarkElapsed: benchmark ? (performance.now() - benchmark.start) / 1000 : 0 }; }
   function frame(now: number) {
     requestAnimationFrame(frame); const elapsed = (now - lastFrame) / 1000; lastFrame = now; let physicsMs = 0;
     if (started && !paused && match.phase !== 'finished') {
@@ -241,6 +241,7 @@ async function boot() {
             const strike = sim.active && p.z > 5 && p.z < 6.5 && v.z > 0;
             sim.held = benchmark.mode === 'control' ? benchmark.demo.step(sim) : [strike && p.x < .9, strike && p.x > -.9];
           } else sim.held = flipperInput.at(sim.tick);
+          if (!benchmark && offenseInput.at(sim.tick)[0]) sim.shootOffense(); else sim.releaseOffense();
           const beforeTick = sim.tick; match.step(); accumulator -= C.dt;
           if (pendingInput && sim.tick > beforeTick) { inputTick = { ...pendingInput, applied: sim.tick }; pendingInput = null; }
           if (match.phase === 'countdown') { const count = Math.ceil(match.timer); if (count !== lastCountdown) { lastCountdown = count; cue(String(count), .8); view.setCelebration(null); } }
@@ -260,6 +261,7 @@ async function boot() {
       view.render(sim.previous, sim.current, paused || match.phase !== 'playing' ? 1 : accumulator / C.dt, false); lastDraw = now;
     }
     offenseButton.classList.toggle('pressed', sim.offensePhase !== 'rest');
+    offenseButton.setAttribute('aria-pressed', String(offenseInput.held[0]));
     if (now - lastMetrics > 500) {
       lastMetrics = now; updateHUD(); el('qa-state').textContent = JSON.stringify(qaState());
       if (!benchmarkResult) el('metrics').textContent = `${benchmark ? `${Math.floor((now - benchmark.start) / 1000)} / 120 seconds\n` : ''}Frame median  ${percentile(rafSamples, .5).toFixed(1)} ms\nFrame p95     ${percentile(rafSamples, .95).toFixed(1)} ms\nDraw interval ${percentile(drawSamples, .5).toFixed(1)} ms\nPhysics p95   ${percentile(physicsSamples, .95).toFixed(2)} ms/frame\nPhysics       120 Hz\nResolution    ${view.resolution}\nActors        ${match.team.skaters.length} skaters + goalie\nContacts      ${sim.contactCount}\nStrikes       ${match.team.stats.strikes}\nNeutral drops ${match.recoveries}`;

@@ -2,9 +2,10 @@
 export class FlipperInput {
   private sources = new Map<string, number>();
   private pulseUntil = [0, 0];
+  constructor(private minimumStrokeTicks = 10) {}
   press(source: string, side: number, tick: number) {
     if (this.sources.has(source)) return false;
-    this.sources.set(source, side); this.pulseUntil[side] = tick + 10; return true;
+    this.sources.set(source, side); this.pulseUntil[side] = tick + this.minimumStrokeTicks; return true;
   }
   release(source: string) { this.sources.delete(source); }
   cancel(source: string) {

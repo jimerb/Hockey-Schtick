@@ -21,6 +21,7 @@ export class RinkView {
   camera = new T.PerspectiveCamera(32, 1, .1, 150);
   puck = new T.Group(); flippers: T.Group[] = []; stick = new T.Group(); shadow: T.Mesh;
   private offensePaddles: T.Group[] = [];
+  private offenseRestFaces: T.Group[] = [];
   resolution = ''; gpu = 'Unavailable';
   private actors = new Map<string, { group: T.Group; ring: T.Mesh; blade?: T.Group }>();
   private puckHalo: T.Mesh;
@@ -100,8 +101,19 @@ export class RinkView {
       for (const x of [0, shaft]) { const end = new T.Mesh(new T.CylinderGeometry(radius, radius, .3, 16), paint.rubber); end.position.set(x, .16, 0); g.add(end); }
       rod(g, [0, .32, 0], [shaft, .32, 0], .035, paint.cream);
       sphere(g, 0, .35, 0, .09, chrome, [1, .35, 1]);
-      // Small visible seams mark the resting stroke; they do not enter the ice.
-      rod(this.staticArt, [sign * 5.31, .35, OFFENSE.pivotZ], [sign * 5.31, .35, OFFENSE.pivotZ + OFFENSE.length], .012, this.led);
+      // A flush board-face insert exposes the resting paddle without moving its
+      // collider onto the ice. Keep the surrounding board art for this prototype.
+      const face = new T.Group(), centerZ = OFFENSE.pivotZ + shaft / 2;
+      rounded(this.staticArt, sign * 5.30, .23, centerZ, .014, .39, OFFENSE.length + .14, navy, .004);
+      rounded(face, sign * 5.28, .23, centerZ, .014, .28, OFFENSE.length, paint.rubber, .004);
+      rounded(face, sign * 5.265, .25, centerZ, .014, .13, OFFENSE.length - .12, paint.cream, .004);
+      const hinge = new T.Mesh(new T.CylinderGeometry(.085, .085, .018, 20), chrome);
+      hinge.rotation.z = Math.PI / 2; hinge.position.set(sign * 5.25, .23, OFFENSE.pivotZ); face.add(hinge);
+      // The top rim is also readable from this elevated camera. It lies entirely
+      // within the existing rail footprint rather than protruding into the ice.
+      rounded(face, sign * 5.4, .985, centerZ, .15, .012, OFFENSE.length, paint.rubber, .003);
+      rounded(face, sign * 5.4, .995, centerZ, .065, .01, OFFENSE.length - .12, paint.cream, .002);
+      this.offenseRestFaces.push(face); this.scene.add(face);
       this.offensePaddles.push(g); this.scene.add(g);
     }
     const disk = new T.Mesh(new T.CylinderGeometry(C.puckRadius, C.puckRadius, C.puckHalfHeight * 2, 40), surface(0x09121b, { roughness: .43 })); this.puck.add(disk);
@@ -179,7 +191,7 @@ export class RinkView {
     this.puckHalo.visible = now.active; this.puckHalo.position.copy(this.puck.position); this.puckHalo.position.y += .11;
     const hop = Math.max(0, this.puck.position.y - .11); this.shadow.scale.setScalar(1 + hop); (this.shadow.material as T.MeshBasicMaterial).opacity = Math.max(.18, .62 - hop * .45);
     this.flippers.forEach((g, side) => { const a = lerp(prev.angles[side], now.angles[side], alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); }); this.stick.visible = stickEnabled; this.stick.position.z = lerp(prev.stickZ, now.stickZ, alpha); this.stick.rotation.y = lerp(prev.stickAngle, now.stickAngle, alpha);
-    this.offensePaddles.forEach((g, side) => { const a = lerp(prev.offenseAngle, now.offenseAngle, alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); });
+    this.offensePaddles.forEach((g, side) => { const a = lerp(prev.offenseAngle, now.offenseAngle, alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); this.offenseRestFaces[side].visible = Math.abs(a - OFFENSE.restAngle) < .035; });
     for (const [id, visual] of this.actors) {
       const pose = now.actors.find(a => a.id === id); visual.group.visible = !!pose; if (!pose) continue; const before = prev.actors.find(a => a.id === id) ?? pose;
       visual.group.position.set(lerp(before.x, pose.x, alpha), 0, lerp(before.z, pose.z, alpha)); visual.group.rotation.y = pose.kind === 'skater' ? -lerp(before.angle, pose.angle, alpha) : 0;

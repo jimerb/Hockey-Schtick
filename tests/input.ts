@@ -22,4 +22,16 @@ input.release('unknown'); input.cancel('unknown'); assert.deepEqual(input.at(241
 input.press('touch-new-round', 1, 0); input.release('touch-new-round');
 assert.deepEqual(input.at(9), [false, true], 'a fresh match accepts taps after the simulation tick resets');
 assert.deepEqual(input.at(10), [false, false]);
-console.log('13 input checks passed: simultaneous thumbs, aiming release, minimum taps, mixed inputs, cancellation and reset.');
+const upper = new FlipperInput(12);
+assert.equal(upper.press('Space', 0, 0), true, 'Space starts the shared upper input');
+assert.equal(upper.at(600)[0], true, 'holding Space keeps both upper paddles extended beyond the minimum stroke');
+assert.equal(upper.press('Space', 0, 600), false, 'keyboard repeat does not retrigger a held upper stroke');
+upper.press('pointer', 0, 601); upper.release('Space');
+assert.equal(upper.at(700)[0], true, 'a pointer hold survives Space release');
+upper.release('pointer'); assert.equal(upper.at(701)[0], false, 'the last upper source releases both paddles');
+upper.press('tap', 0, 710); upper.release('tap');
+assert.equal(upper.at(721)[0], true, 'a short upper tap gets twelve ticks to complete its stroke');
+assert.equal(upper.at(722)[0], false, 'the upper tap retracts after its minimum stroke');
+upper.press('cancel', 0, 730); upper.cancel('cancel'); assert.equal(upper.at(731)[0], false, 'pointer cancellation clears a pending upper tap');
+upper.press('Space', 0, 740); upper.clear(); assert.equal(upper.at(741)[0], false, 'pause or focus loss clears every upper hold');
+console.log('22 input checks passed: lower and upper holds, minimum taps, mixed sources, cancellation and reset.');

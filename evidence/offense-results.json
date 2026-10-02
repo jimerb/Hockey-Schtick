@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-02T12:02:26.074Z",
+  "date": "2026-10-02T12:20:25.548Z",
   "tuning": {
     "pivotX": 5.4,
     "pivotZ": -5.65,
@@ -8,14 +8,21 @@
     "restAngle": 1.5707963267948966,
     "shotAngle": 0.55,
     "swingSpeed": 11,
-    "returnSpeed": 6.5,
-    "cooldown": 0.32
+    "returnSpeed": 6.5
   },
-  "passed": 43,
+  "passed": 57,
   "failed": 0,
   "checks": [
     {
-      "name": "one stroke drives both paddles together, then fully retracts without a release",
+      "name": "both upper paddles extend on the next tick, stay out while held, and retract on release",
+      "passed": true
+    },
+    {
+      "name": "a quick upper tap completes its minimum stroke and then retracts",
+      "passed": true
+    },
+    {
+      "name": "repressing while the upper paddles are returning starts another stroke immediately",
       "passed": true
     },
     {
@@ -68,6 +75,54 @@
     },
     {
       "name": "recessed right paddle leaves the board glide unchanged, hops true, speed 35",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side -1, hops false, speed -30",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side -1, hops false, speed 0",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side -1, hops false, speed 30",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side -1, hops true, speed -30",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side -1, hops true, speed 0",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side -1, hops true, speed 30",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side 1, hops false, speed -30",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side 1, hops false, speed 0",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side 1, hops false, speed 30",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side 1, hops true, speed -30",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side 1, hops true, speed 0",
+      "passed": true
+    },
+    {
+      "name": "a sustained upper hold remains bounded under puck contact: side 1, hops true, speed 30",
       "passed": true
     },
     {
@@ -1479,7 +1534,17 @@
     {
       "kind": "full-team",
       "difficulty": "easy",
-      "strokes": 12,
+      "strokes": 9,
+      "scores": {
+        "you": 1,
+        "cpu": 1
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team",
+      "difficulty": "normal",
+      "strokes": 14,
       "scores": {
         "you": 1,
         "cpu": 0
@@ -1488,23 +1553,13 @@
     },
     {
       "kind": "full-team",
-      "difficulty": "normal",
-      "strokes": 12,
+      "difficulty": "hard",
+      "strokes": 19,
       "scores": {
-        "you": 3,
+        "you": 0,
         "cpu": 0
       },
       "recoveries": 0
-    },
-    {
-      "kind": "full-team",
-      "difficulty": "hard",
-      "strokes": 22,
-      "scores": {
-        "you": 3,
-        "cpu": 1
-      },
-      "recoveries": 1
     }
   ]
 }

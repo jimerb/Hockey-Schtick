@@ -3,6 +3,7 @@ import { writeFileSync } from 'node:fs';
 import { C, OFFENSE, MATCH_MOTION } from '../src/config';
 import { initPhysics, RinkPhysics } from '../src/physics';
 import { HockeyMatch } from '../src/match';
+import { FlipperInput } from '../src/flipper-input';
 
 await initPhysics();
 const checks: { name: string; passed: boolean; error?: string }[] = [], observations: object[] = [];
@@ -14,15 +15,35 @@ function rink(enabled = true) {
   const sim = new RinkPhysics(); sim.setMotion(MATCH_MOTION); if (enabled) sim.addOffensePaddles(); return sim;
 }
 function advance(sim: RinkPhysics, ticks: number) { for (let i = 0; i < ticks; i++) sim.step(); }
-check('one stroke drives both paddles together, then fully retracts without a release', () => {
-  const sim = rink(); sim.place({ x: 0, y: .11, z: 2 }, { x: 0, y: 0, z: 0 });
+check('both upper paddles extend on the next tick, stay out while held, and retract on release', () => {
+  const sim = rink(); sim.downhill = 0; sim.place({ x: 0, y: .11, z: 2 }, { x: 0, y: 0, z: 0 });
   assert.ok(sim.shootOffense()); assert.equal(sim.shootOffense(), false); sim.step();
   assert.ok(sim.offenseAngle < OFFENSE.restAngle);
   const left = sim.offensePaddles[0].rotation(), right = sim.offensePaddles[1].rotation();
   assert.ok(Math.abs((1 - 2 * left.y ** 2) + (1 - 2 * right.y ** 2)) < 1e-6);
   assert.ok(Math.abs(left.y * left.w - right.y * right.w) < 1e-6);
+  advance(sim, 600); assert.equal(sim.offenseAngle, OFFENSE.shotAngle); assert.equal(sim.offensePhase, 'held');
+  assert.equal(sim.offenseStrokes, 1); assert.equal(sim.offenseHeld, true);
+  sim.releaseOffense(); sim.step(); assert.ok(sim.offenseAngle > OFFENSE.shotAngle);
   advance(sim, 50); assert.equal(sim.offenseAngle, OFFENSE.restAngle); assert.equal(sim.offensePhase, 'rest');
   assert.ok(sim.shootOffense()); sim.cancelOffense(); assert.equal(sim.offenseAngle, OFFENSE.restAngle); sim.dispose();
+});
+check('a quick upper tap completes its minimum stroke and then retracts', () => {
+  const sim = rink(), input = new FlipperInput(12); sim.downhill = 0;
+  sim.place({ x: 0, y: .11, z: 2 }, { x: 0, y: 0, z: 0 }); input.press('Space', 0, sim.tick); input.release('Space');
+  let reached = false;
+  for (let tick = 0; tick < 50; tick++) {
+    if (input.at(sim.tick)[0]) sim.shootOffense(); else sim.releaseOffense(); sim.step();
+    reached ||= sim.offenseAngle === OFFENSE.shotAngle;
+  }
+  assert.ok(reached); assert.equal(sim.offenseAngle, OFFENSE.restAngle); assert.equal(sim.offenseStrokes, 1); sim.dispose();
+});
+check('repressing while the upper paddles are returning starts another stroke immediately', () => {
+  const sim = rink(); sim.downhill = 0; sim.place({ x: 0, y: .11, z: 2 }, { x: 0, y: 0, z: 0 });
+  sim.shootOffense(); advance(sim, 20); sim.releaseOffense(); advance(sim, 4); const returning = sim.offenseAngle;
+  assert.ok(sim.shootOffense()); sim.step(); assert.ok(sim.offenseAngle < returning);
+  advance(sim, 20); assert.equal(sim.offensePhase, 'held'); assert.equal(sim.offenseStrokes, 2);
+  sim.cancelOffense(); assert.equal(sim.offenseHeld, false); assert.equal(sim.offensePhase, 'rest'); sim.dispose();
 });
 check('inactive and practice rinks cannot fire upper paddles', () => {
   const sim = rink(); assert.equal(sim.shootOffense(), false); sim.dispose();
@@ -40,14 +61,20 @@ for (const side of [-1, 1]) for (const hops of [false, true]) for (const speed o
     assert.deepEqual(results[0], results[1]);
   });
 }
-function shot(side: number, x: number, z: number, hops = false, vx = 0, vz = 0) {
+function shot(side: number, x: number, z: number, hops = false, vx = 0, vz = 0, holdTicks = 12) {
   const sim = rink(); sim.setHops(hops); sim.place({ x: side * x, y: .11, z }, { x: side * vx, y: 0, z: vz });
   sim.shootOffense(); let impact: { x: number; z: number } | null = null;
   sim.onContact = c => { if (c.label.includes('offensive') && !impact) impact = { ...sim.puck.linvel() }; };
-  advance(sim, 50); const returned = sim.offenseAngle === OFFENSE.restAngle;
+  advance(sim, holdTicks); sim.releaseOffense(); advance(sim, 38); const returned = sim.offenseAngle === OFFENSE.restAngle;
   advance(sim, 600);
   const row = { side, x, z, hops, vx, vz, impact, returned, result: sim.result, faults: sim.scores.fault, position: { ...sim.current.puck } };
   sim.dispose(); return row;
+}
+for (const side of [-1, 1]) for (const hops of [false, true]) for (const speed of [-30, 0, 30]) {
+  check(`a sustained upper hold remains bounded under puck contact: side ${side}, hops ${hops}, speed ${speed}`, () => {
+    const row = shot(side, 4.93, -4.55, hops, .5, speed, 120);
+    assert.equal(row.faults, 0); assert.ok(row.returned); assert.ok(Number.isFinite(row.position.x));
+  });
 }
 for (const side of [-1, 1]) for (const hops of [false, true]) {
   check(`a physical ${side < 0 ? 'left' : 'right'} stroke can score at the far net, hops ${hops}`, () => {
@@ -84,7 +111,8 @@ for (const difficulty of ['easy', 'normal', 'hard'] as const) check(`upper paddl
   for (let tick = 0; tick < 60 * 120 && !match.winner; tick++) {
     const p = sim.puck.translation(), v = sim.puck.linvel();
     sim.held = [v.z > 0 && p.z > 5 && p.z < 6.5 && p.x < .9, v.z > 0 && p.z > 5 && p.z < 6.5 && p.x > -.9];
-    if (match.phase === 'playing' && Math.abs(p.x) > 4.4 && p.z > -5.5 && p.z < -3.6 && sim.shootOffense()) strokes++;
+    if (match.phase === 'playing' && Math.abs(p.x) > 4.4 && p.z > -5.5 && p.z < -3.6) { if (sim.shootOffense()) strokes++; }
+    else sim.releaseOffense();
     match.step(); assert.equal(sim.scores.fault, 0);
   }
   assert.ok(strokes > 0, 'The full-team check must actually fire upper paddles');

@@ -19,9 +19,9 @@ export class RinkPhysics {
   flipperRubber: FlipperRubber | null = null;
   offensePaddles: RAPIER.RigidBody[] = [];
   offenseAngle: number = OFFENSE.restAngle;
-  offensePhase: 'rest' | 'shoot' | 'return' = 'rest';
+  offensePhase: 'rest' | 'shoot' | 'held' | 'return' = 'rest';
+  offenseHeld = false;
   offenseStrokes = 0;
-  private offenseCooldown = 0;
   stick: RAPIER.RigidBody;
   angles = [C.restAngle, C.restAngle] as number[];
   held = [false, false];
@@ -69,11 +69,12 @@ export class RinkPhysics {
   }
   offenseBodyAngle(side: number) { return side === 0 ? -this.offenseAngle : -(Math.PI - this.offenseAngle); }
   shootOffense() {
-    if (!this.active || !this.offensePaddles.length || this.offensePhase !== 'rest' || this.offenseCooldown > 0) return false;
-    this.offensePhase = 'shoot'; this.offenseCooldown = OFFENSE.cooldown; this.offenseStrokes++; return true;
+    if (!this.active || !this.offensePaddles.length || this.offenseHeld) return false;
+    this.offenseHeld = true; this.offenseStrokes++; return true;
   }
+  releaseOffense() { this.offenseHeld = false; }
   cancelOffense() {
-    this.offensePhase = 'rest'; this.offenseAngle = OFFENSE.restAngle; this.offenseCooldown = 0;
+    this.offensePhase = 'rest'; this.offenseAngle = OFFENSE.restAngle; this.offenseHeld = false;
     this.offensePaddles.forEach((body, side) => {
       body.setRotation(yaw(this.offenseBodyAngle(side)), true); body.setNextKinematicRotation(yaw(this.offenseBodyAngle(side)));
     });
@@ -205,12 +206,9 @@ export class RinkPhysics {
   step() {
     this.previous = this.current;
     this.tick++;
-    this.offenseCooldown = Math.max(0, this.offenseCooldown - C.dt);
-    if (this.offensePhase !== 'rest') {
-      const shooting = this.offensePhase === 'shoot', target = shooting ? OFFENSE.shotAngle : OFFENSE.restAngle;
-      this.offenseAngle = move(this.offenseAngle, target, C.dt * (shooting ? OFFENSE.swingSpeed : OFFENSE.returnSpeed));
-      if (this.offenseAngle === target) this.offensePhase = shooting ? 'return' : 'rest';
-    }
+    const offenseTarget = this.offenseHeld ? OFFENSE.shotAngle : OFFENSE.restAngle;
+    this.offenseAngle = move(this.offenseAngle, offenseTarget, C.dt * (this.offenseHeld ? OFFENSE.swingSpeed : OFFENSE.returnSpeed));
+    this.offensePhase = this.offenseHeld ? this.offenseAngle === offenseTarget ? 'held' : 'shoot' : this.offenseAngle === offenseTarget ? 'rest' : 'return';
     this.offensePaddles.forEach((body, side) => body.setNextKinematicRotation(yaw(this.offenseBodyAngle(side))));
     for (let side = 0; side < 2; side++) {
       const previousAngle = this.angles[side];
