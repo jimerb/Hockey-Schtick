@@ -219,11 +219,11 @@
       "difficulty": "easy",
       "hops": false,
       "seconds": 120,
-      "totalChecks": 6,
-      "maxDistance": 0.8643719201087952,
+      "totalChecks": 9,
+      "maxDistance": 0.5608592234611512,
       "score": {
-        "you": 1,
-        "cpu": 6
+        "you": 2,
+        "cpu": 3
       },
       "restarts": 0
     },
@@ -245,8 +245,8 @@
       "difficulty": "normal",
       "hops": false,
       "seconds": 120,
-      "totalChecks": 9,
-      "maxDistance": 0.8969606511592864,
+      "totalChecks": 8,
+      "maxDistance": 0.5556942206501961,
       "score": {
         "you": 1,
         "cpu": 5
@@ -258,8 +258,8 @@
       "difficulty": "normal",
       "hops": true,
       "seconds": 120,
-      "totalChecks": 4,
-      "maxDistance": 0.5351750225424766,
+      "totalChecks": 5,
+      "maxDistance": 0.5391091025829315,
       "score": {
         "you": 0,
         "cpu": 2
@@ -272,10 +272,10 @@
       "hops": false,
       "seconds": 120,
       "totalChecks": 6,
-      "maxDistance": 0.5527940126895904,
+      "maxDistance": 0.5556942206501961,
       "score": {
         "you": 0,
-        "cpu": 6
+        "cpu": 1
       },
       "restarts": 0
     },

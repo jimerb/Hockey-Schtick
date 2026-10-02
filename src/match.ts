@@ -31,7 +31,7 @@ export class HockeyMatch {
   private lastGoalie = -1000;
   private lastBank = -1000;
   constructor(public sim: RinkPhysics, skaterCount: 1 | 3 | 5 = 5, extendedWings = false, tuning: PlayTuning = MATCH_PLAY_TUNING, rubber: FlipperRubber | null = MATCH_FLIPPER_RUBBER, checking: CheckTuning | null = rubber ? MATCH_CHECK_TUNING : null) {
-    sim.addReturnApron(); sim.setMotion(MATCH_MOTION);
+    sim.addReturnApron(); sim.setMotion(MATCH_MOTION); sim.addOffensePaddles();
     sim.setFlipperRubber(rubber); if (rubber) sim.addCradleGuides();
     this.team = new Opponents(sim, skaterCount, extendedWings, tuning, checking);
     sim.onResult = result => this.result(result);

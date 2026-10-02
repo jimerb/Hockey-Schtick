@@ -1,13 +1,14 @@
 {
   "name": "hockey-schtick",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort",
-    "test": "tsx tests/input.ts && tsx tests/physics.ts && tsx tests/match.ts && tsx tests/play-tuning.ts && tsx tests/flipper-control.ts && tsx tests/checking.ts && tsx tests/stuck-puck.ts && tsx tests/pacing.ts",
+    "test": "tsx tests/input.ts && tsx tests/offense.ts && tsx tests/physics.ts && tsx tests/match.ts && tsx tests/play-tuning.ts && tsx tests/flipper-control.ts && tsx tests/checking.ts && tsx tests/stuck-puck.ts && tsx tests/pacing.ts",
+    "test:offense": "tsx tests/offense.ts",
     "test:physics": "tsx tests/physics.ts",
     "test:match": "tsx tests/match.ts",
     "test:pacing": "tsx tests/pacing.ts",

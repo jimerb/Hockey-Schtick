@@ -1,8 +1,8 @@
 import RAPIER from '@dimforge/rapier3d-compat';
-import { C, FEEDS, cradleGuides, guides, outline, rearArc, returnApron } from './config';
+import { C, OFFENSE, FEEDS, cradleGuides, guides, outline, rearArc, returnApron } from './config';
 import type { ActorPose, Feed, FlipperRubber, Result, Vec } from './config';
 
-export type State = { puck: Vec; angles: number[]; stickZ: number; stickAngle: number; active: boolean; actors: ActorPose[] };
+export type State = { puck: Vec; angles: number[]; offenseAngle: number; stickZ: number; stickAngle: number; active: boolean; actors: ActorPose[] };
 export type Contact = { label: string; speed: number; tick: number };
 const yaw = (a: number) => ({ x: 0, y: Math.sin(a / 2), z: 0, w: Math.cos(a / 2) });
 const move = (a: number, b: number, n: number) => a + Math.sign(b - a) * Math.min(Math.abs(b - a), n);
@@ -17,6 +17,11 @@ export class RinkPhysics {
   flippers: RAPIER.RigidBody[] = [];
   flipperColliders: RAPIER.Collider[][] = [[], []];
   flipperRubber: FlipperRubber | null = null;
+  offensePaddles: RAPIER.RigidBody[] = [];
+  offenseAngle: number = OFFENSE.restAngle;
+  offensePhase: 'rest' | 'shoot' | 'return' = 'rest';
+  offenseStrokes = 0;
+  private offenseCooldown = 0;
   stick: RAPIER.RigidBody;
   angles = [C.restAngle, C.restAngle] as number[];
   held = [false, false];
@@ -49,6 +54,30 @@ export class RinkPhysics {
     });
   }
   setFlipperRubber(rubber: FlipperRubber | null) { this.flipperRubber = rubber; }
+  addOffensePaddles() {
+    if (this.offensePaddles.length) return;
+    for (let side = 0; side < 2; side++) {
+      const sign = side === 0 ? -1 : 1, radius = OFFENSE.width / 2, shaft = OFFENSE.length - radius;
+      const body = this.world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased()
+        .setTranslation(sign * OFFENSE.pivotX, .15, OFFENSE.pivotZ).setRotation(yaw(this.offenseBodyAngle(side))));
+      // Extend below the ice to prevent the flat puck wedging under a thin paddle.
+      const shapes = [RAPIER.ColliderDesc.cuboid(shaft / 2, .22, radius).setTranslation(shaft / 2, 0, 0),
+        RAPIER.ColliderDesc.cylinder(.22, radius), RAPIER.ColliderDesc.cylinder(.22, radius).setTranslation(shaft, 0, 0)];
+      for (const shape of shapes) this.registerCollider(this.world.createCollider(shape.setFriction(.03).setRestitution(.8), body), side === 0 ? 'left offensive paddle' : 'right offensive paddle');
+      this.offensePaddles.push(body);
+    }
+  }
+  offenseBodyAngle(side: number) { return side === 0 ? -this.offenseAngle : -(Math.PI - this.offenseAngle); }
+  shootOffense() {
+    if (!this.active || !this.offensePaddles.length || this.offensePhase !== 'rest' || this.offenseCooldown > 0) return false;
+    this.offensePhase = 'shoot'; this.offenseCooldown = OFFENSE.cooldown; this.offenseStrokes++; return true;
+  }
+  cancelOffense() {
+    this.offensePhase = 'rest'; this.offenseAngle = OFFENSE.restAngle; this.offenseCooldown = 0;
+    this.offensePaddles.forEach((body, side) => {
+      body.setRotation(yaw(this.offenseBodyAngle(side)), true); body.setNextKinematicRotation(yaw(this.offenseBodyAngle(side)));
+    });
+  }
   /** A physically supported, slow puck on the front of a raised held bat. No puck lock. */
   cradledSide(): number | null {
     if (!this.flipperRubber || !this.active || Math.hypot(this.puck.linvel().x, this.puck.linvel().z) > .6) return null;
@@ -63,7 +92,7 @@ export class RinkPhysics {
     return null;
   }
   syncStates() { this.current = this.snapshot(); this.previous = this.snapshot(); }
-  stopRally() { this.active = false; this.puck.setEnabled(false); this.held = [false, false]; this.syncStates(); }
+  stopRally() { this.active = false; this.puck.setEnabled(false); this.held = [false, false]; this.cancelOffense(); this.syncStates(); }
 
   constructor() {
     this.world.timestep = C.dt;
@@ -137,7 +166,7 @@ export class RinkPhysics {
   bodyAngle(side: number) { return side === 0 ? -this.angles[0] : -(Math.PI - this.angles[1]); }
   snapshot(): State {
     const t = this.puck.translation();
-    return { puck: { x: t.x, y: t.y, z: t.z }, angles: [...this.angles], stickZ: this.stick.translation().z,
+    return { puck: { x: t.x, y: t.y, z: t.z }, angles: [...this.angles], offenseAngle: this.offenseAngle, stickZ: this.stick.translation().z,
       stickAngle: this.stickPhase * 2.6, active: this.active, actors: this.actorVisuals.map(a => ({ ...a })) };
   }
   setHops(enabled: boolean) {
@@ -159,6 +188,7 @@ export class RinkPhysics {
   reset() {
     this.active = false; this.puck.setEnabled(false); this.held = [false, false];
     this.result = null; this.angles = [C.restAngle, C.restAngle]; this.stickPhase = 0;
+    this.cancelOffense(); this.offenseStrokes = 0;
     this.flippers.forEach((b, side) => {
       b.setRotation(yaw(this.bodyAngle(side)), true); b.setNextKinematicRotation(yaw(this.bodyAngle(side)));
     });
@@ -170,11 +200,18 @@ export class RinkPhysics {
   private finish(result: Result) {
     if (!this.active) return;
     this.active = false; this.result = result; this.scores[result]++;
-    this.puck.setEnabled(false); this.onResult?.(result);
+    this.puck.setEnabled(false); this.cancelOffense(); this.onResult?.(result);
   }
   step() {
     this.previous = this.current;
     this.tick++;
+    this.offenseCooldown = Math.max(0, this.offenseCooldown - C.dt);
+    if (this.offensePhase !== 'rest') {
+      const shooting = this.offensePhase === 'shoot', target = shooting ? OFFENSE.shotAngle : OFFENSE.restAngle;
+      this.offenseAngle = move(this.offenseAngle, target, C.dt * (shooting ? OFFENSE.swingSpeed : OFFENSE.returnSpeed));
+      if (this.offenseAngle === target) this.offensePhase = shooting ? 'return' : 'rest';
+    }
+    this.offensePaddles.forEach((body, side) => body.setNextKinematicRotation(yaw(this.offenseBodyAngle(side))));
     for (let side = 0; side < 2; side++) {
       const previousAngle = this.angles[side];
       this.angles[side] = move(this.angles[side], this.held[side] ? C.raisedAngle : C.restAngle,

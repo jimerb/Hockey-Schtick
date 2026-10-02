@@ -1,6 +1,6 @@
 import * as T from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { C, LANES, MATCH_SKATERS, MATCH_EXTENDED_WINGS, cradleGuides, guides, outline, rearArc, returnApron } from './config';
+import { C, OFFENSE, LANES, MATCH_SKATERS, MATCH_EXTENDED_WINGS, cradleGuides, guides, outline, rearArc, returnApron } from './config';
 import type { State } from './physics';
 import type { Vec } from './config';
 import { paint, surface, rounded, rod, sphere, softTexture, groundShadow, iceTexture, hockeyFigure, batchStatic } from './art';
@@ -20,6 +20,7 @@ export class RinkView {
   scene = new T.Scene();
   camera = new T.PerspectiveCamera(32, 1, .1, 150);
   puck = new T.Group(); flippers: T.Group[] = []; stick = new T.Group(); shadow: T.Mesh;
+  private offensePaddles: T.Group[] = [];
   resolution = ''; gpu = 'Unavailable';
   private actors = new Map<string, { group: T.Group; ring: T.Mesh; blade?: T.Group }>();
   private puckHalo: T.Mesh;
@@ -90,6 +91,18 @@ export class RinkView {
       const cap = new T.Mesh(new T.ExtrudeGeometry(capsuleShape(C.flipperLength + radius - .09, C.flipperWidth - .1), { depth: .025, bevelEnabled: true, bevelSize: .026, bevelThickness: .026, bevelSegments: 3, curveSegments: 20 }), paint.cream); cap.rotation.x = -Math.PI / 2; cap.position.set(.045 - radius, .62, 0); g.add(cap);
       const pin = new T.Mesh(new T.CylinderGeometry(.225, .24, .07, 32), navy); pin.position.set(0, .71, 0); g.add(pin); sphere(g, 0, .735, 0, .195, chrome, [1, .3, 1]); rod(g, [-.09, .796, 0], [.09, .796, 0], .008, navy);
       this.flippers.push(g); this.scene.add(g);
+    }
+    if (match) for (let side = 0; side < 2; side++) {
+      const sign = side === 0 ? -1 : 1, radius = OFFENSE.width / 2, shaft = OFFENSE.length - radius;
+      // Mechanics prototype: board artwork stays intact while these recess into it.
+      const g = new T.Group(); g.position.set(sign * OFFENSE.pivotX, .015, OFFENSE.pivotZ);
+      rounded(g, shaft / 2, .16, 0, shaft, .3, OFFENSE.width, paint.rubber, .02);
+      for (const x of [0, shaft]) { const end = new T.Mesh(new T.CylinderGeometry(radius, radius, .3, 16), paint.rubber); end.position.set(x, .16, 0); g.add(end); }
+      rod(g, [0, .32, 0], [shaft, .32, 0], .035, paint.cream);
+      sphere(g, 0, .35, 0, .09, chrome, [1, .35, 1]);
+      // Small visible seams mark the resting stroke; they do not enter the ice.
+      rod(this.staticArt, [sign * 5.31, .35, OFFENSE.pivotZ], [sign * 5.31, .35, OFFENSE.pivotZ + OFFENSE.length], .012, this.led);
+      this.offensePaddles.push(g); this.scene.add(g);
     }
     const disk = new T.Mesh(new T.CylinderGeometry(C.puckRadius, C.puckRadius, C.puckHalfHeight * 2, 40), surface(0x09121b, { roughness: .43 })); this.puck.add(disk);
     const ring = new T.Mesh(new T.TorusGeometry(.21, .01, 6, 32), surface(0x74858b)); ring.rotation.x = -Math.PI / 2; ring.position.y = C.puckHalfHeight + .002; this.puck.add(ring); this.scene.add(this.puck);
@@ -166,6 +179,7 @@ export class RinkView {
     this.puckHalo.visible = now.active; this.puckHalo.position.copy(this.puck.position); this.puckHalo.position.y += .11;
     const hop = Math.max(0, this.puck.position.y - .11); this.shadow.scale.setScalar(1 + hop); (this.shadow.material as T.MeshBasicMaterial).opacity = Math.max(.18, .62 - hop * .45);
     this.flippers.forEach((g, side) => { const a = lerp(prev.angles[side], now.angles[side], alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); }); this.stick.visible = stickEnabled; this.stick.position.z = lerp(prev.stickZ, now.stickZ, alpha); this.stick.rotation.y = lerp(prev.stickAngle, now.stickAngle, alpha);
+    this.offensePaddles.forEach((g, side) => { const a = lerp(prev.offenseAngle, now.offenseAngle, alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); });
     for (const [id, visual] of this.actors) {
       const pose = now.actors.find(a => a.id === id); visual.group.visible = !!pose; if (!pose) continue; const before = prev.actors.find(a => a.id === id) ?? pose;
       visual.group.position.set(lerp(before.x, pose.x, alpha), 0, lerp(before.z, pose.z, alpha)); visual.group.rotation.y = pose.kind === 'skater' ? -lerp(before.angle, pose.angle, alpha) : 0;

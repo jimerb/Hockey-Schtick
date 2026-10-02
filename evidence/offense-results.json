@@ -1,0 +1,1510 @@
+{
+  "date": "2026-10-02T12:02:26.074Z",
+  "tuning": {
+    "pivotX": 5.4,
+    "pivotZ": -5.65,
+    "length": 1.85,
+    "width": 0.16,
+    "restAngle": 1.5707963267948966,
+    "shotAngle": 0.55,
+    "swingSpeed": 11,
+    "returnSpeed": 6.5,
+    "cooldown": 0.32
+  },
+  "passed": 43,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "one stroke drives both paddles together, then fully retracts without a release",
+      "passed": true
+    },
+    {
+      "name": "inactive and practice rinks cannot fire upper paddles",
+      "passed": true
+    },
+    {
+      "name": "recessed left paddle leaves the board glide unchanged, hops false, speed 4",
+      "passed": true
+    },
+    {
+      "name": "recessed left paddle leaves the board glide unchanged, hops false, speed 15",
+      "passed": true
+    },
+    {
+      "name": "recessed left paddle leaves the board glide unchanged, hops false, speed 35",
+      "passed": true
+    },
+    {
+      "name": "recessed left paddle leaves the board glide unchanged, hops true, speed 4",
+      "passed": true
+    },
+    {
+      "name": "recessed left paddle leaves the board glide unchanged, hops true, speed 15",
+      "passed": true
+    },
+    {
+      "name": "recessed left paddle leaves the board glide unchanged, hops true, speed 35",
+      "passed": true
+    },
+    {
+      "name": "recessed right paddle leaves the board glide unchanged, hops false, speed 4",
+      "passed": true
+    },
+    {
+      "name": "recessed right paddle leaves the board glide unchanged, hops false, speed 15",
+      "passed": true
+    },
+    {
+      "name": "recessed right paddle leaves the board glide unchanged, hops false, speed 35",
+      "passed": true
+    },
+    {
+      "name": "recessed right paddle leaves the board glide unchanged, hops true, speed 4",
+      "passed": true
+    },
+    {
+      "name": "recessed right paddle leaves the board glide unchanged, hops true, speed 15",
+      "passed": true
+    },
+    {
+      "name": "recessed right paddle leaves the board glide unchanged, hops true, speed 35",
+      "passed": true
+    },
+    {
+      "name": "a physical left stroke can score at the far net, hops false",
+      "passed": true
+    },
+    {
+      "name": "a physical left stroke can score at the far net, hops true",
+      "passed": true
+    },
+    {
+      "name": "a physical right stroke can score at the far net, hops false",
+      "passed": true
+    },
+    {
+      "name": "a physical right stroke can score at the far net, hops true",
+      "passed": true
+    },
+    {
+      "name": "the stroke cannot remotely steer a puck in the center of the rink",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops false, speed -35",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops false, speed -12",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops false, speed 0",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops false, speed 12",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops false, speed 35",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops true, speed -35",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops true, speed -12",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops true, speed 0",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops true, speed 12",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side -1, hops true, speed 35",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops false, speed -35",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops false, speed -12",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops false, speed 0",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops false, speed 12",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops false, speed 35",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops true, speed -35",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops true, speed -12",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops true, speed 0",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops true, speed 12",
+      "passed": true
+    },
+    {
+      "name": "firing beside a traveling puck stays bounded: side 1, hops true, speed 35",
+      "passed": true
+    },
+    {
+      "name": "goal and match resets retract a pending stroke",
+      "passed": true
+    },
+    {
+      "name": "upper paddles remain bounded during a full-team easy rally",
+      "passed": true
+    },
+    {
+      "name": "upper paddles remain bounded during a full-team normal rally",
+      "passed": true
+    },
+    {
+      "name": "upper paddles remain bounded during a full-team hard rally",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "kind": "shots",
+      "side": -1,
+      "hops": false,
+      "shots": [
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.1,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 33.54814147949219,
+            "y": 0,
+            "z": -10.298656463623047
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.5813803672790527,
+            "y": 0.10999999940395355,
+            "z": -7.9379730224609375
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.3,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 28.66942596435547,
+            "y": 0,
+            "z": -7.982301712036133
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": -0.9040915966033936,
+            "y": 0.10999999940395355,
+            "z": -8.039260864257812
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.5,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 24.89150047302246,
+            "y": 0,
+            "z": -9.425923347473145
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.3375997543334961,
+            "y": 0.10999999940395355,
+            "z": -7.940188407897949
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.7,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 21.42839241027832,
+            "y": 0,
+            "z": -8.09576416015625
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.4758439064025879,
+            "y": 0.10999999940395355,
+            "z": -8.027209281921387
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.9,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 17.95372200012207,
+            "y": 0,
+            "z": -8.698030471801758
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 1.5635279417037964,
+            "y": 0.10999999940395355,
+            "z": -2.2493326663970947
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.1,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 33.49020767211914,
+            "y": 0,
+            "z": -8.3753662109375
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": -0.8589410781860352,
+            "y": 0.10999999940395355,
+            "z": -7.922226428985596
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.3,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 27.969221115112305,
+            "y": 0,
+            "z": -5.105940341949463
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.00487873237580061,
+            "y": 0.10999999940395355,
+            "z": -7.995948314666748
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.5,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 24.2331485748291,
+            "y": 0,
+            "z": -6.730747699737549
+          },
+          "returned": true,
+          "result": "conceded",
+          "faults": 0,
+          "position": {
+            "x": 0.5639020204544067,
+            "y": 0.10999999940395355,
+            "z": 9.04183292388916
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.7,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 20.551830291748047,
+            "y": 0,
+            "z": -5.692062854766846
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.5275694131851196,
+            "y": 0.10999999940395355,
+            "z": -8.031831741333008
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.9,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 16.995943069458008,
+            "y": 0,
+            "z": -6.393759250640869
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 1.8673619031906128,
+            "y": 0.10999999940395355,
+            "z": -7.331965446472168
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.1,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 33.5809440612793,
+            "y": 0,
+            "z": -5.6692938804626465
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 4.11594295501709,
+            "y": 0.10999999940395355,
+            "z": -7.278411388397217
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.3,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 27.294872283935547,
+            "y": 0,
+            "z": -2.455734968185425
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.10563401877880096,
+            "y": 0.10999999940395355,
+            "z": -7.941343784332275
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.5,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 23.37252426147461,
+            "y": 0,
+            "z": -2.095186948776245
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 3.6040685176849365,
+            "y": 0.10999999940395355,
+            "z": -6.125683307647705
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.7,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 19.437265396118164,
+            "y": 0,
+            "z": -1.7334246635437012
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -1.6600791215896606,
+            "y": 0.10999999940395355,
+            "z": -6.679873943328857
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.9,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 15.965075492858887,
+            "y": 0,
+            "z": -2.880216121673584
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 2.1251866817474365,
+            "y": 0.10999999940395355,
+            "z": -2.789132833480835
+          }
+        }
+      ]
+    },
+    {
+      "kind": "shots",
+      "side": -1,
+      "hops": true,
+      "shots": [
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.1,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 33.40589141845703,
+            "y": 0.0007483521476387978,
+            "z": -10.409637451171875
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -2.961245536804199,
+            "y": 0.10497066378593445,
+            "z": -3.3686797618865967
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.3,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 28.58338737487793,
+            "y": 0.00021696808107662946,
+            "z": -8.286941528320312
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 0.2287728488445282,
+            "y": 0.10497313737869263,
+            "z": -2.7628304958343506
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.5,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 24.78813934326172,
+            "y": -0.00010117053898284212,
+            "z": -9.691020965576172
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -1.714182734489441,
+            "y": 0.10497401654720306,
+            "z": -3.2736880779266357
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.7,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 21.338701248168945,
+            "y": 0.00019254749349784106,
+            "z": -8.323897361755371
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 2.454589366912842,
+            "y": 0.1890157014131546,
+            "z": 5.188484191894531
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.65,
+          "z": -4.9,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 17.86314582824707,
+            "y": -0.00011049647582694888,
+            "z": -8.893135070800781
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -4.638924598693848,
+            "y": 0.1507904976606369,
+            "z": -0.5599530339241028
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.1,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 33.50332260131836,
+            "y": -0.21897822618484497,
+            "z": -8.344691276550293
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -3.105870485305786,
+            "y": 0.10497167706489563,
+            "z": -2.4672298431396484
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.3,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 27.915842056274414,
+            "y": -0.2932664752006531,
+            "z": -5.394930839538574
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -1.6263043880462646,
+            "y": 0.10498589277267456,
+            "z": -1.6887885332107544
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.5,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 24.159751892089844,
+            "y": -0.00029146927408874035,
+            "z": -6.988584041595459
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 2.3942079544067383,
+            "y": 0.10437537729740143,
+            "z": -2.3453052043914795
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.7,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 20.490198135375977,
+            "y": 0.00007644377183169127,
+            "z": -5.911372661590576
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -3.6318154335021973,
+            "y": 0.18500953912734985,
+            "z": -1.8138720989227295
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.8,
+          "z": -4.9,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 16.924680709838867,
+            "y": 0.00015509992954321206,
+            "z": -6.575479984283447
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 1.011995792388916,
+            "y": 0.10497166961431503,
+            "z": -7.933385848999023
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.1,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 33.45870590209961,
+            "y": -0.1873045265674591,
+            "z": -5.834918975830078
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -3.0931332111358643,
+            "y": 0.10497210919857025,
+            "z": -1.7520725727081299
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.3,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 27.268632888793945,
+            "y": -0.23112283647060394,
+            "z": -2.7417027950286865
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -3.2840850353240967,
+            "y": 0.18145273625850677,
+            "z": -0.6494340896606445
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.5,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 23.34999656677246,
+            "y": -0.23853346705436707,
+            "z": -2.340332269668579
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 4.485291481018066,
+            "y": 0.1594615876674652,
+            "z": -0.21807284653186798
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.7,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 19.437894821166992,
+            "y": -0.2449139803647995,
+            "z": -1.9393937587738037
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -3.1486358642578125,
+            "y": 0.10497201979160309,
+            "z": 0.23259548842906952
+          }
+        },
+        {
+          "side": -1,
+          "x": 4.95,
+          "z": -4.9,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": 15.935117721557617,
+            "y": -0.13367167115211487,
+            "z": -3.043827533721924
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -0.12028317153453827,
+            "y": 0.1049763560295105,
+            "z": -3.616130828857422
+          }
+        }
+      ]
+    },
+    {
+      "kind": "shots",
+      "side": 1,
+      "hops": false,
+      "shots": [
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.1,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -29.982385635375977,
+            "y": 0,
+            "z": -17.37644386291504
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -1.077040433883667,
+            "y": 0.10999999940395355,
+            "z": -4.127668380737305
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.3,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -28.669376373291016,
+            "y": 0,
+            "z": -7.982272148132324
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.9022583365440369,
+            "y": 0.10999999940395355,
+            "z": -8.0405855178833
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.5,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -24.89150047302246,
+            "y": 0,
+            "z": -9.425922393798828
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 4.0284013748168945,
+            "y": 0.10999999940395355,
+            "z": -3.3907346725463867
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.7,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -21.420955657958984,
+            "y": 0,
+            "z": -8.093034744262695
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 0.2110968828201294,
+            "y": 0.10999999940395355,
+            "z": 6.959829807281494
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.9,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -17.95372200012207,
+            "y": 0,
+            "z": -8.698030471801758
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -0.8688962459564209,
+            "y": 0.10999999940395355,
+            "z": -2.7531955242156982
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.1,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -29.557640075683594,
+            "y": 0,
+            "z": -17.90945053100586
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.5799202919006348,
+            "y": 0.10999999940395355,
+            "z": -7.93988037109375
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.3,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -27.969039916992188,
+            "y": 0,
+            "z": -5.105906963348389
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.04892360419034958,
+            "y": 0.10999999940395355,
+            "z": -7.964832782745361
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.5,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -24.233121871948242,
+            "y": 0,
+            "z": -6.730739116668701
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 4.873873233795166,
+            "y": 0.10999999940395355,
+            "z": -0.9590664505958557
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.7,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -20.551803588867188,
+            "y": 0,
+            "z": -5.692057132720947
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": -0.5385527610778809,
+            "y": 0.10999999940395355,
+            "z": -8.034722328186035
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.9,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -16.995943069458008,
+            "y": 0,
+            "z": -6.393759250640869
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -1.8220423460006714,
+            "y": 0.10999999940395355,
+            "z": -7.356375217437744
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.1,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -30.46672821044922,
+            "y": 0,
+            "z": -10.908483505249023
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.12263315171003342,
+            "y": 0.10999999940395355,
+            "z": -7.944245338439941
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.3,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -27.29486083984375,
+            "y": 0,
+            "z": -2.4557337760925293
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": 0.013680268079042435,
+            "y": 0.10999999940395355,
+            "z": -7.947998046875
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.5,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -23.372514724731445,
+            "y": 0,
+            "z": -2.0951859951019287
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -3.6049954891204834,
+            "y": 0.10999999940395355,
+            "z": -6.127199649810791
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.7,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -19.437255859375,
+            "y": 0,
+            "z": -1.7334237098693848
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 1.6599239110946655,
+            "y": 0.10999999940395355,
+            "z": -6.680150508880615
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.9,
+          "hops": false,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -15.96489429473877,
+            "y": 0,
+            "z": -2.8801827430725098
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -2.1753835678100586,
+            "y": 0.10999999940395355,
+            "z": -2.784623384475708
+          }
+        }
+      ]
+    },
+    {
+      "kind": "shots",
+      "side": 1,
+      "hops": true,
+      "shots": [
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.1,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -30.547348022460938,
+            "y": 0.001032201573252678,
+            "z": -15.762508392333984
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -3.4368081092834473,
+            "y": 0.1850091516971588,
+            "z": 5.246665000915527
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.3,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -28.583293914794922,
+            "y": 0.00025679246755316854,
+            "z": -8.287365913391113
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -0.2289009690284729,
+            "y": 0.10497325658798218,
+            "z": -2.689516544342041
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.5,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -24.788137435913086,
+            "y": -0.00010110362927662209,
+            "z": -9.691020011901855
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 1.705098271369934,
+            "y": 0.1049719974398613,
+            "z": -3.3360419273376465
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.7,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -21.329570770263672,
+            "y": 0.00019674580835271627,
+            "z": -8.320318222045898
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -2.331467628479004,
+            "y": 0.10497202724218369,
+            "z": -5.0718865394592285
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.65,
+          "z": -4.9,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -17.86314582824707,
+            "y": -0.00011049670865759254,
+            "z": -8.893135070800781
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 4.638924598693848,
+            "y": 0.15079015493392944,
+            "z": -0.5600095391273499
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.1,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -29.60811424255371,
+            "y": -0.000055026059271767735,
+            "z": -17.6373233795166
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 2.5753567218780518,
+            "y": 0.10497203469276428,
+            "z": -0.5492821335792542
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.3,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -27.915660858154297,
+            "y": -0.2932376563549042,
+            "z": -5.394896984100342
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 1.6263624429702759,
+            "y": 0.1049845814704895,
+            "z": -1.6887192726135254
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.5,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -24.15973663330078,
+            "y": -0.0002915575460065156,
+            "z": -6.988574504852295
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -2.394235372543335,
+            "y": 0.10439348965883255,
+            "z": -2.3455069065093994
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.7,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -20.490171432495117,
+            "y": 0.00007606982399011031,
+            "z": -5.911362171173096
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 3.6318345069885254,
+            "y": 0.18500955402851105,
+            "z": -1.8142189979553223
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.8,
+          "z": -4.9,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -16.924680709838867,
+            "y": 0.0001554458576720208,
+            "z": -6.575478553771973
+          },
+          "returned": true,
+          "result": "goal",
+          "faults": 0,
+          "position": {
+            "x": -0.9009537696838379,
+            "y": 0.14100603759288788,
+            "z": -7.933731555938721
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.1,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -30.44540023803711,
+            "y": -0.18795451521873474,
+            "z": -11.1419677734375
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -2.930549144744873,
+            "y": 0.17100848257541656,
+            "z": -2.470543622970581
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.3,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -27.26862144470215,
+            "y": -0.23112188279628754,
+            "z": -2.741702079772949
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 3.284115791320801,
+            "y": 0.18145236372947693,
+            "z": -0.6500482559204102
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.5,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -23.349985122680664,
+            "y": -0.23853205144405365,
+            "z": -2.3403308391571045
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -4.485291481018066,
+            "y": 0.15946155786514282,
+            "z": -0.2167234718799591
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.7,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -19.43788719177246,
+            "y": -0.24491313099861145,
+            "z": -1.9393924474716187
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": 3.1485345363616943,
+            "y": 0.10497166961431503,
+            "z": 0.2326025664806366
+          }
+        },
+        {
+          "side": 1,
+          "x": 4.95,
+          "z": -4.9,
+          "hops": true,
+          "vx": 0,
+          "vz": 0,
+          "impact": {
+            "x": -15.934946060180664,
+            "y": -0.13365045189857483,
+            "z": -3.0437943935394287
+          },
+          "returned": true,
+          "result": null,
+          "faults": 0,
+          "position": {
+            "x": -1.3637582063674927,
+            "y": 0.10497164726257324,
+            "z": 0.257298082113266
+          }
+        }
+      ]
+    },
+    {
+      "kind": "full-team",
+      "difficulty": "easy",
+      "strokes": 12,
+      "scores": {
+        "you": 1,
+        "cpu": 0
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team",
+      "difficulty": "normal",
+      "strokes": 12,
+      "scores": {
+        "you": 3,
+        "cpu": 0
+      },
+      "recoveries": 0
+    },
+    {
+      "kind": "full-team",
+      "difficulty": "hard",
+      "strokes": 22,
+      "scores": {
+        "you": 3,
+        "cpu": 1
+      },
+      "recoveries": 1
+    }
+  ]
+}

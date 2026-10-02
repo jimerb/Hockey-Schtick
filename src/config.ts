@@ -40,6 +40,14 @@ export type CheckTuning = { maxDistance: number; fullImpact: number; minImpact: 
 // A short rail shove, not a free-body launch. Stick-only catches transfer less of the hit.
 export const MATCH_CHECK_TUNING: CheckTuning = { maxDistance: .95, fullImpact: 23, minImpact: 1, cooldown: .4 };
 
+// Small far-zone paddles rest wholly behind the existing board collision face.
+// One press makes a complete stroke; the shared return cannot be held on the ice.
+export const OFFENSE = {
+  pivotX: 5.4, pivotZ: -5.65, length: 1.85, width: .16,
+  restAngle: Math.PI / 2, shotAngle: .55,
+  swingSpeed: 11, returnSpeed: 6.5, cooldown: .32,
+} as const;
+
 export type Vec = { x: number; y: number; z: number };
 export type Feed = 'center' | 'left' | 'right';
 export type Result = 'goal' | 'conceded' | 'fault';

@@ -86,7 +86,7 @@ for (const x of [-2.8, 2.8]) check(`three-skater layout leaves a physical return
     m.start('normal', seed); drop(m);
     assert.deepEqual(m.team.skaters.map(a => a.index), [0, 1, 2]);
     assert.deepEqual(s.current.actors.map(a => a.id), ['skater-0', 'skater-1', 'skater-2', 'goalie']);
-    assert.equal(s.world.bodies.len(), 9, 'The lower pair must be absent physically, not just hidden');
+    assert.equal(s.world.bodies.len() - s.offensePaddles.length, 9, 'The lower pair must be absent physically, not just hidden');
     s.place({ x, y: .11, z: 5.5 }, { x: 0, y: 0, z: -20 });
     for (let i = 0; i < 30; i++) m.step();
     assert.ok(s.current.puck.z < 1); assert.ok(s.puck.linvel().z < -18);
@@ -100,7 +100,7 @@ check('extended side skaters visit the former lower range and return, with fixed
   assert.deepEqual(m.team.lanes[2], LANES[2]);
   assert.deepEqual(LANES.slice(0, 2).map(l => l.max), [-2.3, -2.3], 'The slot artwork remains unchanged');
   assert.deepEqual(m.team.lanes.slice(0, 2).map(l => l.max), [LANES[3].max, LANES[4].max]);
-  assert.equal(s.world.bodies.len(), 9);
+  assert.equal(s.world.bodies.len() - s.offensePaddles.length, 9);
   s.downhill = 0; s.place({ x: 4.8, y: .11, z: 0 }, { x: 0, y: 0, z: 0 });
   const visits = [0, 1].map(() => ({ low: false, back: false, min: Infinity, max: -Infinity }));
   let differentPositions = false, rested = false;
@@ -124,7 +124,7 @@ check('extended side skaters visit the former lower range and return, with fixed
   assert.ok(visits.every(v => v.low && v.back)); assert.ok(differentPositions && rested);
   observations.push({ kind: 'extended-wing-coverage', seed: 42, visits, differentPositions, rested });
   m.start('hard', 43); assert.deepEqual(m.team.skaters.map(a => a.z), LANES.slice(0, 3).map(l => l.home));
-  assert.equal(m.team.extendedWings, true); assert.equal(s.world.bodies.len(), 9); s.dispose();
+  assert.equal(m.team.extendedWings, true); assert.equal(s.world.bodies.len() - s.offensePaddles.length, 9); s.dispose();
 });
 for (const index of [0, 1]) check(`extended wing ${index} pursues and strikes a puck in the former lower lane at real blade contact`, () => {
   const s = new RinkPhysics(), m = new HockeyMatch(s, 3, true); m.start('normal', 1024); drop(m);
