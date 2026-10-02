@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { writeFileSync } from 'node:fs';
 import * as T from 'three';
-import { hockeyFigure, iceTextures } from '../src/art';
+import { hockeyFigure, iceTextures, batchStatic } from '../src/art';
 import { hockeyGoal } from '../src/goal-art';
 import { ArenaCrowd } from '../src/crowd';
 
@@ -50,13 +50,19 @@ for (const goalie of [false, true]) {
   });
 }
 const goal = hockeyGoal();
+check('batching preserves transformed roots, including the independently moving goalie stick', () => {
+  const root = new T.Group(); root.position.set(2, 1, .42); root.rotation.y = .4;
+  const part = new T.Mesh(new T.BoxGeometry(.4,.2,.15), new T.MeshStandardMaterial()); part.position.x = .2; root.add(part);
+  const before = new T.Box3().setFromObject(root); batchStatic(root); const after = new T.Box3().setFromObject(root);
+  assert.ok(before.min.distanceTo(after.min) < .000001 && before.max.distanceTo(after.max) < .000001);
+});
 check('woven goal geometry is finite and batched within a small draw budget', () => {
   const budget = geometryBudget(goal); assert.ok(budget.meshes <= 8); assert.ok(budget.triangles < 16000); observations.push({ kind: 'goal', ...budget });
 });
 check('net covers only the roof, rear and sides, leaving the goal mouth open', () => {
   const back = goal.getObjectByName('woven-net-back-and-sides') as T.Mesh, roof = goal.getObjectByName('woven-net-roof') as T.Mesh;
   const box = new T.Box3().setFromObject(roof);
-  assert.ok(box.min.y >= 1.27); assert.ok(box.max.z <= -7.649);
+  assert.ok(box.min.y >= 1.14 && box.min.y < 1.2); assert.ok(box.max.y <= 1.401); assert.ok(box.max.z <= -7.649);
   const p = back.geometry.getAttribute('position'); for (let i = 0; i < p.count; i++) assert.ok(p.getZ(i) <= -7.649);
   const material = back.material as T.MeshStandardMaterial;
   assert.ok(material.alphaTest > 0); assert.ok(material.map); assert.equal(material.side, T.DoubleSide);

@@ -1,7 +1,7 @@
 {
-  "date": "2026-10-02T19:20:29.010Z",
+  "date": "2026-10-02T20:10:40.133Z",
   "scope": "Geometry and animation logic; no WebGL, canvas pixels or live browser validation",
-  "passed": 15,
+  "passed": 16,
   "failed": [],
   "checks": [
     {
@@ -18,6 +18,10 @@
     },
     {
       "name": "goalie stick remains a separately movable mesh inside its original blade footprint",
+      "passed": true
+    },
+    {
+      "name": "batching preserves transformed roots, including the independently moving goalie stick",
       "passed": true
     },
     {
@@ -69,41 +73,41 @@
     {
       "kind": "skater",
       "meshes": 12,
-      "triangles": 27276,
+      "triangles": 28550,
       "bounds": {
         "min": [
-          -0.26500001549720764,
-          0.014999999664723873,
-          -0.34299999475479126
+          -0.35499998927116394,
+          0.01600000075995922,
+          -0.39234063029289246
         ],
         "max": [
-          1.3000200986862183,
-          1.3947139978408813,
-          0.328000009059906
+          1.3000586032867432,
+          1.364240050315857,
+          0.3748556077480316
         ]
       }
     },
     {
       "kind": "goalie",
-      "meshes": 16,
-      "triangles": 23232,
+      "meshes": 14,
+      "triangles": 26058,
       "bounds": {
         "min": [
           -0.5550000071525574,
-          0.004999992903321981,
-          -0.278
+          -0.008422679267823696,
+          -0.35262611508369446
         ],
         "max": [
           0.6299999952316284,
-          1.4617999792099,
-          0.9100000095367431
+          1.4348000288009644,
+          0.4678446781635284
         ]
       }
     },
     {
       "kind": "goal",
-      "meshes": 7,
-      "triangles": 7056
+      "meshes": 5,
+      "triangles": 7384
     },
     {
       "kind": "crowd",
@@ -115,8 +119,8 @@
     {
       "kind": "animation-cpu-only",
       "samples": 300,
-      "medianMs": 0.19610000000000127,
-      "p95Ms": 0.27499999999997726,
+      "medianMs": 0.1811999999999898,
+      "p95Ms": 0.26319999999998345,
       "caveat": "Node CPU only; does not measure browser GPU rendering or FPS"
     }
   ]

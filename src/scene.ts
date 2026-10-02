@@ -1,5 +1,6 @@
 import * as T from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { Reflector } from 'three/addons/objects/Reflector.js';
 import { C, OFFENSE, LANES, MATCH_SKATERS, MATCH_EXTENDED_WINGS, cradleGuides, guides, outline, returnApron } from './config';
 import type { State } from './physics';
 import type { Vec } from './config';
@@ -27,6 +28,7 @@ export class RinkView {
   resolution = ''; gpu = 'Unavailable';
   private actors = new Map<string, { group: T.Group; ring: T.Mesh; blade?: T.Group }>();
   private puckHalo: T.Mesh;
+  private iceReflection: Reflector;
   private host: HTMLElement; private observer: ResizeObserver; private reduced = false;
   private led = new T.MeshBasicMaterial({ color: 0x35baff, toneMapped: false });
   private glowMap = softTexture(); private glows: T.Sprite[] = [];
@@ -36,7 +38,8 @@ export class RinkView {
   constructor(host: HTMLElement, private match = false) {
     this.host = host;
     this.renderer = new T.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-    this.renderer.outputColorSpace = T.SRGBColorSpace; this.renderer.toneMapping = T.ACESFilmicToneMapping; this.renderer.toneMappingExposure = .96;
+    this.renderer.outputColorSpace = T.SRGBColorSpace; this.renderer.toneMapping = T.ACESFilmicToneMapping; this.renderer.toneMappingExposure = 1;
+    this.renderer.shadowMap.enabled = true; this.renderer.shadowMap.type = T.PCFShadowMap;
     host.append(this.renderer.domElement); this.renderer.domElement.setAttribute('aria-label', 'Angled tabletop hockey rink, viewed from behind your two flippers');
     const gl = this.renderer.getContext(), debug = gl.getExtension('WEBGL_debug_renderer_info'); if (debug) this.gpu = gl.getParameter(debug.UNMASKED_RENDERER_WEBGL);
     const environment = new RoomEnvironment(), pmrem = new T.PMREMGenerator(this.renderer);
@@ -45,21 +48,56 @@ export class RinkView {
       const panel = new T.Mesh(new T.PlaneGeometry(1.4, 10), new T.MeshBasicMaterial({ color: 0xc4eaff }));
       panel.position.set(x, 6, -2); panel.rotation.x = Math.PI / 2; environment.add(panel);
     }
-    const env = pmrem.fromScene(environment, .035); this.scene.environment = env.texture; this.scene.environmentIntensity = .85; environment.dispose(); pmrem.dispose();
-    this.scene.add(new T.HemisphereLight(0xd4eaff, 0x14253a, .8));
-    const key = new T.DirectionalLight(0xfff6e8, 2.15); key.position.set(-4, 13, -8); this.scene.add(key);
-    const fill = new T.DirectionalLight(0x91caff, .85); fill.position.set(6, 8, 3); this.scene.add(fill);
-    const rim = new T.DirectionalLight(0x47a8ff, .65); rim.position.set(-8, 4, -5); this.scene.add(rim);
+    const env = pmrem.fromScene(environment, .035); this.scene.environment = env.texture; this.scene.environmentIntensity = .48; environment.dispose(); pmrem.dispose();
+    this.scene.add(new T.HemisphereLight(0xd4eaff, 0x14253a, .55));
+    const key = new T.DirectionalLight(0xfff6e8, 2.6); key.position.set(-3, 12, -5);
+    key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.camera.left = -7; key.shadow.camera.right = 7;
+    key.shadow.camera.top = 11; key.shadow.camera.bottom = -11; key.shadow.camera.near = .5; key.shadow.camera.far = 35;
+    key.shadow.normalBias = .015; key.shadow.bias = -.00015; key.shadow.radius = 2; this.scene.add(key);
+    const fill = new T.DirectionalLight(0x91caff, .6); fill.position.set(6, 8, 3); this.scene.add(fill);
+    const rim = new T.DirectionalLight(0x47a8ff, .8); rim.position.set(-8, 4, -5); this.scene.add(rim);
     this.scene.add(this.staticArt, this.crowd.group);
     const { navy, chrome, white, red } = paint;
     const outer = outline.map(v => ({ ...v, x: v.x * 1.11, z: v.z * 1.06 }));
     const cabinet = polygon(outer, .62, navy); cabinet.position.y = -.68; this.staticArt.add(cabinet);
     // One physical surface: scuffs affect its relief/gloss while rink paint remains legible.
-    const ice = polygon(outline, 0, new T.MeshPhysicalMaterial({ ...iceTextures(), roughness: .48, bumpScale: .007,
-      metalness: .025, clearcoat: .6, clearcoatRoughness: .25, ior: 1.31, envMapIntensity: .5 }));
+    const ice = polygon(outline, 0, new T.MeshPhysicalMaterial({ ...iceTextures(), color: 0xb2d6ed, roughness: .62, bumpScale: .022,
+      metalness: 0, clearcoat: .22, clearcoatRoughness: .3, ior: 1.31, envMapIntensity: .18 }));
     const pos = ice.geometry.getAttribute('position'), uv = ice.geometry.getAttribute('uv');
     for (let i = 0; i < pos.count; i++) uv.setXY(i, (pos.getX(i) + 5.4) / 10.8, (pos.getY(i) + 9) / 18);
-    uv.needsUpdate = true; ice.position.y = .01; this.staticArt.add(ice);
+    uv.needsUpdate = true; ice.position.y = .01; ice.receiveShadow = true; this.scene.add(ice);
+    // A softened planar reflection grounds moving figures and LEDs in the ice.
+    // A fixed-size render target bounds the cost on larger displays.
+    this.iceReflection = new Reflector(ice.geometry.clone(), { textureWidth: 512, textureHeight: 768, multisample: 0, clipBias: .003,
+      shader: { name: 'IceReflection', uniforms: { color: { value: new T.Color(0xffffff) }, tDiffuse: { value: null }, textureMatrix: { value: new T.Matrix4() } }, vertexShader: `
+        uniform mat4 textureMatrix; varying vec4 vUv;
+        #include <common>
+        #include <logdepthbuf_pars_vertex>
+        void main() {
+          vUv = textureMatrix * vec4(position, 1.0);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          #include <logdepthbuf_vertex>
+        }`, fragmentShader: `
+        uniform sampler2D tDiffuse; varying vec4 vUv;
+        #include <logdepthbuf_pars_fragment>
+        void main() {
+          #include <logdepthbuf_fragment>
+          vec2 uv = vUv.xy / vUv.w;
+          vec3 reflection = texture2D(tDiffuse, uv).rgb * .4;
+          reflection += texture2D(tDiffuse, uv + vec2(.0015,.0015)).rgb * .15;
+          reflection += texture2D(tDiffuse, uv - vec2(.0015,.0015)).rgb * .15;
+          reflection += texture2D(tDiffuse, uv + vec2(-.0015,.0015)).rgb * .15;
+          reflection += texture2D(tDiffuse, uv + vec2(.0015,-.0015)).rgb * .15;
+          gl_FragColor = vec4(reflection * vec3(.82,.93,1.0), .10);
+          #include <tonemapping_fragment>
+          #include <colorspace_fragment>
+        }` } });
+    this.iceReflection.rotation.x = -Math.PI / 2; this.iceReflection.position.y = .023;
+    const reflectionMaterial = this.iceReflection.material as T.ShaderMaterial;
+    reflectionMaterial.transparent = true; reflectionMaterial.depthWrite = false;
+    const reflect = this.iceReflection.onBeforeRender.bind(this.iceReflection);
+    this.iceReflection.onBeforeRender = (...args) => { const visible = this.crowd.group.visible; this.crowd.group.visible = false; try { reflect(...args); } finally { this.crowd.group.visible = visible; } };
+    this.scene.add(this.iceReflection);
     const glass = new T.MeshPhysicalMaterial({ color: 0xb5dcf2, transparent: true, opacity: .12, roughness: .14, metalness: .08, clearcoat: .6, depthWrite: false, side: T.DoubleSide });
     const glassEdges = surface(0x99cbe8, { metalness: .75, roughness: .2 });
     for (let i = 0; i < outline.length; i++) {
@@ -142,21 +180,22 @@ export class RinkView {
   }
   private makeActor(id: string, goalie: boolean, number: number) {
     const { group, blade } = hockeyFigure(goalie, number); group.visible = false;
+    group.traverse(node => { if (node instanceof T.Mesh && !Array.isArray(node.material) && !node.material.transparent) { node.castShadow = true; node.receiveShadow = true; } });
     const ring = new T.Mesh(new T.RingGeometry(.46, .53, 32), new T.MeshBasicMaterial({ color: 0xffbd4a, transparent: true, opacity: .8, depthWrite: false })); ring.rotation.x = -Math.PI / 2; ring.position.y = .047; group.add(ring); groundShadow(group, goalie ? 1.3 : 1.1, .95, .48, this.glowMap);
     this.actors.set(id, { group, ring, blade }); this.scene.add(group);
   }
   private makeGoal() {
     // Rear/side bumper colliders stay in physics; only the actual net piping is visible.
-    this.staticArt.add(hockeyGoal());
-    groundShadow(this.staticArt, 3.4, 1.9, .18, this.glowMap).position.set(0, .033, -8.15);
+    const net = hockeyGoal(); net.traverse(node => { if (node instanceof T.Mesh) { node.castShadow = true; node.receiveShadow = true; } }); this.scene.add(net);
+    groundShadow(this.staticArt, 3.7, 2.3, .32, this.glowMap).position.set(0, .033, -8.15);
   }
   setCelebration(kind: 'you' | 'cpu' | null) { this.celebration = kind; this.celebrationStart = performance.now(); }
-  setReduced(value: boolean) { this.reduced = value; this.resize(); }
+  setReduced(value: boolean) { this.reduced = value; this.iceReflection.visible = !value; this.renderer.shadowMap.enabled = !value; this.resize(); }
   setReducedMotion(value: boolean) { this.reducedMotion = value; if (value) this.crowd.resetMotion(); }
   private resize() {
     const w = Math.max(1, this.host.clientWidth), h = Math.max(1, this.host.clientHeight), aspect = w / h; this.camera.aspect = aspect;
     // Fit every corner, including glass. Wider views reveal crowds without shrinking the rink.
-    const elevation = 57 * Math.PI / 180, s = Math.sin(elevation), c = Math.cos(elevation), tan = Math.tan(this.camera.fov * Math.PI / 360); let distance = 0;
+    const elevation = 47 * Math.PI / 180, s = Math.sin(elevation), c = Math.cos(elevation), tan = Math.tan(this.camera.fov * Math.PI / 360); let distance = 0;
     for (const x of [-6.02, 6.02]) for (const y of [-.7, 1.96]) for (const z of [-9.62, 9.7]) { const depth = y * s + z * c, up = y * c - z * s; distance = Math.max(distance, depth + Math.abs(x) / (tan * aspect * .965), depth + Math.abs(up) / (tan * .965)); }
     let offset = 0;
     if (this.match) {
@@ -173,7 +212,7 @@ export class RinkView {
     this.camera.position.set(0, distance * s + offset * c, distance * c - offset * s); this.camera.lookAt(0, offset * c, -offset * s); this.camera.updateProjectionMatrix(); this.renderer.setPixelRatio(this.reduced ? 1 : Math.min(window.devicePixelRatio, 1.75)); this.renderer.setSize(w, h); this.crowd.group.visible = !this.reduced && aspect > .82;
     const size = this.renderer.getDrawingBufferSize(new T.Vector2()); this.resolution = `${size.x} × ${size.y}`;
   }
-  get presentation() { return { camera: 'perspective', elevation: 57, crowd: this.crowd.group.visible, crowdDetail: this.crowd.presentation, ice: 'scuffed physical clearcoat with studio reflections', reducedMotion: this.reducedMotion, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, celebration: this.celebration }; }
+  get presentation() { return { camera: 'perspective', elevation: 47, crowd: this.crowd.group.visible, crowdDetail: this.crowd.presentation, ice: 'scuffed clearcoat with softened planar reflections', reflections: this.iceReflection.visible, shadows: this.renderer.shadowMap.enabled, reducedMotion: this.reducedMotion, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles, celebration: this.celebration }; }
   render(prev: State, now: State, alpha: number, stickEnabled: boolean, motionActive = true) {
     const lerp = T.MathUtils.lerp; this.puck.visible = this.shadow.visible = now.active;
     this.puck.position.set(lerp(prev.puck.x, now.puck.x, alpha), lerp(prev.puck.y, now.puck.y, alpha), lerp(prev.puck.z, now.puck.z, alpha)); this.shadow.position.x = this.puck.position.x; this.shadow.position.z = this.puck.position.z;

@@ -32,7 +32,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <label class="toggle"><input id="hops" type="checkbox"><span>Low puck hops<small>Tiny lifts after harder impacts</small></span></label>
     <label class="toggle"><input id="stick" type="checkbox"><span>Moving stick fixture<small>A sliding, rotating collision test</small></span></label>
     <label class="toggle"><input id="sound" type="checkbox" checked><span>Contact sounds</span></label>
-    <label class="toggle"><input id="reduced" type="checkbox"><span>Lower render resolution</span></label>
+    <label class="toggle"><input id="reduced" type="checkbox"><span>Lower graphics detail</span></label>
     <p class="small">A scored or conceded puck ends the rally. The next feed follows automatically.</p>
     <details id="lab"><summary>Performance lab</summary><p class="small">Measures this browser and device. The 120-second run repeats feeds, goals, banks, and moving contacts. You can stop it any time.</p><button id="benchmark" class="secondary" disabled>Run 120-second test</button><label class="toggle"><input id="thirty" type="checkbox"><span>Render at 30 FPS<small>Physics stays at 120 Hz</small></span></label><pre id="metrics">Waiting for play</pre><button id="export" class="text-button" disabled>Download test results</button></details>
   </aside>

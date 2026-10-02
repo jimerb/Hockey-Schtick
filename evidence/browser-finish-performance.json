@@ -1,0 +1,113 @@
+{
+  "browser": "154.0.8037.93",
+  "viewport": "1920x1080 at DPR 1.5",
+  "errors": [],
+  "date": "2026-10-02T20:08:11.101Z",
+  "mode": "rally",
+  "catches": 0,
+  "releaseAttempts": 0,
+  "completed": true,
+  "reason": null,
+  "activeSeconds": 120,
+  "measuredFrames": 7021,
+  "medianFrameMs": 16.7,
+  "p95FrameMs": 16.8,
+  "medianDrawIntervalMs": 16.7,
+  "p95DrawIntervalMs": 16.8,
+  "stallsOver100ms": 0,
+  "p95PhysicsPerFrameMs": 0.5,
+  "contacts": 472,
+  "goals": 0,
+  "conceded": 3,
+  "neutralRestarts": 0,
+  "completedMatches": 0,
+  "assistedStrikes": 14,
+  "checks": 0,
+  "settings": {
+    "version": "0.4.6",
+    "presentation": {
+      "camera": "perspective",
+      "elevation": 47,
+      "crowd": true,
+      "crowdDetail": {
+        "spectators": 224,
+        "instancedMeshes": 7,
+        "animationHz": 30,
+        "fadedTiers": 4
+      },
+      "ice": "scuffed physical clearcoat with studio reflections",
+      "reducedMotion": false,
+      "drawCalls": 176,
+      "triangles": 169412,
+      "celebration": null
+    },
+    "difficulty": "normal",
+    "seed": 1024,
+    "actors": 4,
+    "extendedWings": true,
+    "playTuning": {
+      "openingSpeed": 9.5,
+      "openingMinX": 2.2,
+      "openingMaxX": 3.6,
+      "openingZ": 6.15,
+      "rearBoost": 2.4,
+      "rearMaxSpeed": 24,
+      "rearCone": -0.65
+    },
+    "flipperRubber": {
+      "heldRestitution": 0.12,
+      "passiveRestitution": 0.3,
+      "strikeRestitution": 0.94,
+      "friction": 0.2
+    },
+    "checking": {
+      "maxDistance": 0.95,
+      "fullImpact": 23,
+      "minImpact": 1,
+      "cooldown": 0.4
+    },
+    "offensePaddles": {
+      "pivotX": 5.4,
+      "pivotZ": -5.65,
+      "length": 1.85,
+      "width": 0.16,
+      "restAngle": 1.5707963267948966,
+      "shotAngle": 0.55,
+      "swingSpeed": 11,
+      "returnSpeed": 6.5
+    },
+    "skaterLanes": [
+      {
+        "index": 0,
+        "x": -2.8,
+        "min": -5.9,
+        "max": 4.9,
+        "home": -4.1
+      },
+      {
+        "index": 1,
+        "x": 2.8,
+        "min": -5.9,
+        "max": 4.9,
+        "home": -4.1
+      },
+      {
+        "index": 2,
+        "x": 0,
+        "min": -3.25,
+        "max": 0.25,
+        "home": -1.65
+      }
+    ],
+    "hops": false,
+    "reduced": false,
+    "render30": false,
+    "physicsHz": 120,
+    "downhill": 3.2,
+    "resolution": "2853 × 1528",
+    "viewport": "1920 × 1080",
+    "devicePixelRatio": 1.5,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti (0x00002208) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+  }
+}

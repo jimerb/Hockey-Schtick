@@ -11,6 +11,9 @@ export const paint = {
   black: surface(0x101722, { roughness: .52 }), skin: surface(0xe8b18d, { roughness: .65 }),
   wood: surface(0xc7a77a, { roughness: .45 }), pad: surface(0xa58656, { roughness: .58 }),
   stitch: surface(0x5e482b, { roughness: .9 }), tape: surface(0xd4d4cb, { roughness: .8 }),
+  cloth: surface(0xffffff, { vertexColors: true, roughness: .67 }),
+  pants: surface(0x111927, { roughness: .8 }),
+  hockeyPants: surface(0x8c0920, { roughness: .69 }),
 };
 export function rounded(parent: T.Object3D, x: number, y: number, z: number, w: number, h: number, d: number, mat: T.Material, radius = .04) {
   const m = new T.Mesh(new RoundedBoxGeometry(w, h, d, 2, Math.min(radius, w / 3, h / 3, d / 3)), mat);
@@ -34,17 +37,57 @@ function bar(parent: T.Object3D, a: number[], b: number[], width: number, depth:
   mesh.position.copy(start).add(end).multiplyScalar(.5); mesh.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), delta.normalize()); return mesh;
 }
 
+// Continuous tailored sleeves and socks, rather than separate balls at each joint.
+function clothTube(parent: T.Group, points: number[][], radii: number[], colors: (t: number) => number) {
+  const curve = new T.CatmullRomCurve3(points.map(p => new T.Vector3(...p)), false, 'centripetal');
+  const count = 40, sides = 20, frames = curve.computeFrenetFrames(count, false);
+  const pos: number[] = [], rgb: number[] = [], uv: number[] = [], indices: number[] = [];
+  for (let i = 0; i <= count; i++) {
+    const t = i / count, center = curve.getPointAt(t), sample = t * (radii.length - 1), a = Math.min(radii.length - 2, Math.floor(sample));
+    const radius = T.MathUtils.lerp(radii[a], radii[a + 1], sample - a), color = new T.Color(colors(t));
+    for (let j = 0; j <= sides; j++) {
+      const theta = j / sides * Math.PI * 2;
+      const fold = 1 + .032 * Math.sin(theta * 5 + t * 8) + .018 * Math.sin(t * 55) * Math.sin(Math.PI * t);
+      const p = center.clone().addScaledVector(frames.normals[i], Math.cos(theta) * radius * fold).addScaledVector(frames.binormals[i], Math.sin(theta) * radius * fold);
+      pos.push(...p.toArray()); rgb.push(color.r, color.g, color.b); uv.push(j / sides, t);
+      if (i < count && j < sides) { const k = i * (sides + 1) + j; indices.push(k, k + 1, k + sides + 1, k + 1, k + sides + 2, k + sides + 1); }
+    }
+  }
+  const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new T.Float32BufferAttribute(rgb, 3)); g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); g.setIndex(indices); g.computeVertexNormals(); parent.add(new T.Mesh(g, paint.cloth));
+}
+
+function tailoredJersey(parent: T.Group) {
+  // Cross-sections follow the crouched spine; broad shoulders taper into the neck.
+  const profile = [[-.12,.56,.17,.23],[-.11,.62,.18,.24],[-.07,.74,.185,.255],[0,.91,.195,.28],[.035,1.01,.17,.265],[.075,1.065,.095,.10]];
+  const contour = new T.CatmullRomCurve3(profile.map(p => new T.Vector3(p[2],p[1],p[3])), false, 'centripetal');
+  const pos: number[] = [], colors: number[] = [], uv: number[] = [], indices: number[] = [], rings = 48, sides = 40;
+  for (let i = 0; i <= rings; i++) {
+    const t = i / rings, section = contour.getPoint(t), y = section.y;
+    let a = 0; while (a < profile.length - 2 && profile[a + 1][1] < y) a++;
+    const f = (y - profile[a][1]) / (profile[a + 1][1] - profile[a][1]), p = profile[a].map((v, j) => T.MathUtils.lerp(v, profile[a + 1][j], f));
+    p[2] = section.x; p[3] = section.z;
+    const c = new T.Color((y > .61 && y < .636) || (y > .663 && y < .691) ? 0xf2ebdf : 0x99091f);
+    for (let j = 0; j <= sides; j++) {
+      const angle = j / sides * Math.PI * 2, wrinkle = 1 + .028 * Math.sin(angle * 7 + y * 14) * (1 - t) + .018 * Math.sin(angle * 11 + y * 20);
+      pos.push(p[0] + Math.cos(angle) * p[2] * wrinkle, y, Math.sin(angle) * p[3] * wrinkle); colors.push(c.r, c.g, c.b); uv.push(j / sides, t);
+      if (i < rings && j < sides) { const k = i * (sides + 1) + j; indices.push(k, k + sides + 1, k + 1, k + 1, k + sides + 1, k + sides + 2); }
+    }
+  }
+  const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new T.Float32BufferAttribute(colors, 3)); g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); g.setIndex(indices); g.computeVertexNormals(); parent.add(new T.Mesh(g, paint.cloth));
+}
+
 // Merge only rigid, opaque decoration. Moving figures, glass and ground shadows stay separate.
 export function batchStatic(root: T.Group) {
   root.updateMatrixWorld(true);
+  const inverseRoot = root.matrixWorld.clone().invert();
   const batches = new Map<T.Material, T.BufferGeometry[]>(), originals: T.Mesh[] = [];
   root.traverse(node => {
     if (!(node instanceof T.Mesh) || Array.isArray(node.material) || node.material.transparent) return;
     const g = node.geometry.index ? node.geometry.toNonIndexed() : node.geometry.clone();
-    for (const attribute of Object.keys(g.attributes)) if (!['position', 'normal', 'uv'].includes(attribute)) g.deleteAttribute(attribute);
+    for (const attribute of Object.keys(g.attributes)) if (!['position', 'normal', 'uv', 'color'].includes(attribute)) g.deleteAttribute(attribute);
     if (!g.getAttribute('uv')) g.setAttribute('uv', new T.BufferAttribute(new Float32Array(g.getAttribute('position').count * 2), 2));
     if (!g.getAttribute('normal')) g.computeVertexNormals();
-    g.applyMatrix4(node.matrixWorld);
+    g.applyMatrix4(inverseRoot.clone().multiply(node.matrixWorld));
     const list = batches.get(node.material) ?? []; list.push(g); batches.set(node.material, list); originals.push(node);
   });
   originals.forEach(m => { m.removeFromParent(); m.geometry.dispose(); });
@@ -72,14 +115,14 @@ export function iceTextures() {
   const grain = document.createElement('canvas'); grain.width = 512; grain.height = 1024;
   const rough = grain.getContext('2d')!; rough.fillStyle = '#a4a4a4'; rough.fillRect(0, 0, 512, 1024);
   const grad = ctx.createLinearGradient(0, 0, 1024, 2048);
-  grad.addColorStop(0, '#cde7f5'); grad.addColorStop(.45, '#e5f0f5'); grad.addColorStop(1, '#b7dff3');
+  grad.addColorStop(0, '#78aed0'); grad.addColorStop(.45, '#c1e0ed'); grad.addColorStop(1, '#91c5e4');
   ctx.fillStyle = grad; ctx.fillRect(0, 0, 1024, 2048);
   let seed = 32; const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
   // Broad skate sweeps and fine scuffs, beneath the painted markings.
   for (let i = 0; i < 6500; i++) {
     const x = random() * 1024, y = random() * 2048;
     const ex = x + random() * 85 - 42, ey = y + random() * 100 - 50;
-    ctx.strokeStyle = i % 3 ? '#ffffff24' : '#6f9ebb15'; ctx.lineWidth = .45 + random() * .8;
+    ctx.strokeStyle = i % 3 ? '#ffffff52' : '#387da02b'; ctx.lineWidth = .45 + random() * .8;
     for (const context of [ctx, bump]) {
       if (context === bump) { bump.strokeStyle = i % 2 ? '#b0b0b045' : '#4c4c4c30'; bump.lineWidth = ctx.lineWidth; }
       context.beginPath(); context.moveTo(x, y); context.quadraticCurveTo(x + 14, y + 8, ex, ey); context.stroke();
@@ -89,15 +132,15 @@ export function iceTextures() {
   }
   const X = (x: number) => (x + 5.4) / 10.8 * 1024, Z = (z: number) => (z + 9) / 18 * 2048;
   const line = (z: number, color: string, width: number) => { ctx.strokeStyle = color; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(0, Z(z)); ctx.lineTo(1024, Z(z)); ctx.stroke(); };
-  line(-2.8, '#1676cbbb', 14); line(2.8, '#1676cbbb', 14); line(0, '#ce2249bb', 10);
+  line(-2.8, '#0059b7', 18); line(2.8, '#0059b7', 18); line(0, '#bb1234', 12);
   for (let x = 0; x < 1024; x += 38) { ctx.fillStyle = '#e1eaf688'; ctx.fillRect(x, Z(0) - 5, 16, 10); }
-  line(-7.65, '#cd2947', 3); line(7.55, '#cd2947', 3);
+  line(-7.65, '#c41637', 5); line(7.55, '#c41637', 5);
   function circle(x: number, z: number, r: number, color: string) {
-    ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.beginPath(); ctx.ellipse(X(x), Z(z), X(r) - X(0), Z(r) - Z(0), 0, 0, Math.PI * 2); ctx.stroke();
+    ctx.strokeStyle = color; ctx.lineWidth = 5; ctx.beginPath(); ctx.ellipse(X(x), Z(z), X(r) - X(0), Z(r) - Z(0), 0, 0, Math.PI * 2); ctx.stroke();
     ctx.fillStyle = color; ctx.beginPath(); ctx.ellipse(X(x), Z(z), 9, 10, 0, 0, Math.PI * 2); ctx.fill();
     if (x) for (const s of [-1, 1]) { ctx.beginPath(); ctx.moveTo(X(x + s * .25), Z(z - .17)); ctx.lineTo(X(x + s * .5), Z(z - .17)); ctx.lineTo(X(x + s * .5), Z(z + .17)); ctx.lineTo(X(x + s * .25), Z(z + .17)); ctx.stroke(); }
   }
-  circle(0, 0, 1.6, '#147cca'); for (const x of [-2.8, 2.8]) for (const z of [-4.8, 4.5]) circle(x, z, 1.55, '#c63151bb');
+  circle(0, 0, 1.6, '#0068c2'); for (const x of [-2.8, 2.8]) for (const z of [-4.8, 4.5]) circle(x, z, 1.55, '#c41637');
   for (const z of [-7.65, 7.55]) { ctx.fillStyle = '#198dec28'; ctx.strokeStyle = '#cd2947'; ctx.lineWidth = 3; ctx.beginPath(); ctx.ellipse(X(0), Z(z), X(1.55) - X(0), Z(1.1) - Z(0), 0, z < 0 ? 0 : Math.PI, z < 0 ? Math.PI : Math.PI * 2); ctx.closePath(); ctx.fill(); ctx.stroke(); }
   // Soft LED spill complements the camera-dependent specular surface reflection.
   for (const x of [45, 979]) for (let y = 170; y < 1930; y += 350) {
@@ -120,23 +163,24 @@ function jerseyBadge(parent: T.Object3D, number: number, goalie: boolean) {
   if (goalie) { back.position.set(0, .85, -.278); back.rotation.y = Math.PI; }
   else { back.position.set(-.256, .87, 0); back.rotation.y = -Math.PI / 2; }
   parent.add(back);
-  const crest = new T.Mesh(new T.CircleGeometry(.08, 6), paint.cream);
-  if (goalie) crest.position.set(0, .9, .254);
-  else { crest.position.set(.247, .91, 0); crest.rotation.y = Math.PI / 2; }
-  parent.add(crest);
+  // A small lace-up collar, leaving the broad red chest clean like the reference.
+  for (let i = 0; i < 3; i++) {
+    if (goalie) rod(parent, [-.025, 1.01 - i * .018, .18], [.025, .998 - i * .018, .182], .004, paint.tape);
+    else rod(parent, [.169, 1.015 - i * .018, -.025], [.172, 1.003 - i * .018, .025], .004, paint.tape);
+  }
 }
 
 /** A tapered, wrapped blade within the original .48 by .18 horizontal footprint. */
 function stickBlade(parent: T.Object3D, centerX: number, centerZ: number, goalie = false) {
   const width = goalie ? .892 : .472, shape = new T.Shape(), half = width / 2;
-  shape.moveTo(-half, .07); shape.lineTo(half - .05, .055); shape.quadraticCurveTo(half, .075, half, .13);
-  shape.lineTo(half - .012, goalie ? .25 : .225); shape.quadraticCurveTo(half * .5, .19, -half, .205); shape.closePath();
-  const depth = goalie ? .132 : .172;
+  shape.moveTo(-half, .07); shape.lineTo(half - .05, .055); shape.quadraticCurveTo(half, .075, half, .11);
+  shape.lineTo(half - .012, goalie ? .20 : .16); shape.quadraticCurveTo(half * .5, .135, -half, .16); shape.closePath();
+  const depth = goalie ? .055 : .045;
   const mesh = new T.Mesh(new T.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelSize: .004, bevelThickness: .004, bevelSegments: 1, curveSegments: 6 }), paint.black);
   mesh.position.set(centerX, 0, centerZ - depth / 2); parent.add(mesh);
   for (let i = 0; i < 5; i++) {
     const x = centerX - half + .04 + i * (width - .08) / 5;
-    rounded(parent, x, .134, centerZ, .012, .112, goalie ? .14 : .18, paint.tape, .002);
+    rounded(parent, x, .119, centerZ, .007, .072, depth + .004, paint.black, .002);
   }
 }
 
@@ -147,6 +191,7 @@ export function hockeyFigure(goalie: boolean, number: number) {
   if (goalie) {
     // Stacked leather channels, knee rolls, bindings and toe straps rather than a pad wall.
     for (const sign of [-1, 1]) {
+      const start = group.children.length;
       const x = sign * .245;
       b(x, .31, .005, .42, .61, .3, pad, .08);
       b(x, .315, .165, .345, .55, .025, wood, .018);
@@ -160,28 +205,31 @@ export function hockeyFigure(goalie: boolean, number: number) {
       b(x, .12, .235, .34, .11, .065, pad, .02);
       b(x, .13, .273, .24, .015, .009, stitch, .003);
       rod(group, [x - .13, .025, -.12], [x + .13, .025, -.12], .012, chrome);
+      const leg = new T.Group(), pivot = new T.Vector3(x, .58, -.035);
+      for (const child of group.children.slice(start)) { child.position.sub(pivot); leg.add(child); }
+      leg.position.copy(pivot); leg.rotation.z = sign * .16; leg.rotation.x = -.1; group.add(leg);
     }
-    b(0, .67, -.055, .6, .28, .4, navy, .085);
-    sphere(group, 0, .85, -.015, .3, red, [1.12, .89, .84]);
-    b(0, .652, .035, .57, .062, .41, white, .025);
+    b(0, .555, -.075, .6, .23, .35, paint.pants, .065);
+    const jersey = new T.Group(); tailoredJersey(jersey); jersey.rotation.y = -Math.PI / 2; jersey.scale.set(1.1,1,1.2); jersey.position.z = -.035; group.add(jersey);
     for (const sign of [-1, 1]) {
-      sphere(group, sign * .25, .99, 0, .16, red, [1.08, .8, 1]);
-      limb(group, [sign * .24, .97, .01], [sign * .36, .82, .07], .12, red);
-      limb(group, [sign * .36, .82, .07], [sign * .43, .69, .18], .105, red);
-      b(sign * .40, .755, .155, .20, .047, .2, white, .014);
+      clothTube(group, [[sign * .14,1.015,0],[sign * .29,.965,.015],[sign * .36,.82,.07],[sign * .43,.69,.18]], [.08,.13,.115,.09], t => t > .61 && t < .68 || t > .76 && t < .83 ? 0xf2ebdf : 0x99091f);
     }
     b(-.44, .68, .245, .23, .31, .11, pad, .045);
     b(-.44, .68, .306, .17, .24, .01, wood, .015);
     for (const y of [.59, .65, .71, .77]) b(-.44, y, .318, .16, .009, .008, stitch, .002);
     sphere(group, .44, .70, .21, .19, pad, [1.0, 1.07, .68]);
     sphere(group, .46, .71, .33, .135, stitch, [1, 1, .25]);
-    for (const y of [.64, .70, .76]) rod(group, [.355, y, .365], [.555, y, .365], .007, tape);
+    for (const y of [.64, .69, .74, .79]) {
+      rod(group, [.36, y, .36], [.53, y + .045, .355], .006, tape);
+      rod(group, [.36, y + .045, .36], [.53, y, .355], .006, tape);
+    }
     rod(group, [0, 1.0, 0], [0, 1.15, .02], .077, skin);
-    sphere(group, 0, 1.235, .025, .21, helmet, [1.0, 1.08, 1.03]);
+    sphere(group, 0, 1.235, .025, .185, helmet, [1.0, 1.08, 1.03]);
     // A dark face opening inside the white mask; the cage follows its curved front.
-    sphere(group, 0, 1.205, .195, .174, white, [1.0, 1.05, .56]);
-    b(0, 1.232, .291, .275, .13, .018, black, .028);
-    b(0, 1.095, .273, .19, .07, .044, white, .02);
+    sphere(group, 0, 1.205, .18, .155, white, [1.0, 1.05, .56]);
+    sphere(group, 0, 1.227, .253, .12, black, [1,.57,.3]);
+    sphere(group, 0, 1.225, .273, .105, skin, [1,.52,.2]);
+    b(0, 1.095, .259, .15, .045, .044, white, .018);
     for (const x of [-.12, -.06, 0, .06, .12]) {
       const front = .318 - Math.abs(x) * .17;
       rod(group, [x, 1.105, .278], [x, 1.2, front], .006, chrome);
@@ -194,40 +242,37 @@ export function hockeyFigure(goalie: boolean, number: number) {
     for (const sign of [-1, 1]) for (const y of [1.12, 1.18]) sphere(group, sign * .164, y, .225, .013, black, [1, 1, .3]);
     blade = new T.Group(); blade.position.z = .42; group.add(blade);
     stickBlade(blade, 0, 0, true);
-    bar(blade, [.32, .83, -.25], [.32, .15, 0], .062, .043, wood);
-    rounded(blade, .32, .37, -.08, .095, .31, .052, tape, .008);
+    bar(blade, [-.42, .76, -.18], [-.20, .15, 0], .049, .035, wood);
+    bar(blade, [-.31, .45, -.09], [-.20, .15, 0], .10, .038, wood);
     jerseyBadge(group, number, true);
   } else {
     // Bent knees, forward shoulders and staggered skates give the figure a hockey stance.
     for (const sign of [-1, 1]) {
-      const z = sign * .16, footX = sign * .04 - .04;
-      b(footX, .085, z, .37, .14, .16, black, .05);
+      const z = sign * .235, footX = sign * .115 - .07;
+      b(footX, .085, z, .34, .13, .145, black, .06);
       sphere(group, footX + .115, .082, z, .065, black, [1.3, .8, 1]);
       b(footX, .026, z, .34, .02, .022, chrome, .005);
       for (const x of [-.11, .10]) b(footX + x, .045, z, .025, .04, .035, white, .006);
       for (let i = 0; i < 4; i++) rod(group, [footX - .045 + i * .031, .162, z - .045], [footX - .029 + i * .031, .165, z + .045], .005, tape);
-      limb(group, [footX - .01, .20, z], [.075, .40, z], .076, white);
-      limb(group, [.075, .40, z], [-.085, .585, z * .84], .101, navy);
-      sphere(group, .07, .405, z, .079, red, [1, .48, 1.12]);
-      limb(group, [footX + .028, .277, z], [footX + .045, .306, z], .078, red);
-      limb(group, [footX + .065, .345, z], [.065, .365, z], .079, red);
+      clothTube(group, [[footX - .035,.16,z],[footX + .015,.29,z],[.10 + sign * .035,.43,z * .88]], [.064,.075,.088], t => t > .43 && t < .51 || t > .60 && t < .68 ? 0xe7e5dc : t < .30 ? 0x141b25 : 0x99091f);
+      limb(group, [.10 + sign * .035, .43, z * .88], [-.12, .585, z * .73], .103, paint.hockeyPants);
     }
-    b(-.065, .56, 0, .32, .24, .36, navy, .07);
-    const torso = new T.Mesh(new T.LatheGeometry([new T.Vector2(.19, 0), new T.Vector2(.245, .04), new T.Vector2(.25, .13), new T.Vector2(.275, .31), new T.Vector2(.23, .43), new T.Vector2(.12, .48)], 20), red);
-    torso.position.set(-.055, .58, 0); torso.scale.set(.83, 1, .91); torso.rotation.z = -.18; group.add(torso);
-    const stripe = new T.Mesh(new T.LatheGeometry([new T.Vector2(.247, .065), new T.Vector2(.255, .125)], 20), white);
-    stripe.position.copy(torso.position); stripe.scale.copy(torso.scale); stripe.rotation.copy(torso.rotation); group.add(stripe);
+    b(-.12, .56, 0, .31, .20, .43, paint.hockeyPants, .065);
+    tailoredJersey(group);
     rod(group, [.028, 1.01, 0], [.085, 1.14, 0], .065, skin);
     const headStart = group.children.length;
     sphere(group, .105, 1.18, 0, .151, skin, [.95, 1.0, .88]);
-    sphere(group, .065, 1.275, 0, .198, helmet, [1.04, .77, .98]);
-    b(.217, 1.243, 0, .058, .035, .30, helmet, .012);
+    const shell = new T.Mesh(new T.SphereGeometry(.18, 32, 20, 0, Math.PI * 2, 0, Math.PI * .53), helmet); shell.scale.set(1.08, .77, .94); shell.position.set(.065,1.255,0); group.add(shell);
+    b(.224, 1.25, 0, .061, .021, .29, helmet, .009);
     for (const sign of [-1, 1]) {
-      b(.02, 1.18, sign * .151, .14, .095, .032, helmet, .024);
-      sphere(group, .253, 1.193, sign * .051, .009, black, [.35, 1, 1]);
+      sphere(group, .012, 1.198, sign * .144, .075, helmet, [1,.82,.28]);
+      sphere(group, .253, 1.193, sign * .051, .009, black, [.35, .5, 1.3]);
       rod(group, [.20, 1.209, sign * .067], [.23, 1.209, sign * .039], .007, stitch);
       rod(group, [.013, 1.173, sign * .135], [.15, 1.084, sign * .04], .009, black);
-      for (const x of [-.055, .005, .065]) b(x, 1.402, sign * .075, .034, .006, .014, black, .003);
+      for (const x of [-.025, .035, .095]) {
+        const top = 1.255 + .1386 * Math.sqrt(1 - ((x - .065) / .1944) ** 2 - (.075 / .1692) ** 2);
+        b(x, top + .001, sign * .075, .024, .003, .012, black, .002);
+      }
     }
     sphere(group, .244, 1.15, 0, .025, skin, [1, .65, .75]);
     b(.244, 1.112, 0, .018, .008, .058, stitch, .003);
@@ -236,14 +281,10 @@ export function hockeyFigure(goalie: boolean, number: number) {
     head.position.copy(headPivot); head.scale.set(.86, .90, .86); group.add(head);
     for (const sign of [-1, 1]) {
       const elbow = sign < 0 ? [.25, .83, -.25] : [.3, .77, .23], hand = sign < 0 ? [.43, .72, -.025] : [.62, .535, .016];
-      sphere(group, .033, .995, sign * .20, .128, red, [1.08, .85, 1]);
-      limb(group, [.065, .975, sign * .22], elbow, .093, red);
-      limb(group, elbow, hand, .074, red);
-      const sleeve = new T.Vector3(...elbow).lerp(new T.Vector3(...hand), .62), end = new T.Vector3(...elbow).lerp(new T.Vector3(...hand), .77);
-      limb(group, sleeve.toArray(), end.toArray(), .077, white);
-      sphere(group, ...hand as [number, number, number], .091, black, [1.1, .82, 1]);
-      for (let i = 0; i < 3; i++) b(hand[0] + .02, hand[1] + .05, hand[2] + (i - 1) * .039, .095, .014, .027, navy, .006);
-      b(hand[0] - .035, hand[1] + .008, hand[2], .025, .1, .15, white, .008);
+      clothTube(group, [[.035,1.015,sign * .11],[.045,.98,sign * .245], elbow, hand], [.07,.119,.09,.061], t => t > .66 && t < .71 || t > .78 && t < .84 ? 0xf2ebdf : 0x99091f);
+      b(hand[0],hand[1],hand[2],.14,.115,.14,red,.038);
+      for (let i = 0; i < 4; i++) b(hand[0] + .015, hand[1] + .057, hand[2] + (i - 1.5) * .031, .095, .034, .026, red, .01);
+      b(hand[0] - .05, hand[1] + .008, hand[2], .039, .13, .15, red, .015);
     }
     bar(group, [.30, .86, 0], [1.01, .165, 0], .045, .029, wood);
     bar(group, [.31, .863, .017], [1.01, .168, .017], .012, .007, black);
