@@ -16,3 +16,20 @@ export class FlipperInput {
   get held() { const sides = [...this.sources.values()]; return [sides.includes(0), sides.includes(1)]; }
   at(tick: number) { return this.held.map((held, i) => held || tick < this.pulseUntil[i]); }
 }
+
+/** One side button drives its lower flipper and upper paddle with their existing tap timing. */
+export class PairedPaddleInput {
+  private lower = new FlipperInput();
+  private upper = new FlipperInput(12);
+  press(source: string, side: number, tick: number) {
+    const accepted = this.lower.press(source, side, tick);
+    if (accepted) this.upper.press(source, side, tick);
+    return accepted;
+  }
+  release(source: string) { this.lower.release(source); this.upper.release(source); }
+  cancel(source: string) { this.lower.cancel(source); this.upper.cancel(source); }
+  clear() { this.lower.clear(); this.upper.clear(); }
+  get held() { return this.lower.held; }
+  at(tick: number) { return this.lower.at(tick); }
+  upperAt(tick: number) { return this.upper.at(tick); }
+}

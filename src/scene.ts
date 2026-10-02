@@ -191,7 +191,7 @@ export class RinkView {
     this.puckHalo.visible = now.active; this.puckHalo.position.copy(this.puck.position); this.puckHalo.position.y += .11;
     const hop = Math.max(0, this.puck.position.y - .11); this.shadow.scale.setScalar(1 + hop); (this.shadow.material as T.MeshBasicMaterial).opacity = Math.max(.18, .62 - hop * .45);
     this.flippers.forEach((g, side) => { const a = lerp(prev.angles[side], now.angles[side], alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); }); this.stick.visible = stickEnabled; this.stick.position.z = lerp(prev.stickZ, now.stickZ, alpha); this.stick.rotation.y = lerp(prev.stickAngle, now.stickAngle, alpha);
-    this.offensePaddles.forEach((g, side) => { const a = lerp(prev.offenseAngle, now.offenseAngle, alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); this.offenseRestFaces[side].visible = Math.abs(a - OFFENSE.restAngle) < .035; });
+    this.offensePaddles.forEach((g, side) => { const a = lerp(prev.offenseAngles[side], now.offenseAngles[side], alpha); g.rotation.y = side === 0 ? -a : -(Math.PI - a); this.offenseRestFaces[side].visible = Math.abs(a - OFFENSE.restAngle) < .035; });
     for (const [id, visual] of this.actors) {
       const pose = now.actors.find(a => a.id === id); visual.group.visible = !!pose; if (!pose) continue; const before = prev.actors.find(a => a.id === id) ?? pose;
       visual.group.position.set(lerp(before.x, pose.x, alpha), 0, lerp(before.z, pose.z, alpha)); visual.group.rotation.y = pose.kind === 'skater' ? -lerp(before.angle, pose.angle, alpha) : 0;

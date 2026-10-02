@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { FlipperInput } from '../src/flipper-input.ts';
+import { FlipperInput, PairedPaddleInput } from '../src/flipper-input.ts';
 
 const input = new FlipperInput();
 input.press('touch-left', 0, 100); input.press('touch-right', 1, 103);
@@ -22,16 +22,36 @@ input.release('unknown'); input.cancel('unknown'); assert.deepEqual(input.at(241
 input.press('touch-new-round', 1, 0); input.release('touch-new-round');
 assert.deepEqual(input.at(9), [false, true], 'a fresh match accepts taps after the simulation tick resets');
 assert.deepEqual(input.at(10), [false, false]);
-const upper = new FlipperInput(12);
-assert.equal(upper.press('Space', 0, 0), true, 'Space starts the shared upper input');
-assert.equal(upper.at(600)[0], true, 'holding Space keeps both upper paddles extended beyond the minimum stroke');
-assert.equal(upper.press('Space', 0, 600), false, 'keyboard repeat does not retrigger a held upper stroke');
-upper.press('pointer', 0, 601); upper.release('Space');
-assert.equal(upper.at(700)[0], true, 'a pointer hold survives Space release');
-upper.release('pointer'); assert.equal(upper.at(701)[0], false, 'the last upper source releases both paddles');
-upper.press('tap', 0, 710); upper.release('tap');
-assert.equal(upper.at(721)[0], true, 'a short upper tap gets twelve ticks to complete its stroke');
-assert.equal(upper.at(722)[0], false, 'the upper tap retracts after its minimum stroke');
-upper.press('cancel', 0, 730); upper.cancel('cancel'); assert.equal(upper.at(731)[0], false, 'pointer cancellation clears a pending upper tap');
-upper.press('Space', 0, 740); upper.clear(); assert.equal(upper.at(741)[0], false, 'pause or focus loss clears every upper hold');
-console.log('22 input checks passed: lower and upper holds, minimum taps, mixed sources, cancellation and reset.');
+const paired = new PairedPaddleInput();
+let pairedChecks = 0;
+function pairAt(tick: number, lower: boolean[], upper = lower, note = '') {
+  assert.deepEqual(paired.at(tick), lower, `lower: ${note}`);
+  assert.deepEqual(paired.upperAt(tick), upper, `upper: ${note}`); pairedChecks += 2;
+}
+paired.press('KeyA', 0, 0); pairAt(600, [true, false], undefined, 'left mapping operates only the left pair');
+assert.equal(paired.press('KeyA', 0, 600), false, 'repeat does not add another stroke'); pairedChecks++;
+paired.press('KeyL', 1, 601); pairAt(700, [true, true], undefined, 'both side keys can be held together');
+paired.release('KeyA'); pairAt(701, [false, true], undefined, 'releasing the left pair preserves the right pair');
+paired.press('pointer-right', 1, 702); paired.release('KeyL');
+pairAt(800, [false, true], undefined, 'pointer hold survives keyboard release on the same side');
+paired.release('pointer-right'); pairAt(801, [false, false], undefined, 'last source releases both paddles on its side');
+paired.press('ShiftLeft', 0, 810); paired.press('ShiftRight', 1, 810);
+pairAt(900, [true, true], undefined, 'custom Shift mappings operate both pairs');
+paired.cancel('ShiftLeft'); pairAt(901, [false, true], undefined, 'cancelling one source affects only its side');
+paired.clear(); pairAt(902, [false, false], undefined, 'pause or focus loss clears both pairs');
+for (const side of [0, 1]) {
+  const only = [side === 0, side === 1];
+  paired.press('tap', side, 910); paired.release('tap');
+  pairAt(919, only, only, 'quick tap preserves the lower and upper stroke');
+  pairAt(920, [false, false], only, 'lower tap retains ten ticks while upper finishes its longer stroke');
+  pairAt(921, [false, false], only);
+  pairAt(922, [false, false], undefined, 'upper tap finishes at twelve ticks');
+  paired.press('cancel', side, 930); paired.cancel('cancel');
+  pairAt(931, [false, false], undefined, 'pointer cancellation also clears the unfinished upper stroke');
+}
+paired.press('touch-left', 0, 1000); paired.press('second-touch-left', 0, 1002); paired.cancel('touch-left');
+pairAt(1100, [true, false], undefined, 'cancelling one finger preserves another on both same-side paddles');
+paired.clear(); paired.press('rematch', 1, 0); paired.release('rematch');
+pairAt(9, [false, true], undefined, 'fresh match accepts side taps after the simulation tick resets');
+pairAt(12, [false, false]);
+console.log(`${13 + pairedChecks} input checks passed: same-side pairs, remapping, independent holds, tap timing, mixed sources and cancellation.`);

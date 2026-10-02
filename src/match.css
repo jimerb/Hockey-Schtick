@@ -25,8 +25,6 @@
 .match-game .flipper-control kbd { height: 30px; min-width: 30px; width: 30px; padding: 4px 2px; font-size: 14px; line-height: 20px; border-width: 1px; border-radius: 6px; box-shadow: none; }
 .match-game .flipper-control span { float: none; font-size: 10px; color: #d9f6ff; opacity: 1; letter-spacing: .8px; font-weight: 700; white-space: nowrap; }
 .match-game .flipper-control.pressed { background: linear-gradient(#2276a1, #134f78); border-color: #7fe2ff; box-shadow: 0 0 22px #2fb9ff44; transform: translateY(2px); }
-.match-game .offense-control kbd { width: 42px; min-width: 42px; font-size: 9px; }
-.match-game .flipper-controls { gap: 8px; }
 .match-game .flipper-control { min-width: 0; }
 /* Use the horizontal wings for UI, leaving the entire height to the rink. */
 @media (min-width: 900px) and (min-aspect-ratio: 6/5) {
@@ -36,8 +34,6 @@
   .match-game .hud strong { font-size: 44px; }
   .match-game .flipper-controls { inset: auto clamp(24px, 5vw, 100px) 40px; }
   .match-game .flipper-control { flex: none; width: 158px; }
-  .match-game .offense-control { position: absolute; left: 0; bottom: 76px; height: 44px; padding: 6px; gap: 6px; }
-  .match-game .offense-control span { font-size: 8px; }
 }
 .match-game #how-to-play { margin: 8px 0 14px; padding: 12px 0 0; }
 .match-game #how-to-play summary { font-size: 13px; margin-bottom: 10px; }
@@ -81,7 +77,7 @@
   .match-game .hud strong { font-size: 30px; }
   .match-game .flipper-control { padding: 8px; }
   .match-game .flipper-control kbd { display: none; }
-  .match-game .flipper-control span { font-size: 8px; letter-spacing: .2px; }
+  .match-game .flipper-control span { font-size: 10px; letter-spacing: .2px; }
   .match-game .start-card { margin: 15px; padding: 20px; max-width: 285px; }
 }
 @media (max-width: 360px) {
@@ -103,8 +99,6 @@
   .match-game .flipper-control { flex: none; width: 80px; height: 82px; padding: 10px 3px; }
   .match-game .flipper-control span { font-size: 8px; letter-spacing: 0; }
   .match-game .flipper-control kbd { display: none; }
-  .match-game .offense-control { position: absolute; left: auto; right: 0; bottom: 94px; width: 80px; height: 42px; padding: 4px; }
-  .match-game .offense-control span { font-size: 7px; white-space: normal; }
   .match-game .start-card { margin: 4px; padding: 12px 20px; }
   .match-game .start-card h2 { font-size: 24px; margin: 7px 0; }
   .match-game .start-card p { font-size: 10px; margin-bottom: 8px; }

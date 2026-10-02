@@ -41,7 +41,7 @@ export type CheckTuning = { maxDistance: number; fullImpact: number; minImpact: 
 export const MATCH_CHECK_TUNING: CheckTuning = { maxDistance: .95, fullImpact: 23, minImpact: 1, cooldown: .4 };
 
 // Small far-zone paddles rest wholly behind the existing board collision face.
-// Shared press/hold/release control, with the same clear resting board glide.
+// Each follows its same-side lower flipper input, with a clear resting board glide.
 export const OFFENSE = {
   pivotX: 5.4, pivotZ: -5.65, length: 1.85, width: .16,
   restAngle: Math.PI / 2, shotAngle: .55,
