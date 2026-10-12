@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-12T15:15:37.956Z",
+  "url": "http://127.0.0.1:2384/Hockey-Schtick/",
+  "live": false,
+  "version": "0.4.9",
+  "paddleLength": 2.54375,
+  "pairedInputs": true,
+  "practiceRoundTrip": true,
+  "errors": [],
+  "failedResponses": []
+}

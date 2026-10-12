@@ -1,5 +1,5 @@
 import RAPIER from '@dimforge/rapier3d-compat';
-import { C, LANES, MATCH_PLAY_TUNING } from './config';
+import { C, OFFENSE, LANES, MATCH_PLAY_TUNING } from './config';
 import type { ActorPose, PlayTuning, CheckTuning } from './config';
 import type { RinkPhysics } from './physics';
 
@@ -16,8 +16,8 @@ const yaw = (a: number) => ({ x: 0, y: Math.sin(-a / 2), z: 0, w: Math.cos(a / 2
 type Skater = { index: number; body: RAPIER.RigidBody; torso: RAPIER.Collider; blade: RAPIER.Collider; z: number; angle: number; stage: string; timer: number; cooldown: number;
   phi: number; sign: number; target: { x: number; z: number }; pass: boolean; push: boolean; struck: boolean; receiver: number; meetAt: number; roamZ: number; roamTimer: number;
   speed: number; gentleOpening: boolean; bodyContact: boolean; lastBump: number;
-  previousZ: number; previousAngle: number; checkTime: number; checkDuration: number; checkFrom: number; checkDistance: number; checkStrength: number; lastCheck: number; paddleContact: boolean[] };
-export type CheckEvent = { index: number; side: number; strength: number; distance: number; impact: number; part: 'body' | 'stick'; tick: number };
+  previousZ: number; previousAngle: number; checkTime: number; checkDuration: number; checkFrom: number; checkDistance: number; checkDirection: -1 | 1; checkStrength: number; lastCheck: number; paddleContact: boolean[] };
+export type CheckEvent = { index: number; side: number; paddle: 'lower' | 'upper'; direction: -1 | 1; strength: number; distance: number; impact: number; part: 'body' | 'stick'; tick: number };
 export type TeamStats = { shots: number; passes: number; pushes: number; misses: number; goalieContacts: number; clears: number; strikes: number; peakCommitted: number; openingDeliveries: number; rearBumps: number; checks: number };
 
 /** A local, deliberately limited rod-hockey opponent. It observes puck motion only. */
@@ -51,7 +51,7 @@ export class Opponents {
   private roamSeed = 1;
   private openingSeed = 1;
   private incoming = { x: 0, z: 0, tick: -1 };
-  private paddleRising = [false, false];
+  private paddleRising = [false, false, false, false];
   lastCheck: CheckEvent | null = null;
   onCheck?: (event: CheckEvent) => void;
 
@@ -69,7 +69,7 @@ export class Opponents {
       const blade = sim.world.createCollider(RAPIER.ColliderDesc.cuboid(.24, .42, .09).setTranslation(1.06, -.08, 0).setFriction(.02).setRestitution(.9), body);
       sim.registerCollider(torso, `skater-${index}`); sim.registerCollider(blade, `skater-${index}-blade`);
       this.skaters.push({ index, body, torso, blade, z: lane.home, angle: Math.PI / 2, stage: 'idle', timer: 0, cooldown: 0, phi: 0, sign: 1, target: { x: 0, z: 8 }, pass: false, push: false, struck: false, receiver: -1, meetAt: 0, roamZ: lane.home, roamTimer: 0, speed: 0, gentleOpening: false, bodyContact: false, lastBump: -1000,
-        previousZ: lane.home, previousAngle: 0, checkTime: 0, checkDuration: 0, checkFrom: lane.home, checkDistance: 0, checkStrength: 0, lastCheck: -1000, paddleContact: [false, false] });
+        previousZ: lane.home, previousAngle: 0, checkTime: 0, checkDuration: 0, checkFrom: lane.home, checkDistance: 0, checkDirection: -1, checkStrength: 0, lastCheck: -1000, paddleContact: [false, false, false, false] });
     }
     this.goalie = sim.world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased().setTranslation(0, 0, -6.95));
     this.goaliePad = sim.world.createCollider(RAPIER.ColliderDesc.roundCuboid(.43, .51, .13, .04).setTranslation(0, .01, 0).setRestitution(.78), this.goalie);
@@ -101,13 +101,13 @@ export class Opponents {
     this.roamSeed = (seed ^ 0x9e3779b9) >>> 0;
     this.openingSeed = (Math.imul(seed, 0x85ebca6b) ^ 0xc2b2ae35) >>> 0; this.incoming.tick = -1;
     this.active = this.receiver = this.preferred = -1; this.opening = true; this.passChain = 0; this.history = [];
-    this.paddleRising = [false, false]; this.lastCheck = null;
+    this.paddleRising = [false, false, false, false]; this.lastCheck = null;
     if (clearStats) this.stats = this.emptyStats();
     for (const s of this.skaters) {
       const lane = this.lanes[s.index];
       s.z = lane.home; s.angle = lane.x > 0 ? Math.PI : 0; s.stage = 'idle'; s.timer = s.cooldown = 0; s.struck = false;
       s.bodyContact = false; s.lastBump = -1000; s.gentleOpening = false;
-      s.previousZ = s.checkFrom = s.z; s.previousAngle = s.angle; s.checkTime = s.checkDuration = s.checkDistance = s.checkStrength = 0; s.lastCheck = -1000; s.paddleContact = [false, false];
+      s.previousZ = s.checkFrom = s.z; s.previousAngle = s.angle; s.checkTime = s.checkDuration = s.checkDistance = s.checkStrength = 0; s.checkDirection = -1; s.lastCheck = -1000; s.paddleContact = [false, false, false, false];
       s.roamZ = lane.home; s.roamTimer = .15 + this.roamRandom() * .65;
       s.body.setTranslation({ x: lane.x, y: 0, z: s.z }, true); s.body.setNextKinematicTranslation({ x: lane.x, y: 0, z: s.z });
       s.body.setRotation(yaw(s.angle), true); s.body.setNextKinematicRotation(yaw(s.angle));
@@ -181,7 +181,7 @@ export class Opponents {
       if (s.checkTime < s.checkDuration) {
         s.checkTime = Math.min(s.checkDuration, s.checkTime + dt);
         const t = s.checkTime / s.checkDuration;
-        s.z = clamp(s.checkFrom - s.checkDistance * (1 - (1 - t) ** 2), lane.min, lane.max);
+        s.z = clamp(s.checkFrom + s.checkDirection * s.checkDistance * (1 - (1 - t) ** 2), lane.min, lane.max);
         s.stage = 'checked';
       } else if (s.stage === 'windup') {
         const lead = Math.max(.035, s.meetAt - this.time), px = p.x + v.x * lead, pz = p.z + v.z * lead + .5 * this.sim.downhill * lead * lead;
@@ -257,22 +257,30 @@ export class Opponents {
   }
   private checkSkaters() {
     const tuning = this.checking; if (!tuning) return;
-    const rising = this.sim.angles.map((a, side) => a < this.sim.previous.angles[side] - .00001);
+    const paddles = [...this.sim.flippers.map((body, side) => ({ body, side, upper: false, bat: this.sim.flipperColliders[side], angle: this.sim.angles[side], before: this.sim.previous.angles[side] })),
+      ...this.sim.offensePaddles.map((body, side) => ({ body, side, upper: true, bat: this.sim.offenseColliders[side], angle: this.sim.offenseAngles[side], before: this.sim.previous.offenseAngles[side] }))];
+    const rising = paddles.map(p => p.angle < p.before - .00001);
     for (const s of this.skaters) {
-      if (!s.body.isEnabled() || s.z < 3.5) { s.paddleContact = [false, false]; continue; }
-      for (const side of [0, 1]) {
-        const bat = this.sim.flipperColliders[side];
+      if (!s.body.isEnabled()) { s.paddleContact.fill(false); continue; }
+      for (const [index, paddle] of paddles.entries()) {
+        const { side, upper, bat } = paddle;
+        if (!upper && s.z < 3.5) { s.paddleContact[index] = false; continue; }
+        if (upper) {
+          const pivot = paddle.body.translation(), x = this.lanes[s.index].x - pivot.x;
+          // Include the stick's full reach and both endpoints of this small rod movement.
+          if (Math.min(Math.hypot(x, s.z - pivot.z), Math.hypot(x, s.previousZ - pivot.z)) > OFFENSE.length + 1.4) { s.paddleContact[index] = false; continue; }
+        }
         const touching = bat.some(c => !!c.contactCollider(s.torso, 0) || !!c.contactCollider(s.blade, 0));
-        const fresh = !s.paddleContact[side] || !this.paddleRising[side]; s.paddleContact[side] = touching;
-        if (!rising[side] || !fresh || s.checkTime < s.checkDuration || this.sim.tick - s.lastCheck < tuning.cooldown / C.dt) continue;
+        const fresh = !s.paddleContact[index] || !this.paddleRising[index]; s.paddleContact[index] = touching;
+        if (!rising[index] || !fresh || s.checkTime < s.checkDuration || this.sim.tick - s.lastCheck < tuning.cooldown / C.dt) continue;
         // Kinematic rods and bats don't repel each other in the solver. Sample their real
         // shapes through this 120 Hz stroke, including both figures' motion, to gate a check.
-        const delta = this.sim.angles[side] - this.sim.previous.angles[side];
+        const delta = paddle.angle - paddle.before;
         const omega = (side === 0 ? -delta : delta) / C.dt;
-        const pivot = this.sim.flippers[side].translation();
-        let hit: { strength: number; impact: number; part: 'body' | 'stick' } | null = null;
+        const pivot = paddle.body.translation();
+        let hit: { strength: number; impact: number; part: 'body' | 'stick'; direction: -1 | 1 } | null = null;
         for (let sample = 0; sample <= 8 && !hit; sample++) {
-          const t = sample / 8, a = this.sim.previous.angles[side] + delta * t;
+          const t = sample / 8, a = paddle.before + delta * t;
           const axis = side === 0 ? a : Math.PI - a, rotation = yaw(axis);
           const figureAngle = s.previousAngle + (s.angle - s.previousAngle) * t;
           const figureZ = s.previousZ + (s.z - s.previousZ) * t;
@@ -283,27 +291,28 @@ export class Opponents {
               const offset = c.translationWrtParent()!;
               const batPosition = { x: pivot.x + offset.x * Math.cos(axis), y: pivot.y + offset.y, z: pivot.z + offset.x * Math.sin(axis) };
               const contact = c.shape.contactShape(batPosition, rotation, target.shape, position, yaw(figureAngle), 0);
-              if (!contact || contact.normal1.z >= -.15) continue;
+              if (!contact || (upper ? Math.abs(contact.normal1.z) <= .15 : contact.normal1.z >= -.15)) continue;
               const n = contact.normal1;
               const vx = omega * (contact.point1.z - pivot.z), vz = -omega * (contact.point1.x - pivot.x);
               const approach = vx * n.x + (vz - (s.z - s.previousZ) / C.dt) * n.z;
               if (approach <= tuning.minImpact) continue;
-              const strength = clamp((approach - tuning.minImpact) / (tuning.fullImpact - tuning.minImpact), 0, 1) * -n.z * (part === 'stick' ? .55 : 1);
-              hit = { strength, impact: approach, part }; break;
+              const strength = clamp((approach - tuning.minImpact) / (tuning.fullImpact - tuning.minImpact), 0, 1) * Math.abs(n.z) * (part === 'stick' ? .55 : 1);
+              hit = { strength, impact: approach, part, direction: n.z < 0 ? -1 : 1 }; break;
             }
             if (hit) break;
           }
         }
         if (!hit) continue;
-        const distance = Math.min(this.lanes[s.index].max - this.lanes[s.index].min, s.z - this.lanes[s.index].min, tuning.maxDistance * (.12 + .88 * hit.strength));
+        const lane = this.lanes[s.index], room = hit.direction < 0 ? s.z - lane.min : lane.max - s.z;
+        const distance = Math.min(lane.max - lane.min, room, tuning.maxDistance * (.12 + .88 * hit.strength));
         if (distance < .01) continue;
-        s.checkFrom = s.z; s.checkDistance = distance; s.checkStrength = hit.strength;
+        s.checkFrom = s.z; s.checkDistance = distance; s.checkDirection = hit.direction; s.checkStrength = hit.strength;
         s.checkTime = 0; s.checkDuration = .16 + .16 * hit.strength;
         s.stage = 'checked'; s.timer = 0; s.cooldown = Math.max(s.cooldown, s.checkDuration + .12); s.struck = false; s.receiver = -1; s.lastCheck = this.sim.tick;
         if (this.active === s.index) { this.active = -1; this.receiver = -1; }
         if (this.receiver === s.index) this.receiver = -1;
         if (this.preferred === s.index) this.preferred = -1;
-        const event: CheckEvent = { index: s.index, side, ...hit, distance, tick: this.sim.tick };
+        const event: CheckEvent = { index: s.index, side, paddle: upper ? 'upper' : 'lower', ...hit, distance, tick: this.sim.tick };
         this.stats.checks++; this.lastCheck = event; this.onCheck?.(event);
       }
     }

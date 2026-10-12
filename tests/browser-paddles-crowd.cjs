@@ -35,8 +35,8 @@ const fs = require('node:fs');
       });
     });
     for (const shape of geometry) {
-      assert.ok(Math.abs(shape.max[0] - 2.035) < .002, 'visible paddle tip follows the 10% extension');
-      assert.ok(shape.faceMin[2] < -5.65 && shape.faceMax[2] > -3.67, 'visible board recess covers longer blade');
+      assert.ok(Math.abs(shape.max[0] - 2.54375) < .002, 'visible paddle tip follows the 25% extension from 0.4.8');
+      assert.ok(shape.faceMin[2] < -5.65 && shape.faceMax[2] > -3.2, 'visible board recess covers longer blade');
       assert.ok(Math.abs(Math.abs(shape.pivot[0]) - 5.4) < 1e-6); assert.ok(Math.abs(shape.pivot[1] + 5.65) < 1e-6);
     }
     observations.push({ geometry, idle: (await state()).settings.presentation });

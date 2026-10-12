@@ -21,6 +21,7 @@ export class RinkPhysics {
   flipperColliders: RAPIER.Collider[][] = [[], []];
   flipperRubber: FlipperRubber | null = null;
   offensePaddles: RAPIER.RigidBody[] = [];
+  offenseColliders: RAPIER.Collider[][] = [[], []];
   offenseAngles: number[] = [OFFENSE.restAngle, OFFENSE.restAngle];
   offensePhases: ('rest' | 'shoot' | 'held' | 'return')[] = ['rest', 'rest'];
   offenseHeld = [false, false];
@@ -66,7 +67,11 @@ export class RinkPhysics {
       const cy = paddleCenterY - .15;
       const shapes = [RAPIER.ColliderDesc.cuboid(shaft / 2, paddleHalfHeight, radius).setTranslation(shaft / 2, cy, 0),
         RAPIER.ColliderDesc.cylinder(paddleHalfHeight, radius).setTranslation(0, cy, 0), RAPIER.ColliderDesc.cylinder(paddleHalfHeight, radius).setTranslation(shaft, cy, 0)];
-      for (const shape of shapes) this.registerCollider(this.world.createCollider(shape.setFriction(.03).setRestitution(.8), body), side === 0 ? 'left offensive paddle' : 'right offensive paddle');
+      for (const shape of shapes) {
+        const collider = this.world.createCollider(shape.setFriction(.03).setRestitution(.8), body);
+        this.registerCollider(collider, side === 0 ? 'left offensive paddle' : 'right offensive paddle');
+        this.offenseColliders[side].push(collider);
+      }
       this.offensePaddles.push(body);
     }
   }

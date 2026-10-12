@@ -15,7 +15,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <p class="small">Tap to strike. Hold to keep a flipper raised. Release to bring it back. Both work together.</p>
     <button id="pause" class="secondary" disabled>Pause <span>Esc</span></button>
     <button id="controls" class="text-button">Change keys</button>
-    <a class="practice-link" href="/">← Back to hockey match</a><div class="note">Test rink · no opponents yet<br>Every return is a chance to shoot.</div>
+    <a class="practice-link" href="./">← Back to hockey match</a><div class="note">Test rink · no opponents yet<br>Every return is a chance to shoot.</div>
   </aside>
   <section class="arena" aria-label="Playable rink">
     <div class="hud"><div><span>GOALS</span><strong id="goals">0</strong></div><div class="rally-label">PUCK & FLIPPERS <small id="status">Loading rink…</small></div><div class="conceded"><span>CONCEDED</span><strong id="conceded">0</strong></div></div>

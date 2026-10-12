@@ -1,4 +1,14 @@
-# Hockey Schtick — Phase 4 (0.4.8)
+# Hockey Schtick
+
+**[▶ Play Hockey Schtick in your browser](https://jimerb.github.io/Hockey-Schtick/)**
+
+![Hockey Schtick gameplay: a lit tabletop rink, three hockey skaters, a goalie, and four pinball paddles](docs/gameplay.png)
+
+Tabletop hockey. Pinball soul. Save the puck, cradle it, and time your return shot past the goalie. First to seven wins.
+
+**Controls:** A operates both left paddles; L operates both right paddles. Hold to cradle, release to position the puck, then press again to shoot. Enter starts a match; Escape pauses or resumes. On-screen side buttons and remappable keys are available.
+
+**0.4.9 offensive paddles:** upper paddles are 25% longer than the 0.4.8 size (2.035 → 2.54375). Their blades and recessed board inserts grow together. Upper-paddle contact uses the lower paddles' bounded checking response: a powered swing can interrupt a skater and push it along its rail, with gentler stick contact, a short recovery, the existing check sound and cyan cue. Holding or returning a paddle does not keep pumping the skater. The accepted playtest is now the current release.
 
 **0.4.8 paddle contact and crowd:** all four paddle collision shapes now extend through the ice and cover low puck hops, preventing deep contacts from escaping underneath. The upper paddles are exactly 10% longer (1.85 → 2.035), with matching visible blades and recessed board faces; their pivots, width and paired controls are retained. A 368-person crowd wraps around the far end and near corners, with shaped coats, faces, scarves, caps and seated legs, varied idle gestures, and a 4.2-second human-goal celebration that continues through the next puck drop. Spectators fade near scores and buttons. See [paddle and crowd validation](evidence/Paddles%20and%20Crowd.md).
 
@@ -89,6 +99,8 @@ Flipper rubber is represented by lower restitution and modest surface friction, 
 The current checking experiment is documented in `evidence/Paddle Checking Tuning.md`; the accepted control tuning remains in `evidence/Flipper Cradle Tuning.md`. Earlier opening/body tuning remains in `evidence/Opening and Rear Bumper Tuning.md`, and earlier travel evidence remains in `evidence/Extended Wing Playtest.md`. Speed-tuning evidence remains in `evidence/Playtest Tuning.md` and `evidence/pacing-before.json` / `evidence/pacing-after.json`. Numerical reports are refreshed by tests. `evidence/Stage 3 Validation.md` preserves the original 0.3.0 browser baseline. These are finite test cases and measured hardware results. They do not establish integrated-GPU laptop performance, Edge compatibility, or how enjoyable aiming feels to a human. Match length varies; goalie strength and shot angles remain playtest tuning decisions.
 
 ## Development
+
+The public game is hosted at [jimerb.github.io/Hockey-Schtick](https://jimerb.github.io/Hockey-Schtick/). `.github/workflows/pages.yml` builds and deploys the `dist/` output after pushes to `main`, and can also be run manually from GitHub Actions. Both the match and practice rink use relative links/assets so the same build works under the repository's Pages path. Node 24 and pnpm 11.25.0 are used for deployment, with the frozen dependency lockfile.
 
 The project backup is [jimerb/Hockey-Schtick](https://github.com/jimerb/Hockey-Schtick), on the `main` branch. The repository is public: anyone can view or fork a copy, while pushes to the original require collaborator access. Source, tests, design documents, reference images, the selected mockup and validation evidence are tracked. Dependency caches, generated builds, environment files and runtime logs stay local.
 

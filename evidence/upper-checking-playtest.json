@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-12T14:55:01.023Z",
+  "tuning": {
+    "pivotX": 5.4,
+    "pivotZ": -5.65,
+    "length": 2.54375,
+    "width": 0.16,
+    "restAngle": 1.5707963267948966,
+    "shotAngle": 0.55,
+    "swingSpeed": 11,
+    "returnSpeed": 6.5
+  },
+  "checks": [
+    {
+      "name": "side 0: real upper contact pushes a skater smoothly along its rail and triggers the normal check cue",
+      "passed": true
+    },
+    {
+      "name": "side 0: held upper paddle does not check repeatedly",
+      "passed": true
+    },
+    {
+      "name": "side 0: return upper paddle does not check repeatedly",
+      "passed": true
+    },
+    {
+      "name": "side 0: a distant skater and disabled checking receive no artificial shove",
+      "passed": true
+    },
+    {
+      "name": "side 0: upper checking does not kick a remote puck",
+      "passed": true
+    },
+    {
+      "name": "side 0: upper check clamps at the end of a shortened rail and resets on rematch",
+      "passed": true
+    },
+    {
+      "name": "side 1: real upper contact pushes a skater smoothly along its rail and triggers the normal check cue",
+      "passed": true
+    },
+    {
+      "name": "side 1: held upper paddle does not check repeatedly",
+      "passed": true
+    },
+    {
+      "name": "side 1: return upper paddle does not check repeatedly",
+      "passed": true
+    },
+    {
+      "name": "side 1: a distant skater and disabled checking receive no artificial shove",
+      "passed": true
+    },
+    {
+      "name": "side 1: upper checking does not kick a remote puck",
+      "passed": true
+    },
+    {
+      "name": "side 1: upper check clamps at the end of a shortened rail and resets on rematch",
+      "passed": true
+    },
+    {
+      "name": "mirrored upper checks have the same strength and displacement",
+      "passed": true
+    },
+    {
+      "name": "upper checks stay bounded during live play with both side pairs",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "side": 0,
+      "event": {
+        "index": 0,
+        "side": 0,
+        "paddle": "upper",
+        "strength": 0.32472072853749084,
+        "impact": 20.9169430070086,
+        "part": "stick",
+        "direction": -1,
+        "distance": 0.38546652905734236,
+        "tick": 8
+      },
+      "moved": 0.385466529057342
+    },
+    {
+      "side": 1,
+      "event": {
+        "index": 1,
+        "side": 1,
+        "paddle": "upper",
+        "strength": 0.32472072853749084,
+        "impact": 20.9169430070086,
+        "part": "stick",
+        "direction": -1,
+        "distance": 0.38546652905734236,
+        "tick": 8
+      },
+      "moved": 0.385466529057342
+    },
+    {
+      "kind": "live-play",
+      "upperChecks": 0,
+      "score": {
+        "you": 0,
+        "cpu": 4
+      },
+      "length": 2.54375
+    }
+  ]
+}

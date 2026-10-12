@@ -1,2 +1,3 @@
 import { defineConfig } from 'vite';
-export default defineConfig({ build: { rolldownOptions: { input: { match: 'index.html', practice: 'practice.html' } } } });
+// Relative assets work at both the local root and the GitHub Pages project path.
+export default defineConfig({ base: './', build: { rolldownOptions: { input: { match: 'index.html', practice: 'practice.html' } } } });

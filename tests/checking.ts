@@ -88,7 +88,7 @@ for (const side of [0, 1]) {
   check(`side ${side}: resetting after a check clears all pending shove and contact state`, () => {
     const f = fixture(side); assert.equal(f.events.length, 1); f.m.start('easy', 72);
     assert.equal(f.m.team.stats.checks, 0); assert.equal(f.m.team.lastCheck, null);
-    for (const a of f.m.team.skaters) { assert.equal(a.checkDuration, 0); assert.equal(a.checkDistance, 0); assert.deepEqual(a.paddleContact, [false, false]); assert.equal(a.z, f.m.team.lanes[a.index].home); }
+    for (const a of f.m.team.skaters) { assert.equal(a.checkDuration, 0); assert.equal(a.checkDistance, 0); assert.deepEqual(a.paddleContact, [false, false, false, false]); assert.equal(a.z, f.m.team.lanes[a.index].home); }
     assert.equal(f.m.phase, 'countdown'); f.s.dispose();
   });
   check(`side ${side}: the shove stops at the end of a restricted rail`, () => {

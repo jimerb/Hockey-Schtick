@@ -15,15 +15,15 @@ function rink(enabled = true) {
   const sim = new RinkPhysics(); sim.setMotion(MATCH_MOTION); if (enabled) sim.addOffensePaddles(); return sim;
 }
 function advance(sim: RinkPhysics, ticks: number) { for (let i = 0; i < ticks; i++) sim.step(); }
-check('upper paddle reach increases by exactly ten percent without moving the pivots or widening the boards', () => {
-  assert.ok(Math.abs(OFFENSE.length / 1.85 - 1.1) < 1e-12);
+check('upper paddle reach increases by twenty-five percent from 0.4.8 without moving the pivots or widening the boards', () => {
+  assert.ok(Math.abs(OFFENSE.length / 2.035 - 1.25) < 1e-12);
   assert.equal(OFFENSE.pivotX, 5.4); assert.equal(OFFENSE.pivotZ, -5.65); assert.equal(OFFENSE.width, .16);
 });
 for (const side of [0, 1]) check(`extended side ${side} has real contact in its added tip reach`, () => {
   const sim = rink(); sim.downhill = 0; sim.place({ x: 0, y: .11, z: 2 }, { x: 0, y: 0, z: 0 });
   try {
     sim.shootOffense(side); advance(sim, 20);
-    const sign = side === 0 ? -1 : 1, a = OFFENSE.shotAngle, along = 1.85 + C.puckRadius + .05;
+    const sign = side === 0 ? -1 : 1, a = OFFENSE.shotAngle, along = 2.035 + C.puckRadius + .05;
     sim.place({ x: sign * (OFFENSE.pivotX - Math.cos(a) * along), y: .11, z: OFFENSE.pivotZ + Math.sin(a) * along }, { x: 0, y: 0, z: 0 });
     sim.step();
     assert.ok(sim.contacts.some(contact => contact.label.includes('offensive')), 'added visible tip must collide');

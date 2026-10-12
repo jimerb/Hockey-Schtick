@@ -1,13 +1,14 @@
 {
   "name": "hockey-schtick",
-  "version": "0.4.8",
+  "version": "0.4.9",
+  "packageManager": "pnpm@11.25.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort",
-    "test": "tsx tests/input.ts && tsx tests/offense.ts && tsx tests/physics.ts && tsx tests/paddle-integrity.ts && tsx tests/match.ts && tsx tests/play-tuning.ts && tsx tests/flipper-control.ts && tsx tests/checking.ts && tsx tests/stuck-puck.ts && tsx tests/visuals.ts && tsx tests/pacing.ts",
+    "test": "tsx tests/input.ts && tsx tests/offense.ts && tsx tests/physics.ts && tsx tests/paddle-integrity.ts && tsx tests/match.ts && tsx tests/play-tuning.ts && tsx tests/flipper-control.ts && tsx tests/checking.ts && tsx tests/upper-checking.ts && tsx tests/stuck-puck.ts && tsx tests/visuals.ts && tsx tests/pacing.ts",
     "test:visuals": "tsx tests/visuals.ts",
     "test:offense": "tsx tests/offense.ts",
     "test:physics": "tsx tests/physics.ts",
@@ -16,6 +17,7 @@
     "test:play-tuning": "tsx tests/play-tuning.ts",
     "test:flipper-control": "tsx tests/flipper-control.ts",
     "test:checking": "tsx tests/checking.ts",
+    "test:upper-checking": "tsx tests/upper-checking.ts",
     "test:stuck-puck": "tsx tests/stuck-puck.ts"
   },
   "dependencies": {
